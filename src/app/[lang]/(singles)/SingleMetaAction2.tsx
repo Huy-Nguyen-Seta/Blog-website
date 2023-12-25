@@ -1,17 +1,23 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import PostActionDropdown from "@/components/PostActionDropdown/PostActionDropdown";
-import PostCardLikeAndComment from "@/components/PostCardLikeAndComment/PostCardLikeAndComment";
-import { SOCIALS_DATA } from "@/components/SocialsShare/SocialsShare";
-import NcDropDown from "@/components/NcDropDown/NcDropDown";
-import NcBookmark from "@/components/NcBookmark/NcBookmark";
+import React, { FC } from 'react';
+import PostActionDropdown from '@/components/PostActionDropdown/PostActionDropdown';
+import PostCardLikeAndComment from '@/components/PostCardLikeAndComment/PostCardLikeAndComment';
+import { SOCIALS_DATA } from '@/components/SocialsShare/SocialsShare';
+import NcDropDown from '@/components/NcDropDown/NcDropDown';
+import NcBookmark from '@/components/NcBookmark/NcBookmark';
+import useTrans from '@/hooks/useTranslate';
 
 export interface SingleMetaAction2Props {
   className?: string;
+  data?: any;
 }
 
-const SingleMetaAction2: FC<SingleMetaAction2Props> = ({ className = "" }) => {
+const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
+  className = '',
+  data,
+}) => {
+  const lang = useTrans();
   return (
     <div className={`nc-SingleMetaAction2 ${className}`}>
       <div className="flex flex-row space-x-2.5 rtl:space-x-reverse items-center">
@@ -20,6 +26,7 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({ className = "" }) => {
           hiddenCommentOnMobile
           useOnSinglePage
           className="!space-x-2.5 rtl:!space-x-reverse"
+          likeCount={data?.like}
         />
         <div className="px-1">
           <div className="border-s border-neutral-200 dark:border-neutral-700 h-6" />
@@ -46,10 +53,12 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({ className = "" }) => {
           )}
           onClick={() => {}}
           data={SOCIALS_DATA}
+          url={window.location.origin + `/${lang}` + '/single/' + data?.slug}
         />
         <PostActionDropdown
           containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
           iconClass="h-5 w-5"
+          url={window.location.origin + '/single/' + data?.slug}
         />
       </div>
     </div>

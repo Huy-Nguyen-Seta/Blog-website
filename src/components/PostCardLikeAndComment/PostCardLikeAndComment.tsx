@@ -7,7 +7,7 @@ export interface PostCardLikeAndCommentProps {
   itemClass?: string;
   hiddenCommentOnMobile?: boolean;
   useOnSinglePage?: boolean;
-  likeCount?: number
+  likeCount?: number | any
 }
 
 const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({

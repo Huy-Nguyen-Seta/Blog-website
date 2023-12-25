@@ -1,19 +1,28 @@
-import React, { FC } from "react";
-import PostCardSaveAction from "@/components/PostCardSaveAction/PostCardSaveAction";
-import { PostDataType } from "@/data/types";
-import CardAuthor2 from "@/components/CardAuthor2/CardAuthor2";
-import CategoryBadgeList from "@/components/CategoryBadgeList/CategoryBadgeList";
-import Image from "next/image";
-import Link from "next/link";
+import React, { FC } from 'react';
+import PostCardSaveAction from '@/components/PostCardSaveAction/PostCardSaveAction';
+import { PostDataType } from '@/data/types';
+import CardAuthor2 from '@/components/CardAuthor2/CardAuthor2';
+import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getStrapiImage } from '../utils/api-helpers';
+import moment from 'moment';
 
 export interface Card4Props {
   className?: string;
   post: PostDataType;
 }
 
-const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
-  const { title, href, featuredImage, categories, author, date, readingTime } =
-    post;
+const Card4: FC<Card4Props> = ({ className = 'h-full', post }) => {
+  const {
+    title,
+    href,
+    thumbnailImage,
+    tags,
+    author,
+    readingTime,
+    createdAt,
+  } = post;
 
   return (
     <div
@@ -25,7 +34,7 @@ const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
           className="object-cover"
           alt=""
           sizes="(max-width: 600px) 480px, 800px"
-          src={featuredImage}
+          src={getStrapiImage(thumbnailImage) || ''}
         />
       </span>
 
@@ -33,7 +42,7 @@ const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
 
       <div className="p-4 flex flex-col flex-grow">
         <div className="space-y-2.5 mb-4">
-          <CategoryBadgeList categories={categories} />
+          <CategoryBadgeList categories={tags} />
           <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
             <Link href={href || ''} className="line-clamp-2" title={title}>
               {title}
@@ -41,7 +50,11 @@ const Card4: FC<Card4Props> = ({ className = "h-full", post }) => {
           </h2>
         </div>
         <div className="flex items-end justify-between mt-auto">
-          <CardAuthor2 readingTime={readingTime} date={date} author={author} />
+          <CardAuthor2
+            readingTime={readingTime}
+            date={moment(createdAt).format('MMM DD, YYYY')}
+            author={author}
+          />
           <PostCardSaveAction hidenReadingTime />
         </div>
       </div>

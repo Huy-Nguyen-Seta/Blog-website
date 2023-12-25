@@ -169,9 +169,11 @@ const CommentCard: FC<CommentCardProps> = ({
             </div>
             <Link
               className="flex-shrink-0 font-semibold text-neutral-800 dark:text-neutral-100"
-              href={author?.href}
+              // href={author?.href || ''}
+              href={''}
+
             >
-             {author?.displayName}
+             {/* {author?.displayName} */}
             </Link>
             <span className="mx-2">·</span>
             <span className="text-neutral-500 dark:text-neutral-400 text-xs line-clamp-1 sm:text-sm">

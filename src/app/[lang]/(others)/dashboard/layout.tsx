@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { ReactNode } from "react";
 
-const subPages: { href: Route; pageName: string; emoij: string }[] = [
+const subPages: { href: Route | string; pageName: string; emoij: string }[] = [
   {
     href: "/dashboard",
     emoij: "⏳",
@@ -70,7 +70,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                         ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
                         : "hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                     }`}
-                    href={href || ''}
+                    href={ href || '/'}
                   >
                     <span className="w-8 me-2 text-lg">{emoij}</span>
                     <span> {pageName}</span>
@@ -83,7 +83,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
             <li>
               <Link
                 className={`flex items-center px-6 py-3 font-medium text-red-500`}
-                href={"/"}
+                href={ "/"}
               >
                 <span className="w-8 me-2 text-lg">💡</span>
                 Sign out

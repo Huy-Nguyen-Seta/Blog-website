@@ -8,26 +8,30 @@ export interface SectionMagazine1Props {
   posts: any[];
   heading?: string;
   className?: string;
+  categories?:any[];
+  desc?: string;
+  lang?: Language
 }
 
 const SectionMagazine1: FC<SectionMagazine1Props> = ({
   posts,
   heading = 'Latest Articles 🎈 ',
+  desc,
   className = '',
 }) => {
   return (
     <div className={`nc-SectionMagazine1 ${className}`}>
       {heading && (
-        <Heading description={'Click on music icon and enjoy music or podcast'}>
+        <Heading description={desc}>
           {heading}
         </Heading>
       )}
-      {!posts.length && <span>Nothing we found!</span>}
+      {!posts?.length && <span>Nothing we found!</span>}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-        {posts[0] && <Card2 size="large" post={posts[0]} />}
+        {posts?.[0] && <Card2 size="large" post={posts?.[0]} />}
         <div className="grid gap-6 md:gap-8">
           {posts
-            .filter((_, i) => i < 4 && i > 0)
+            ?.filter((_, i) => i < 4 && i > 0)
             .map((item, index) => (
               <Card6 key={index} post={item} />
             ))}

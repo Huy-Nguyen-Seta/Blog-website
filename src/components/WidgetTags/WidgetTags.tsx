@@ -19,7 +19,7 @@ const WidgetTags: FC<WidgetTagsProps> = ({
     <div className={`nc-WidgetTags rounded-3xl overflow-hidden ${className}`}>
       <WidgetHeading1
         title="💡 More tags"
-        viewAll={{ label: "View all", href: "/#" }}
+        viewAll={{ label: "Xem thêm", href: "/#" }}
       />
       <div className="flex flex-wrap p-4 xl:p-5">
         {tags.map((tag) => (

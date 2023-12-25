@@ -22,7 +22,7 @@ const WidgetCategories: FC<WidgetCategoriesProps> = ({
     >
       <WidgetHeading1
         title="✨ Trending topic"
-        viewAll={{ label: "View all", href: "/#" }}
+        viewAll={{ label: "Xem thêm", href: "/#" }}
       />
       <div className="flow-root">
         <div className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700">

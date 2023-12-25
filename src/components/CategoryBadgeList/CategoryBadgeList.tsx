@@ -1,6 +1,8 @@
-import { PostDataType } from "@/data/types";
-import React, { FC } from "react";
-import Badge from "@/components/Badge/Badge";
+'use client';
+import { PostDataType } from '@/data/types';
+import React, { FC } from 'react';
+import Badge from '@/components/Badge/Badge';
+import useTrans from '@/hooks/useTranslate';
 
 export interface CategoryBadgeListProps {
   className?: string;
@@ -9,22 +11,26 @@ export interface CategoryBadgeListProps {
 }
 
 const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
-  className = "flex flex-wrap space-x-2",
+  className = 'flex flex-wrap space-x-2',
   itemClass,
   categories,
 }) => {
+  const lang = useTrans();
   return (
     <div
       className={`nc-CategoryBadgeList ${className}`}
       data-nc-id="CategoryBadgeList"
     >
-      {categories?.map((item: any, index : number) => (
+      {(categories?.data || categories)?.map((item: any, index: number) => (
         <Badge
           className={itemClass}
           key={index}
-          name={item.tagName}
-          href={item.slug}
-          color={item.color as any}
+          name={item?.tagName || item?.attributes?.tagName}
+          href={
+            `/${lang}/archive/tags/${item?.slug || item?.attributes?.slug}` ||
+            '/'
+          }
+          color={item?.color || (item?.attributes?.color as any)}
         />
       ))}
     </div>

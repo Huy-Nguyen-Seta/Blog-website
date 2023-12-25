@@ -112,7 +112,7 @@ export default function SharedModal({
                       <ChevronLeftIcon className="h-6 w-6 rtl:rotate-180" />
                     </button>
                   )}
-                  {index + 1 < images.length && (
+                  {index + 1 < images?.length && (
                     <button
                       className="absolute end-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
                       style={{ transform: "translate3d(0, 0, 0)" }}
@@ -187,7 +187,7 @@ export default function SharedModal({
                           ? "z-20 rounded-md shadow shadow-black/50"
                           : "z-10"
                       } ${id === 0 ? "rounded-s-md" : ""} ${
-                        id === images.length - 1 ? "rounded-e-md" : ""
+                        id === images?.length - 1 ? "rounded-e-md" : ""
                       } relative inline-block w-full shrink-0 transform-gpu overflow-hidden focus:outline-none`}
                     >
                       <Image

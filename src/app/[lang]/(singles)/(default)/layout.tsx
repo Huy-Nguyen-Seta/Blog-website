@@ -8,12 +8,7 @@ const layout = ({ children }: { children: ReactNode }) => {
       {children}
 
       {/* SINGLE MAIN CONTENT */}
-      <div className="container mt-10">
-        <SingleContent />
-      </div>
 
-      {/* RELATED POSTS */}
-      <SingleRelatedPosts />
     </div>
   );
 };

@@ -18,6 +18,13 @@ export interface TaxonomyType {
   description?: string;
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";
+  tagName?:string;
+  attributes?: any;
+  slug?: string;
+  image?: any;
+  blogs?: any;
+  priority?: string;
+
 }
 
 export interface PostAuthorType {
@@ -31,14 +38,16 @@ export interface PostAuthorType {
   count: number;
   description: string;
   jobName: string;
-  href: Route;
-  name: string;
-  image: any;
+  href: Route | any;
+  name?: string;
+  image?: any;
+  createdAt?: string;
+  slug?: string
 }
 
 export interface PostDataType {
   id: string | number;
-  author: PostAuthorType;
+  author: PostAuthorType | any;
   date: string;
   href: Route;
   categories: TaxonomyType[];
@@ -46,8 +55,8 @@ export interface PostDataType {
   featuredImage: string | StaticImageData;
   description?: string;
   like: {
-    count: number;
-    isLiked: boolean;
+    count?: number;
+    isLiked?: boolean;
   };
   bookmark: {
     count: number;
@@ -60,9 +69,11 @@ export interface PostDataType {
   videoUrl?: string;
   audioUrl?: string | string[];
   galleryImgs?: string[];
-  thumbnailImage: any;
-  tags: any,
-  createdAt: string
+  thumbnailImage?: any;
+  tags?: any,
+  createdAt?: string,
+  attributes?: any,
+  slug?: string
 }
 
 export type TwMainColor =

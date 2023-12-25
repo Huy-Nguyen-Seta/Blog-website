@@ -1,52 +1,140 @@
-import React, { FC } from "react";
-import ButtonCircle from "@/components/Button/ButtonCircle";
-import rightImg from "@/images/SVG-subcribe2.png";
-import Badge from "@/components/Badge/Badge";
-import Input from "@/components/Input/Input";
-import Image from "next/image";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
+'use client';
+import ButtonCircle from '@/components/Button/ButtonCircle';
+import Input from '@/components/Input/Input';
+import rightImg from '@/images/SVG-subcribe2.png';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import Image from 'next/image';
+import { FC, useState } from 'react';
+import Textarea from '../Textarea/Textarea';
+import emailjs from '@emailjs/browser';
+import { showErrorMessage, showSuccessMessage } from '../utils/toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../Button/Loading';
 
 export interface SectionSubscribe2Props {
   className?: string;
 }
 
-const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
+const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMess] = useState('');
+
+  emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_INIT || '');
+
+  const createGoogleSheet = () => {
+    fetch('https://sheetdb.io/api/v1/zq5rc4rojmcjf', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: [
+          {
+            name: name,
+            email: email,
+            message: message,
+          },
+        ],
+      }),
+    }).then(
+      (response) => {},
+      (err) =>
+        showErrorMessage('Nhập thông tin vào sheet thất bại' || '', {
+          autoClose: 10000,
+        })
+    );
+  };
+
+  const handleSubmitFormContact = (e: any) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    createGoogleSheet();
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+        '#contact-form'
+      )
+      .then(
+        function (response) {
+          setName('');
+          setEmail('');
+          setMess('');
+          setIsSubmitting(false);
+          showSuccessMessage('Gửi thông tin thành công' || '', {
+            autoClose: 10000,
+          });
+        },
+        function (error) {
+          console.log('error');
+
+          setIsSubmitting(false);
+          showErrorMessage('Gửi thông tin thất bại' || '', {
+            autoClose: 10000,
+          });
+        }
+      );
+  };
+
   return (
     <div
       className={`nc-SectionSubscribe2 relative flex flex-col lg:flex-row items-center ${className}`}
     >
       <div className="flex-shrink-0 mb-14 lg:mb-0 lg:me-10 lg:w-2/5">
-        <h2 className="font-semibold text-4xl">Join our newsletter 🎉</h2>
+        <h2 className="font-semibold text-4xl">Liên hệ với chúng tôi 🎉</h2>
         <span className="block mt-6 text-neutral-500 dark:text-neutral-400">
-          Read and share new perspectives on just about any topic. Everyone’s
-          welcome.
+          Để được tư vấn và hỗ trợ miễn phí. HALLO cam kết tư vấn minh bạch và
+          bảo mật thông tin khách hàng
         </span>
-        <ul className="space-y-5 mt-10">
-          <li className="flex items-center space-x-4 rtl:space-x-reverse">
-            <Badge name="01" />
-            <span className="font-medium text-neutral-700 dark:text-neutral-300">
-              Get more discount
-            </span>
-          </li>
-          <li className="flex items-center space-x-4 rtl:space-x-reverse">
-            <Badge color="red" name="02" />
-            <span className="font-medium text-neutral-700 dark:text-neutral-300">
-              Get premium magazines
-            </span>
-          </li>
-        </ul>
-        <form className="mt-10 relative max-w-sm">
+        <form
+          className="mt-10 relative max-w-sm space-y-3"
+          id="contact-form"
+          onSubmit={handleSubmitFormContact}
+        >
           <Input
             required
             aria-required
-            placeholder="Enter your email"
+            placeholder="Họ và tên"
+            id="name"
+            name="name"
+            onChange={(e) => setName(e?.target?.value)}
+            value={name}
+          />
+          <Input
+            required
+            aria-required
+            placeholder="Nhập email của bạn"
             type="email"
+            id="email"
+            name="email"
+            onChange={(e) => setEmail(e?.target?.value)}
+            value={email}
+          />
+          <Textarea
+            required
+            aria-required
+            placeholder="Nhập tin nhắn của bạn"
+            id="message"
+            name="message"
+            onChange={(e) => setMess(e?.target?.value)}
+            value={message}
           />
           <ButtonCircle
+            disabled={isSubmitting}
             type="submit"
-            className="absolute transform top-1/2 -translate-y-1/2 end-1 dark:bg-neutral-300 dark:text-black"
+            className="bg-indigo-600 shadow-xl hover:bg-indigo-500 text-white font-bold rounded-full px-4 py-6  !w-48 space-x-2 flex flex-row justify-center items-center"
           >
-            <ArrowRightIcon className="w-5 h-5 rtl:rotate-180" />
+            {isSubmitting ? (
+              <Loading />
+            ) : (
+              <>
+                <span>Gửi thông tin</span>
+                <ArrowRightIcon className="w-5 h-5 rtl:rotate-180" />
+              </>
+            )}
           </ButtonCircle>
         </form>
       </div>

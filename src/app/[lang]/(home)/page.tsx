@@ -1,5 +1,6 @@
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
+import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
 import SectionMagazine1 from '@/components/Sections/SectionMagazine1';
 import SectionMagazine2 from '@/components/Sections/SectionMagazine2';
 import SectionMagazine9 from '@/components/Sections/SectionMagazine9';
@@ -19,7 +20,7 @@ export async function generateMetadata({
   params: { lang: Language };
 }): Promise<Metadata> {
   try {
-    const response = await getData(params?.lang, '/homepage/data');
+    const response = await getData(params?.lang, '/homepage/seo');
     const metadata = response?.Seo;
     if (!metadata) return {};
 
@@ -61,61 +62,62 @@ export async function generateMetadata({
 const PageHome = async ({
   params,
 }: {
-  params: { lang: string; slug: string };
+  params: { lang: Language; slug: string };
 }) => {
   const response = await getData(params?.lang, '/homepage/data');
+  const postByCategory = await getData(params?.lang, '/homepage/postByCate');
+  const filterCategories = [{ id: 0, name: 'Tất cả' }];
   return (
     <section>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(response?.Seo?.schema),
         }}
-      />
+      /> */}
       <div className="nc-PageHome relative">
         <div className="container relative">
           <SectionMagazine2
             className="py-16 lg:py-24"
             posts={MAGAZINE2_POSTS}
+            categories={filterCategories.concat(response?.NewPost?.categories)}
+            lang={params?.lang}
           />
           <SectionMagazine1
-            heading="Tin nổỉ bật 🎨 "
+            heading={response?.PopularPost?.title}
+            desc={response?.PopularPost?.description}
             className="py-16 lg:py-28"
             posts={response?.PopularPost?.data}
           />
           <div className="relative py-16">
             <BackgroundSection />
             <SectionMagazine9
-              posts={DEMO_POSTS_AUDIO.filter((_, i) => i >= 6 && i < 15)}
+              heading={response?.Section1?.title}
+              desc={response?.Section1?.description}
+              posts={response?.Section1?.tagPost}
+              cate={response?.Section1?.category}
             />
           </div>
-
-          <div className="relative py-16">
-            <BackgroundSection />
-            <SectionSliderPosts
-              postCardName="card11"
-              heading="More design articles"
-              subHeading="Over 1118 articles "
-              posts={DEMO_POSTS.filter(
-                (p, i) => i > 3 && i < 25 && p.postType === 'standard'
-              )}
-            />
-          </div>
-          <div className="relative py-16">
-            <BackgroundSection />
-            <SectionSliderPosts
-              postCardName="card11"
-              heading="More design articles"
-              subHeading="Over 1118 articles "
-              posts={DEMO_POSTS.filter(
-                (p, i) => i > 3 && i < 25 && p.postType === 'standard'
-              )}
-            />
-          </div>
+          {(postByCategory?.PostByCategory || [])?.map((item: any) => (
+            <div className="relative py-16" key={item?.id}>
+              <BackgroundSection />
+              <SectionSliderPosts
+                postCardName="card11"
+                heading={item?.title}
+                subHeading={
+                  item?.description ||
+                  `Khám phá hơn ${item?.category?.blogs?.length} bài viết`
+                }
+                posts={item?.category?.blogs}
+                cate={item?.category}
+              />
+            </div>
+          ))}
+          <SectionSubscribe2 />
 
           <SectionSliderNewCategories
             className="py-16 lg:py-28"
-            heading="Top trending topics"
+            heading="Diễn đàn và thảo luận"
             subHeading="Discover 233 topics"
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"

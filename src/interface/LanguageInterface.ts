@@ -1,1 +1,1 @@
-type Language = 'en' | 'ja'
+type Language = 'en' | 'ja' | 'vi'

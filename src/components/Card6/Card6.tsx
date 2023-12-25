@@ -1,3 +1,4 @@
+'use client'
 import React, { FC } from "react";
 import PostCardMeta from "@/components/PostCardMeta/PostCardMeta";
 import PostCardSaveAction from "@/components/PostCardSaveAction/PostCardSaveAction";
@@ -8,6 +9,7 @@ import PostTypeFeaturedIcon from "@/components/PostTypeFeaturedIcon/PostTypeFeat
 import Link from "next/link";
 import Image from "next/image";
 import { getStrapiImage } from "../utils/api-helpers";
+import useTrans from "@/hooks/useTranslate";
 
 export interface Card6Props {
   className?: string;
@@ -15,32 +17,32 @@ export interface Card6Props {
 }
 
 const Card6: FC<Card6Props> = ({ className = "h-full", post }) => {
-  const { title, href, readingTime, featuredImage, tags, postType, thumbnailImage } =
+  const { title, href, readingTime, featuredImage, tags, postType, thumbnailImage, like, slug } =
     post;
-
+  const lang = useTrans()
   return (
     <div
       className={`nc-Card6 relative flex group flex-row items-center sm:p-4 sm:rounded-3xl sm:bg-white sm:dark:bg-neutral-900 sm:border border-neutral-200 dark:border-neutral-700 ${className}`}
     >
-      <Link href={href || ''} className="absolute inset-0 z-0"></Link>
+      <Link href={`/${lang}/single/${slug}` || ''} className="absolute inset-0 z-0"></Link>
       <div className="flex flex-col flex-grow">
         <div className="space-y-3 mb-4">
           <CategoryBadgeList categories={tags} />
           <h2 className={`block font-semibold text-sm sm:text-base`}>
-            <Link href={href || ''} className="line-clamp-2" title={title}>
+            <Link href={`/${lang}/single/${slug}` || ''} className="line-clamp-2" title={title}>
               {title}
             </Link>
           </h2>
           <PostCardMeta meta={{ ...post }} />
         </div>
         <div className="flex items-center flex-wrap justify-between mt-auto">
-          <PostCardLikeAndComment className="relative" />
+          <PostCardLikeAndComment likeCount={like} className="relative" />
           <PostCardSaveAction className="relative" readingTime={readingTime} />
         </div>
       </div>
 
       <Link
-        href={href || ''}
+        href={`/${lang}/single/${slug}` || ''}
         className={`block relative flex-shrink-0 w-24 h-24 sm:w-40 sm:h-full ms-3 sm:ms-5 rounded-2xl overflow-hidden z-0`}
       >
         <Image

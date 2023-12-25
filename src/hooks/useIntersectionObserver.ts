@@ -37,7 +37,7 @@ function useIntersectionObserver(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef, threshold, root, rootMargin, frozen]);
 
-  return entry;
+  return entry || '';
 }
 
 export default useIntersectionObserver;

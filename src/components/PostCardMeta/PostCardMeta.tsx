@@ -4,6 +4,7 @@ import { PostDataType } from '@/data/types';
 import Link from 'next/link';
 import { getStrapiImage } from '../utils/api-helpers';
 import moment from 'moment';
+import useTrans from '@/hooks/useTranslate';
 
 export interface PostCardMetaProps {
   className?: string;
@@ -18,25 +19,28 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
   hiddenAvatar = false,
   avatarSize = 'h-7 w-7 text-sm',
 }) => {
+  const lang = useTrans()
   const { createdAt, author } = meta;
+  const currentAuthor = author?.data ? author?.data?.attributes : author
+  const authorImage = currentAuthor?.image?.data ? currentAuthor?.image?.data?.attributes : currentAuthor?.image
   return (
     <div
       className={`nc-PostCardMeta inline-flex items-center flex-wrap text-neutral-800 dark:text-neutral-200 ${className}`}
     >
       <Link
-        href={author?.href || ''}
+        href={`/${lang}/author/${currentAuthor?.slug}` || ''}
         className="relative flex items-center space-x-2 rtl:space-x-reverse"
       >
         {!hiddenAvatar && (
           <Avatar
             radius="rounded-full"
             sizeClass={avatarSize}
-            imgUrl={getStrapiImage(author?.image) || ''}
-            userName={author?.name}
+            imgUrl={getStrapiImage(authorImage) || ''}
+            userName={currentAuthor?.name}
           />
         )}
         <span className="block text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white font-medium">
-          {author?.name}
+          {currentAuthor?.name}
         </span>
       </Link>
       <>

@@ -1,13 +1,15 @@
-"use client";
+'use client';
 
-import React, { FC, useState } from "react";
-import PostCardSaveAction from "@/components/PostCardSaveAction/PostCardSaveAction";
-import { PostDataType } from "@/data/types";
-import CategoryBadgeList from "@/components/CategoryBadgeList/CategoryBadgeList";
-import PostCardLikeAndComment from "@/components/PostCardLikeAndComment/PostCardLikeAndComment";
-import PostCardMeta from "@/components/PostCardMeta/PostCardMeta";
-import PostFeaturedMedia from "@/components/PostFeaturedMedia/PostFeaturedMedia";
-import Link from "next/link";
+import React, { FC, useState } from 'react';
+import PostCardSaveAction from '@/components/PostCardSaveAction/PostCardSaveAction';
+import { PostDataType } from '@/data/types';
+import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList';
+import PostCardLikeAndComment from '@/components/PostCardLikeAndComment/PostCardLikeAndComment';
+import PostCardMeta from '@/components/PostCardMeta/PostCardMeta';
+import PostFeaturedMedia from '@/components/PostFeaturedMedia/PostFeaturedMedia';
+import Link from 'next/link';
+import moment from 'moment';
+import useTrans from '@/hooks/useTranslate';
 
 export interface Card11Props {
   className?: string;
@@ -17,15 +19,14 @@ export interface Card11Props {
 }
 
 const Card11: FC<Card11Props> = ({
-  className = "h-full",
+  className = 'h-full',
   post,
   hiddenAuthor = false,
-  ratio = "aspect-w-4 aspect-h-3",
+  ratio = 'aspect-w-4 aspect-h-3',
 }) => {
-  const { title, href, categories, date } = post;
-
+  const { title, href, tags, createdAt, like, slug } = post;
+  const lang = useTrans();
   const [isHover, setIsHover] = useState(false);
-
   return (
     <div
       className={`nc-Card11 relative flex flex-col group rounded-3xl overflow-hidden bg-white dark:bg-neutral-900 ${className}`}
@@ -40,24 +41,28 @@ const Card11: FC<Card11Props> = ({
           <PostFeaturedMedia post={post} isHover={isHover} />
         </div>
       </div>
-      <Link href={href ||''} className="absolute inset-0"></Link>
+      <Link href={`/${lang}/single/${slug}` || ''} className="absolute inset-0"></Link>
       <span className="absolute top-3 inset-x-3 z-10">
-        <CategoryBadgeList categories={categories} />
+        <CategoryBadgeList categories={tags || tags?.data} />
       </span>
 
       <div className="p-4 flex flex-col space-y-3">
         {!hiddenAuthor ? (
           <PostCardMeta meta={post} />
         ) : (
-          <span className="text-xs text-neutral-500">{date}</span>
+          <span className="text-xs text-neutral-500">
+            {moment(createdAt).format('MMM DD, YYYY')}
+          </span>
         )}
         <h3 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100">
-          <span className="line-clamp-2" title={title}>
-            {title}
-          </span>
+          <Link href={`/${lang}/single/${slug}`}>
+            <span className="line-clamp-2" title={title}>
+              {title}
+            </span>
+          </Link>
         </h3>
         <div className="flex items-end justify-between mt-auto">
-          <PostCardLikeAndComment className="relative" />
+          <PostCardLikeAndComment likeCount={like} className="relative" />
           <PostCardSaveAction className="relative" />
         </div>
       </div>

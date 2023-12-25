@@ -5,7 +5,7 @@ import React, { FC, ReactNode } from "react";
 export interface NcLinkProps {
   className?: string;
   colorClass?: string;
-  href: Route;
+  href: Route | string;
   children: ReactNode;
 }
 

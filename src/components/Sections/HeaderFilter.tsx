@@ -43,7 +43,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
           ))}
         </Nav>
         <Button className="!hidden md:!flex" pattern="white" sizeClass="px-6">
-          <span>View all</span>
+          <span>Xem thêm</span>
           <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180" />
         </Button>
       </div>

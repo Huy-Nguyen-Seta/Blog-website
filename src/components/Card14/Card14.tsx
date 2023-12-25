@@ -58,7 +58,7 @@ const Card14: FC<Card14Props> = ({
 
         <div className="p-2 sm:p-2.5 mt-4 sm:mt-5 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-full flex items-center text-neutral-50 text-xs sm:text-sm font-medium">
           <Link
-            href={author?.href}
+            href={author?.href || ''}
             className="relative flex items-center space-x-2 rtl:space-x-reverse"
           >
             <Avatar

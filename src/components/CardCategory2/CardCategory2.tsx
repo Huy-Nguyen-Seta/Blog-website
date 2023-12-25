@@ -1,8 +1,10 @@
-import React, { FC } from "react";
-import NcImage from "@/components/NcImage/NcImage";
-import { TaxonomyType, TwMainColor } from "@/data/types";
-import Badge from "@/components/Badge/Badge";
-import Link from "next/link";
+import React, { FC } from 'react';
+import NcImage from '@/components/NcImage/NcImage';
+import { TaxonomyType, TwMainColor } from '@/data/types';
+import Badge from '@/components/Badge/Badge';
+import Link from 'next/link';
+import { getStrapiImage } from '../utils/api-helpers';
+import useTrans from '@/hooks/useTranslate';
 
 export interface CardCategory2Props {
   className?: string;
@@ -11,26 +13,39 @@ export interface CardCategory2Props {
 }
 
 const CardCategory2: FC<CardCategory2Props> = ({
-  className = "",
+  className = '',
   taxonomy,
   index,
 }) => {
-  const { count, name, href = "/", thumbnail, color } = taxonomy;
+  const lang = useTrans();
+  const { name, thumbnail, image, slug = '/' } = taxonomy;
+  const colorArr = [
+    'pink',
+    'green',
+    'yellow',
+    'red',
+    'indigo',
+    'blue',
+    'purple',
+    'gray',
+  ];
   return (
     <Link
-      href={href || ''}
+      href={`/${lang}/archive/${slug}` || '/'}
       className={`nc-CardCategory2 relative flex flex-col items-center justify-center text-center px-3 py-5 sm:p-6 bg-white dark:bg-neutral-900 rounded-3xl transition-colors ${className}`}
     >
       {index && (
         <Badge
-          color={color as TwMainColor}
+          color={
+            colorArr[Math.floor(Math.random() * colorArr.length)] as TwMainColor
+          }
           name={index}
           className="absolute -top-2 sm:top-3 left-3"
         />
       )}
       <NcImage
         containerClassName={`relative flex-shrink-0 w-20 h-20 rounded-full shadow-lg overflow-hidden z-0`}
-        src={thumbnail || ""}
+        src={getStrapiImage(image || thumbnail) || ''}
         fill
         sizes="80px"
         alt="categories"
@@ -41,7 +56,7 @@ const CardCategory2: FC<CardCategory2Props> = ({
         <span
           className={`block mt-1 text-sm text-neutral-500 dark:text-neutral-400`}
         >
-          {count} Articles
+          {taxonomy?.blogs?.count || 0} Bài viết
         </span>
       </div>
     </Link>

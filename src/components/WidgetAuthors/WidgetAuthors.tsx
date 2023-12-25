@@ -21,7 +21,7 @@ const WidgetAuthors: FC<WidgetAuthorsProps> = ({
     >
       <WidgetHeading1
         title="🎭 Discover Authors"
-        viewAll={{ label: "View all", href: "/#" }}
+        viewAll={{ label: "Xem thêm", href: "/#" }}
       />
       <div className="flow-root">
         <div className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700">

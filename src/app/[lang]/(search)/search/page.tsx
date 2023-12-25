@@ -1,57 +1,127 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { DEMO_POSTS } from "@/data/posts";
-import { PostDataType } from "@/data/types";
-import { DEMO_AUTHORS } from "@/data/authors";
-import { DEMO_CATEGORIES } from "@/data/taxonomies";
-import Pagination from "@/components/Pagination/Pagination";
-import ButtonPrimary from "@/components/Button/ButtonPrimary";
-import Nav from "@/components/Nav/Nav";
-import NavItem from "@/components/NavItem/NavItem";
-import ArchiveFilterListBox from "@/components/ArchiveFilterListBox/ArchiveFilterListBox";
-import Input from "@/components/Input/Input";
-import SectionSubscribe2 from "@/components/SectionSubscribe2/SectionSubscribe2";
-import NcImage from "@/components/NcImage/NcImage";
-import NcLink from "@/components/NcLink/NcLink";
-import SectionSliderNewAuthors from "@/components/SectionSliderNewAthors/SectionSliderNewAuthors";
-import ButtonSecondary from "@/components/Button/ButtonSecondary";
-import SectionGridCategoryBox from "@/components/SectionGridCategoryBox/SectionGridCategoryBox";
-import BackgroundSection from "@/components/BackgroundSection/BackgroundSection";
-import Card11 from "@/components/Card11/Card11";
-import ButtonCircle from "@/components/Button/ButtonCircle";
-import CardCategory2 from "@/components/CardCategory2/CardCategory2";
-import Tag from "@/components/Tag/Tag";
-import CardAuthorBox2 from "@/components/CardAuthorBox2/CardAuthorBox2";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+import ButtonCircle from '@/components/Button/ButtonCircle';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import Loading from '@/components/Button/Loading';
+import Card11 from '@/components/Card11/Card11';
+import CardAuthorBox2 from '@/components/CardAuthorBox2/CardAuthorBox2';
+import CardCategory2 from '@/components/CardCategory2/CardCategory2';
+import Input from '@/components/Input/Input';
+import Nav from '@/components/Nav/Nav';
+import NavItem from '@/components/NavItem/NavItem';
+import NcImage from '@/components/NcImage/NcImage';
+import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
+import SectionSliderNewAuthors from '@/components/SectionSliderNewAthors/SectionSliderNewAuthors';
+import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
+import Tag from '@/components/Tag/Tag';
+import { getData } from '@/components/utils/fetch-api';
+import { DEMO_AUTHORS } from '@/data/authors';
+import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { useEffect, useState } from 'react';
 
-const posts: PostDataType[] = DEMO_POSTS.filter((_, i) => i < 12);
-const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
-const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
-const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
+const TABS = ['Bài viết', 'Thể loại', 'Thẻ', 'Tác giả'];
+const numberPerPage = 2;
 
-const FILTERS = [
-  { name: "Most Recent" },
-  { name: "Curated by Admin" },
-  { name: "Most Appreciated" },
-  { name: "Most Discussed" },
-  { name: "Most Viewed" },
-];
-
-const TABS = ["Articles", "Categories", "Tags", "Authors"];
-
-const PageSearch = ({}) => {
-  let s = "Technology";
-
+const PageSearch = ({ params }: { params: { lang: Language } }) => {
   const [tabActive, setTabActive] = useState(TABS[0]);
+  const [searchValue, setSearchValue] = useState('');
+  const [currentValue, setCurrentValue] = useState('');
+  const [page, setPage] = useState(0);
+  const [blogs, setBlogs] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [tags, setTags] = useState<any[]>([]);
+  const [authors, setAuthor] = useState<any[]>([]);
+  const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleFetch = async (
+    searchValue: string = '',
+    path: string = '',
+    page?: number,
+    limit?: number
+  ): Promise<any> => {
+    setIsLoading(true);
+    const data = await getData(params?.lang, path, {
+      ...(searchValue && { searchValue: searchValue }),
+      ...(limit && { limit: limit }),
+      ...(page && { start: page }),
+      populate: '*',
+    });
+    setIsLoading(false);
+
+    return data;
+  };
+
+  const fetchData = async (page?: number, limit?: number) => {
+    switch (tabActive) {
+      case TABS[0]:
+        const data = await handleFetch(
+          searchValue,
+          '/getBLogsByQuery',
+          page,
+          limit
+        );
+        if (page !== 0) {
+          setBlogs([...blogs, ...data?.data]);
+        } else {
+          setBlogs(data?.data);
+        }
+        setTotal(data?.total);
+        break;
+      case TABS[1]:
+        const cate = await handleFetch(
+          currentValue,
+          '/findCateByPaging',
+          page,
+          limit
+        );
+        if (page !== 0) {
+          setCategories([...categories, ...cate?.results]);
+        } else {
+          setCategories(cate?.results);
+        }
+        setTotal(cate?.total);
+        break;
+      case TABS[2]:
+        const tags = await handleFetch(currentValue, '/getTags');
+        setTags(tags);
+        setTotal(tags?.length);
+
+        break;
+      case TABS[3]:
+        const author = await handleFetch(
+          currentValue,
+          '/getAuthors',
+          page,
+          limit
+        );
+        if (page !== 0) {
+          setAuthor([...authors, ...author?.results]);
+        } else {
+          setAuthor(author?.results);
+        }
+        setTotal(author?.total);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    fetchData(0, 2);
+  }, [tabActive]);
 
   const handleClickTab = (item: string) => {
     if (item === tabActive) {
       return;
     }
+    setPage(0);
+    fetchData(0, numberPerPage);
     setTabActive(item);
   };
-
   return (
     <div className={`nc-PageSearch`}>
       {/* HEADER */}
@@ -70,20 +140,30 @@ const PageSearch = ({}) => {
         <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
             <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center">
-              <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
-              <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
-                We found{" "}
-                <strong className="font-medium text-neutral-800 dark:text-neutral-100">
-                  1135
-                </strong>{" "}
-                results for{" "}
-                <strong className="font-medium text-neutral-800 dark:text-neutral-100">
-                  {s}
-                </strong>
-              </span>
+              <h2 className="text-2xl sm:text-4xl font-semibold">
+                {currentValue}
+              </h2>
+              {currentValue && (
+                <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
+                  Tìm thấy{' '}
+                  <strong className="font-medium text-neutral-800 dark:text-neutral-100">
+                    {total}
+                  </strong>{' '}
+                  {tabActive} cho từ khóa{' '}
+                  <strong className="font-medium text-neutral-800 dark:text-neutral-100">
+                    {currentValue}
+                  </strong>
+                </span>
+              )}
               <form
                 className="relative w-full mt-8 sm:mt-11 text-left"
                 method="post"
+                onSubmit={(e) => {
+                  e?.preventDefault();
+                  setCurrentValue(searchValue);
+                  fetchData(0, numberPerPage);
+                  setPage(0);
+                }}
               >
                 <label
                   htmlFor="search-input"
@@ -93,9 +173,10 @@ const PageSearch = ({}) => {
                   <Input
                     id="search-input"
                     type="search"
-                    placeholder="Type and press enter"
+                    placeholder="Nhập từ khóa tìm kiếm"
                     sizeClass="pl-14 py-5 pe-5 md:ps-16"
-                    defaultValue={s}
+                    defaultValue={currentValue}
+                    onChange={(e) => setSearchValue(e?.target?.value)}
                   />
                   <ButtonCircle
                     className="absolute end-2.5 top-1/2 transform -translate-y-1/2"
@@ -117,23 +198,6 @@ const PageSearch = ({}) => {
                   </span>
                 </label>
               </form>
-              <div className="w-full text-sm text-start mt-4 text-neutral-500 dark:text-neutral-300">
-                <div className="inline-block space-x-1.5 sm:space-x-2.5 rtl:space-x-reverse">
-                  <span className="">Related:</span>
-                  <NcLink className="inline-block font-normal" href="/search">
-                    Design
-                  </NcLink>
-                  <NcLink className="inline-block font-normal" href="/search">
-                    Photo
-                  </NcLink>
-                  <NcLink className="inline-block font-normal" href="/search">
-                    Vector
-                  </NcLink>
-                  <NcLink className="inline-block font-normal" href="/search">
-                    Frontend
-                  </NcLink>
-                </div>
-              </div>
             </header>
           </div>
         </div>
@@ -159,50 +223,61 @@ const PageSearch = ({}) => {
               ))}
             </Nav>
             <div className="block my-4 border-b w-full border-neutral-300 dark:border-neutral-500 sm:hidden"></div>
-            <div className="flex justify-end">
-              <ArchiveFilterListBox lists={FILTERS} />
-            </div>
           </div>
-
+          {!total && (
+            <div className=" flex justify-center items-center">
+              <span className="pt-10">
+                {isLoading ? <Loading /> : 'Nothing we found!'}
+              </span>
+            </div>
+          )}
           {/* LOOP ITEMS */}
           {/* LOOP ITEMS POSTS */}
-          {tabActive === "Articles" && (
+          {tabActive === TABS[0] && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {posts.map((post) => (
+              {blogs?.map((post) => (
                 <Card11 key={post.id} post={post} />
               ))}
             </div>
           )}
           {/* LOOP ITEMS CATEGORIES */}
-          {tabActive === "Categories" && (
+          {tabActive === TABS[1] && (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {cats.map((cat) => (
+              {categories?.map((cat) => (
                 <CardCategory2 key={cat.id} taxonomy={cat} />
               ))}
             </div>
           )}
           {/* LOOP ITEMS TAGS */}
-          {tabActive === "Tags" && (
+          {tabActive === TABS[2] && (
             <div className="flex flex-wrap mt-12 ">
-              {tags.map((tag) => (
+              {tags?.map((tag) => (
                 <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
               ))}
             </div>
           )}
           {/* LOOP ITEMS POSTS */}
-          {tabActive === "Authors" && (
+          {tabActive === TABS[3] && (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {authors.map((author) => (
+              {authors?.map((author) => (
                 <CardAuthorBox2 key={author.id} author={author} />
               ))}
             </div>
           )}
 
           {/* PAGINATION */}
-          <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-            <Pagination />
-            <ButtonPrimary>Show me more</ButtonPrimary>
-          </div>
+          {total > page + numberPerPage && tabActive !== TABS[2] && (
+            <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-center sm:items-center">
+              <ButtonPrimary
+                onClick={() => {
+                  setPage((pre) => pre + numberPerPage);
+                  fetchData(page + numberPerPage, numberPerPage);
+                }}
+              >
+                Xem thêm
+              </ButtonPrimary>
+            </div>
+          )}
         </main>
 
         {/* MORE SECTIONS */}
@@ -212,15 +287,13 @@ const PageSearch = ({}) => {
           <SectionGridCategoryBox
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
           />
-          <div className="text-center mx-auto mt-10 md:mt-16">
-            <ButtonSecondary>Show me more</ButtonSecondary>
-          </div>
+          <div className="text-center mx-auto mt-10 md:mt-16"></div>
         </div>
 
         {/* === SECTION 5 === */}
         <SectionSliderNewAuthors
-          heading="Top elite authors"
-          subHeading="Discover our elite writers"
+          heading="Những tác giả hàng đầu"
+          subHeading="Khám phá những tác giả hàng đầu của chúng tôi"
           authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
         />
 

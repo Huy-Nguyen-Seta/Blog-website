@@ -38,11 +38,9 @@ export async function fetchAPI(
   }
 }
 
-export async function getData(lang: string, path: string, populate?: string[]) {
+export async function getData(lang: Language, path: string, queryParams?: any) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-  const urlParamsObject = {
-    populate: populate || '*',
-  };
+  const urlParamsObject = queryParams || { populate: '*' };
   const options = { headers: { Authorization: `Bearer ${token}` } };
   const { data } = await fetchAPI(path, urlParamsObject, options, lang);
   return data;

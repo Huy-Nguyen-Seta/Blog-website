@@ -15,7 +15,7 @@ const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
   const renderModalContent = () => {
     return (
       <div className="flex flex-wrap dark:text-neutral-200">
-        {tags.map((tag) => (
+        {tags?.map((tag) => (
           <Tag key={tag.id} tag={tag} className="me-2 mb-2" />
         ))}
       </div>
@@ -33,7 +33,7 @@ const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
             onClick={openModal}
           >
             <div>
-              <span className="hidden sm:inline">Other</span> Tags
+              <span className="hidden sm:inline">Thẻ</span> khác
             </div>
             <ChevronDownIcon
               className="w-4 h-4 ms-2 -me-1"
@@ -41,7 +41,7 @@ const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
             />
           </Button>
         )}
-        modalTitle="Discover other tags"
+        modalTitle="Khám phá các thẻ khác"
         renderContent={renderModalContent}
       />
     </div>

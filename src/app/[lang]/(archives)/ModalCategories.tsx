@@ -15,7 +15,7 @@ const ModalCategories: FC<ModalCategoriesProps> = ({ categories }) => {
   const renderModalContent = () => {
     return (
       <div className="grid gap-6 sm:grid-cols-2 sm:py-2 md:gap-8 md:grid-cols-3 lg:grid-cols-4 xl:md:grid-cols-5">
-        {categories.map((cat) => (
+        {categories?.map((cat) => (
           <CardCategory1 key={cat.id} taxonomy={cat} size="normal" />
         ))}
       </div>
@@ -32,7 +32,7 @@ const ModalCategories: FC<ModalCategoriesProps> = ({ categories }) => {
             onClick={openModal}
           >
             <div>
-              <span className="hidden sm:inline">Other</span> Categories
+              <span className="hidden sm:inline">Thể loại</span> khác
             </div>
             <ChevronDownIcon
               className="w-4 h-4 ms-2 -me-1"
@@ -40,7 +40,7 @@ const ModalCategories: FC<ModalCategoriesProps> = ({ categories }) => {
             />
           </Button>
         )}
-        modalTitle="Discover other categories"
+        modalTitle="Khám phá các thể loại khác"
         renderContent={renderModalContent}
       />
     </div>

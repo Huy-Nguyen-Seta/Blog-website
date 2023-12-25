@@ -1,3 +1,4 @@
+"use client"
 import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList';
 import PostCardLikeAndComment from '@/components/PostCardLikeAndComment/PostCardLikeAndComment';
 import PostCardSaveAction from '@/components/PostCardSaveAction/PostCardSaveAction';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 import PostCardMeta from '../PostCardMeta/PostCardMeta';
 import { getStrapiImage } from '../utils/api-helpers';
+import useTrans from '@/hooks/useTranslate';
 
 export interface Card2Props {
   className?: string;
@@ -30,9 +32,10 @@ const Card2: FC<Card2Props> = ({
     postType,
     thumbnailImage,
     tags,
-    like
+    like,
+    slug,
   } = post;
-  console.log('post', post?.like)
+  const lang = useTrans();
   return (
     <div className={`nc-Card2 group relative flex flex-col ${className}`}>
       <div className="block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] z-0">
@@ -56,7 +59,10 @@ const Card2: FC<Card2Props> = ({
         />
       </div>
 
-      <Link href={href || ''} className="absolute inset-0" />
+      <Link
+        href={`/${lang}/single/${slug}` || ''}
+        className="absolute inset-0"
+      />
 
       <div className="mt-5 px-4 flex flex-col">
         <div className="space-y-3">
@@ -71,7 +77,11 @@ const Card2: FC<Card2Props> = ({
               size === 'large' ? 'text-base sm:text-lg md:text-xl' : 'text-base'
             }`}
           >
-            <Link href={href || ''} className="line-clamp-2" title={title}>
+            <Link
+              href={`/${lang}/single/${slug}` || ''}
+              className="line-clamp-2"
+              title={title}
+            >
               {title}
             </Link>
           </h2>
