@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, Fragment, useEffect } from "react";
-import { Transition } from "@/app/[lang]/headlessui";
+import { Transition } from "@/app/[lang]/news/headlessui";
 import NavMobile from "@/components/Navigation/NavMobile";
 import { usePathname } from "next/navigation";
 

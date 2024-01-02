@@ -46,7 +46,7 @@ const HeaderFilterCustom: FC<HeaderFilterProps> = ({
           ))}
         </Nav>
         <Button pattern="white" sizeClass="px-6" className='!hidden md:!block'>
-          <Link href={`/${lang}/search`} className=" md:!flex" >
+          <Link href={`/${lang}/news/search`} className=" md:!flex" >
             <span>Xem thêm</span>
             <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180" />
           </Link>

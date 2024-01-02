@@ -24,7 +24,7 @@ const Card11: FC<Card11Props> = ({
   hiddenAuthor = false,
   ratio = 'aspect-w-4 aspect-h-3',
 }) => {
-  const { title, href, tags, createdAt, like, slug } = post;
+  const { title, href, tags, createdAt, like, slug, id, comments } = post;
   const lang = useTrans();
   const [isHover, setIsHover] = useState(false);
   return (
@@ -41,7 +41,10 @@ const Card11: FC<Card11Props> = ({
           <PostFeaturedMedia post={post} isHover={isHover} />
         </div>
       </div>
-      <Link href={`/${lang}/single/${slug}` || ''} className="absolute inset-0"></Link>
+      <Link
+        href={`/${lang}/news/single/${slug}` || ''}
+        className="absolute inset-0"
+      ></Link>
       <span className="absolute top-3 inset-x-3 z-10">
         <CategoryBadgeList categories={tags || tags?.data} />
       </span>
@@ -55,15 +58,21 @@ const Card11: FC<Card11Props> = ({
           </span>
         )}
         <h3 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100">
-          <Link href={`/${lang}/single/${slug}`}>
+          <Link href={`/${lang}/news/single/${slug}`}>
             <span className="line-clamp-2" title={title}>
               {title}
             </span>
           </Link>
         </h3>
         <div className="flex items-end justify-between mt-auto">
-          <PostCardLikeAndComment likeCount={like} className="relative" />
-          <PostCardSaveAction className="relative" />
+          <PostCardLikeAndComment
+            slug={slug}
+            commentCount={comments?.length || 0}
+            blogId={id}
+            likeCount={like}
+            className="relative"
+          />
+          <PostCardSaveAction postId={id} className="relative" />
         </div>
       </div>
     </div>

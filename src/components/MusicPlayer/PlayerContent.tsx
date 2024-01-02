@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import NcImage from "@/components/NcImage/NcImage";
-import { Transition } from "@/app/[lang]/headlessui";
+import { Transition } from "@/app/[lang]/news/headlessui";
 import { useMusicPlayer } from "@/hooks/useMusicPlayer";
 import Link from "next/link";
 import PostCardLikeAction from "../PostCardLikeAction/PostCardLikeAction";

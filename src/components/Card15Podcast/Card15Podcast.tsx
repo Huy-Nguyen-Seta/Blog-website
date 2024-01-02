@@ -48,7 +48,7 @@ const Card15Podcast: FC<Card15PodcastProps> = ({
     >
       <div className="w-1/4 flex-shrink-0">
         <Link
-          href={`/${lang}/single/${slug}` || ''}
+          href={`/${lang}/news/single/${slug}` || ''}
           className="block h-0 aspect-w-1 aspect-h-1 relative rounded-full overflow-hidden shadow-lg"
         >
           <Image
@@ -64,14 +64,14 @@ const Card15Podcast: FC<Card15PodcastProps> = ({
       <div className="flex flex-col flex-grow ms-4">
         <h2 className={`nc-card-title block font-semibold text-sm sm:text-lg`}>
           <Link
-            href={`/${lang}/single/${slug}` || ''}
+            href={`/${lang}/news/single/${slug}` || ''}
             className={IS_AUDIO ? `line-clamp-1` : 'line-clamp-2'}
             title={title}
           >
             {title}
           </Link>
         </h2>
-        <Link href={`/${lang}/single/${slug}` || ''}>
+        <Link href={`/${lang}/news/single/${slug}` || ''}>
           <div
             className={
               'line-clamp-2 inline-flex items-center pe-4 py-0.5 hover:ps-0.5 cursor-pointer rounded-full transition-all hover:bg-primary-50 dark:hover:bg-neutral-900 select-none mt-1 p-2'

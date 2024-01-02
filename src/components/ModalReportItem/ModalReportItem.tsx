@@ -5,7 +5,7 @@ import NcModal from "@/components/NcModal/NcModal";
 import Textarea from "@/components/Textarea/Textarea";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";
 import ButtonSecondary from "@/components/Button/ButtonSecondary";
-import { RadioGroup } from "@/app/[lang]/headlessui";
+import { RadioGroup } from "@/app/[lang]/news/headlessui";
 import twFocusClass from "@/utils/twFocusClass";
 import ButtonThird from "../Button/ButtonThird";
 

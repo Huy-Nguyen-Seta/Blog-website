@@ -1,6 +1,6 @@
 "use client";
 
-import { Popover, Tab, Transition } from "@/app/[lang]/headlessui";
+import { Popover, Tab, Transition } from "@/app/[lang]/news/headlessui";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import { FC, Fragment } from "react";

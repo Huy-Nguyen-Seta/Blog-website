@@ -346,7 +346,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     </kbd>{" "}
                     for help, or{" "}
                     <Link
-                      href={"/search"}
+                      href={"/news/search"}
                       className="mx-1 flex h-5 px-1.5 items-center justify-center rounded border bg-white sm:mx-2 border-primary-6000 text-neutral-900"
                       onClick={() => setOpen(false)}
                     >

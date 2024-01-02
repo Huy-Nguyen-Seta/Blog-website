@@ -1,6 +1,6 @@
 "use client";
 
-import { Popover, Transition } from "@/app/[lang]/headlessui";
+import { Popover, Transition } from "@/app/[lang]/news/headlessui";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import React, { FC, Fragment, useState } from "react";
 import { Route } from "@/routers/types";

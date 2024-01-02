@@ -1,4 +1,4 @@
-import { Popover, Transition } from "@/app/[lang]/headlessui";
+import { Popover, Transition } from "@/app/[lang]/news/headlessui";
 import Avatar from "@/components/Avatar/Avatar";
 import { FC, Fragment } from "react";
 

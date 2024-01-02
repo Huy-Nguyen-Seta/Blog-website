@@ -1,8 +1,8 @@
-import React from "react";
-import Logo from "@/components/Logo/Logo";
-import SocialsList1 from "@/components/SocialsList1/SocialsList1";
-import { CustomLink } from "@/data/types";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
+import React from 'react';
+import Logo from '@/components/Logo/Logo';
+import SocialsList1 from '@/components/SocialsList1/SocialsList1';
+import { CustomLink } from '@/data/types';
+import MusicPlayer from '../MusicPlayer/MusicPlayer';
 
 export interface WidgetFooterMenu {
   id: string;
@@ -12,47 +12,42 @@ export interface WidgetFooterMenu {
 
 const widgetMenus: WidgetFooterMenu[] = [
   {
-    id: "5",
-    title: "Getting started",
+    id: '5',
+    title: 'Về HALLO',
     menus: [
-      { href: "/", label: "Installation" },
-      { href: "/", label: "Release Notes" },
-      { href: "/", label: "Upgrade Guide" },
-      { href: "/", label: "Browser Support" },
-      { href: "/", label: "Editor Support" },
+      { href: '#', label: 'Tin tức' },
+      { href: '#', label: 'Nhà tuyển dụng' },
+      { href: '#', label: 'Nhà đầu tư' },
+      { href: '#', label: 'Tìm cửa hàng' },
     ],
   },
   {
-    id: "1",
-    title: "Explore",
+    id: '1',
+    title: 'Thông tin và chính sách',
     menus: [
-      { href: "/", label: "Design features" },
-      { href: "/", label: "Prototyping" },
-      { href: "/", label: "Design systems" },
-      { href: "/", label: "Pricing" },
-      { href: "/", label: "Customers" },
+      { href: '#', label: 'Chính sách bán hàng' },
+      { href: '#', label: 'Bảo hành' },
+      { href: '#', label: 'Giao hàng' },
+      { href: '#', label: 'Liên hệ với chúng tôi' },
     ],
   },
   {
-    id: "2",
-    title: "Resources",
+    id: '2',
+    title: 'Phương thức thanh toán',
     menus: [
-      { href: "/", label: "Best practices" },
-      { href: "/", label: "Support" },
-      { href: "/", label: "Developers" },
-      { href: "/", label: "Learn design" },
-      { href: "/", label: "What's new" },
+      { href: '#', label: 'Combini' },
+      { href: '#', label: 'Chuyển khoản' },
+      { href: '#', label: 'Thanh toán trực tiếp tại văn phòng' },
     ],
   },
   {
-    id: "4",
-    title: "Community",
+    id: '4',
+    title: 'Dịch vụ và các thông tin khác',
     menus: [
-      { href: "/", label: "Discussion Forums" },
-      { href: "/", label: "Code of Conduct" },
-      { href: "/", label: "Community Resources" },
-      { href: "/", label: "Contributing" },
-      { href: "/", label: "Concurrent Mode" },
+      { href: '#', label: 'Hỗ trợ mua hàng' },
+      { href: '#', label: 'Chăm sóc khách hàng' },
+      { href: '#', label: 'Hồ sơ sau mua' },
+      { href: '#', label: 'Góp ý và khiếu lại' },
     ],
   },
 ];

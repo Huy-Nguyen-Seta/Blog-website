@@ -15,7 +15,7 @@ const SectionMagazine4: FC<SectionMagazine4Props> = ({
     <div className={`nc-SectionMagazine4 ${className}`}>
       <HeaderFilter heading={heading} />
 
-      {!posts?.length && <span>Nothing we found!</span>}
+      {!posts?.length && <span>Danh sách rỗng !</span>}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         {posts[0] && <Card8 className="sm:col-span-2" post={posts[0]} />}
         {posts
@@ -24,7 +24,7 @@ const SectionMagazine4: FC<SectionMagazine4Props> = ({
             <Card9 key={index} post={item} />
           ))}
         {posts
-          .filter((_, i) => i < 5 && i >= 3)
+          ?.filter((_, i) => i < 5 && i >= 3)
           .map((item, index) => (
             <Card9 key={index} post={item} />
           ))}

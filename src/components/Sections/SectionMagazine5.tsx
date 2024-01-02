@@ -16,7 +16,7 @@ const SectionMagazine5: FC<SectionMagazine5Props> = ({
   return (
     <div className="nc-SectionMagazine5">
       <HeaderFilter heading={heading} />
-      {!posts.length && <span>Nothing we found!</span>}
+      {!posts.length && <span>Danh sách rỗng !</span>}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-7">
         {posts[0] && <Card12 post={posts[0]} />}
         <div className="flex flex-col gap-5 md:gap-7">

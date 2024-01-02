@@ -1,17 +1,15 @@
 "use client";
 
-import React, { Fragment, useEffect, useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
 import HeaderLogged from "@/components/Header/HeaderLogged";
-import Header from "@/components/Header/Header";
-import Header2 from "@/components/Header/Header2";
-import {
-  ShoppingBagIcon as ShoppingCartIcon,
-  Cog8ToothIcon as CogIcon,
-} from "@heroicons/react/24/outline";
-import { Popover, Transition } from "@headlessui/react";
 import SwitchDarkMode2 from "@/components/SwitchDarkMode/SwitchDarkMode2";
 import { useThemeMode } from "@/hooks/useThemeMode";
+import { Popover, Transition } from "@headlessui/react";
+import {
+  Cog8ToothIcon as CogIcon,
+  ShoppingBagIcon as ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import { Fragment, useEffect, useMemo, useState } from "react";
 
 const SiteHeader = () => {
   let pathname = usePathname();
@@ -117,16 +115,16 @@ const SiteHeader = () => {
                   <Popover.Panel className="absolute right-0 z-10 mt-3 w-screen max-w-sm">
                     <div className="rounded-2xl bg-white dark:bg-neutral-950 overflow-hidden nc-custom-shadow-1">
                       <div className="relative p-6 space-y-3.5 xl:space-y-5">
-                        <span className="text-xl font-semibold">Customize</span>
+                        <span className="text-xl font-semibold">Cài đặt</span>
                         <div className="w-full border-b border-neutral-200 dark:border-neutral-700"></div>
-                        {renderRadioThemeDir()}
-                        {renderRadioHeaders()}
+                        {/* {renderRadioThemeDir()} */}
+                        {/* {renderRadioHeaders()} */}
                         <div className="flex space-x-2 xl:space-x-4 rtl:space-x-reverse">
-                          <span className="text-sm font-medium">Dark mode</span>
+                          <span className="text-sm font-medium">Chế độ tối</span>
                           <SwitchDarkMode2 />
                         </div>
                       </div>
-                      <div className="bg-gray-50 dark:bg-white/5 p-5">
+                      {/* <div className="bg-gray-50 dark:bg-white/5 p-5">
                         <a
                           className="flex items-center justify-center w-full px-4 py-2 !rounded-xl text-sm font-medium bg-primary-6000 text-white hover:bg-primary-700"
                           href={
@@ -138,7 +136,7 @@ const SiteHeader = () => {
                           <ShoppingCartIcon className="w-4 h-4" />
                           <span className="ms-2">Buy this template</span>
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </Popover.Panel>
                 </Transition>

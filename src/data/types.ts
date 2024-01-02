@@ -73,7 +73,8 @@ export interface PostDataType {
   tags?: any,
   createdAt?: string,
   attributes?: any,
-  slug?: string
+  slug?: string,
+  comments?: any[]
 }
 
 export type TwMainColor =

@@ -1,19 +1,45 @@
-"use client";
+'use client';
 
-import { Popover, Transition } from "@/app/[lang]/headlessui";
-import { avatarImgs } from "@/contains/fakeData";
-import { Fragment } from "react";
-import Avatar from "@/components/Avatar/Avatar";
-import SwitchDarkMode2 from "@/components/SwitchDarkMode/SwitchDarkMode2";
-import Link from "next/link";
+import { Popover, Transition } from '@/app/[lang]/news/headlessui';
+import { avatarImgs } from '@/contains/fakeData';
+import { Fragment, useEffect, useState } from 'react';
+import Avatar from '@/components/Avatar/Avatar';
+import SwitchDarkMode2 from '@/components/SwitchDarkMode/SwitchDarkMode2';
+import Link from 'next/link';
+import useTrans from '@/hooks/useTranslate';
+import { useRouter } from 'next/navigation';
 
 export default function AvatarDropdown() {
+  const [user, setUser] = useState<any>();
+  const router = useRouter();
+  const lang = useTrans();
+
+  useEffect(() => {
+    let user;
+    if (localStorage.getItem('userInfor')) {
+      user = JSON.parse(localStorage.getItem('userInfor') || '');
+    }
+    setUser(user)
+  }, [])
+  
+
+  const handleClick = (e: any) => {
+    if (!localStorage.getItem('userInfor')) {
+      e.preventDefault();
+      router.push(`/${lang}/news/login`);
+    }
+  };
+  const handleLogOut = () => {
+    localStorage.removeItem('userInfor');
+    router.push(`/${lang}/news/login`);
+  };
   return (
-    <div className="AvatarDropdown ">
+    <div className="AvatarDropdown">
       <Popover className="relative">
         {({ open, close }) => (
           <>
             <Popover.Button
+              onClick={handleClick}
               className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
             >
               <svg
@@ -51,19 +77,19 @@ export default function AvatarDropdown() {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center">
-                      <Avatar imgUrl={avatarImgs[7]} sizeClass="w-12 h-12" />
+                      <Avatar imgUrl={avatarImgs[0]} sizeClass="w-12 h-12" />
 
                       <div className="flex-grow ms-3">
-                        <h4 className="font-semibold">Eden Smith</h4>
-                        <p className="text-xs mt-0.5">Los Angeles, CA</p>
+                        <h4 className="font-semibold">{user?.name || ''}</h4>
+                        <p className="text-xs mt-0.5">{user?.email || ''}</p>
                       </div>
                     </div>
 
                     <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
 
                     {/* ------------------ 1 --------------------- */}
-                    <Link
-                      href={"/author/demo-slug"}
+                    {/* <Link
+                      href={'/author/demo-slug'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -92,13 +118,13 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{"My Account"}</p>
+                        <p className="text-sm font-medium ">{'My Account'}</p>
                       </div>
-                    </Link>
+                    </Link> */}
 
                     {/* ------------------ 2 --------------------- */}
-                    <Link
-                      href={"/dashboard/posts"}
+                    {/* <Link
+                      href={'/news/dashboard/posts'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -144,13 +170,13 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{"My Posts"}</p>
+                        <p className="text-sm font-medium ">{'My Posts'}</p>
                       </div>
-                    </Link>
+                    </Link> */}
 
                     {/* ------------------ 2 --------------------- */}
                     <Link
-                      href={"/author/demo-slug"}
+                      href={'/news/dashboard/posts'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -171,7 +197,7 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{"Wishlist"}</p>
+                        <p className="text-sm font-medium ">{'Yêu thích'}</p>
                       </div>
                     </Link>
 
@@ -212,15 +238,15 @@ export default function AvatarDropdown() {
                           </svg>
                         </div>
                         <div className="ms-4">
-                          <p className="text-sm font-medium ">{"Dark theme"}</p>
+                          <p className="text-sm font-medium ">{'Nền tối'}</p>
                         </div>
                       </div>
                       <SwitchDarkMode2 />
                     </div>
 
                     {/* ------------------ 2 --------------------- */}
-                    <Link
-                      href={"/"}
+                    {/* <Link
+                      href={'/'}
                       className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -277,15 +303,14 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{"Help"}</p>
+                        <p className="text-sm font-medium ">{'Help'}</p>
                       </div>
-                    </Link>
+                    </Link> */}
 
                     {/* ------------------ 2 --------------------- */}
-                    <Link
-                      href={"/#"}
-                      className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      onClick={() => close()}
+                    <div
+                      className="cursor-pointer flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      onClick={handleLogOut}
                     >
                       <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
                         <svg
@@ -319,9 +344,9 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{"Log out"}</p>
+                        <p className="text-sm font-medium ">{'Đăng xuất'}</p>
                       </div>
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </Popover.Panel>

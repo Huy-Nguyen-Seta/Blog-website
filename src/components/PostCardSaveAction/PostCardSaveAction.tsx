@@ -1,18 +1,20 @@
-import React, { FC } from "react";
-import NcBookmark from "../NcBookmark/NcBookmark";
+import React, { FC } from 'react';
+import NcBookmark from '../NcBookmark/NcBookmark';
 
 export interface PostCardSaveActionProps {
   className?: string;
   bookmarkClass?: string;
   readingTime?: number;
   hidenReadingTime?: boolean;
+  postId?: string | number;
 }
 
 const PostCardSaveAction: FC<PostCardSaveActionProps> = ({
-  className = "",
+  className = '',
   bookmarkClass,
   hidenReadingTime = true,
   readingTime = 3,
+  postId
 }) => {
   return (
     <div
@@ -22,7 +24,7 @@ const PostCardSaveAction: FC<PostCardSaveActionProps> = ({
         <span>{readingTime} min read</span>
       )}
 
-      <NcBookmark containerClassName={bookmarkClass} />
+      <NcBookmark postId={postId} containerClassName={bookmarkClass} />
     </div>
   );
 };

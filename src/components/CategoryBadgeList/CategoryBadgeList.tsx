@@ -27,7 +27,7 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
           key={index}
           name={item?.tagName || item?.attributes?.tagName}
           href={
-            `/${lang}/archive/tags/${item?.slug || item?.attributes?.slug}` ||
+            `/${lang}/news/archive/tags/${item?.slug || item?.attributes?.slug}` ||
             '/'
           }
           color={item?.color || (item?.attributes?.color as any)}

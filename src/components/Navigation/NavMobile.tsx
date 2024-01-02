@@ -3,7 +3,7 @@
 import React from "react";
 import ButtonClose from "@/components/ButtonClose/ButtonClose";
 import Logo from "@/components/Logo/Logo";
-import { Disclosure } from "@/app/[lang]/headlessui";
+import { Disclosure } from "@/app/[lang]/news/headlessui";
 import { NavItemType } from "./NavigationItem";
 import { NAVIGATION_DEMO_2 } from "@/data/navigation";
 import ButtonPrimary from "@/components/Button/ButtonPrimary";

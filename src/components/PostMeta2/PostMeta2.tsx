@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
 import Avatar from '@/components/Avatar/Avatar';
-import { PostDataType } from '@/data/types';
 import { DEMO_POSTS } from '@/data/posts';
-import Link from 'next/link';
+import { PostDataType } from '@/data/types';
 import moment from 'moment';
+import Link from 'next/link';
+import { FC } from 'react';
 import { getStrapiImage } from '../utils/api-helpers';
+import useTrans from '@/hooks/useTranslate';
 
 const metaDemo: PostMeta2Props['meta'] = DEMO_POSTS[0];
 
@@ -23,6 +24,7 @@ const PostMeta2: FC<PostMeta2Props> = ({
   size = 'normal',
   avatarRounded,
 }) => {
+  const lang = useTrans()
   const { author, readingTime, createdAt } = meta;
   return (
     <div
@@ -31,7 +33,7 @@ const PostMeta2: FC<PostMeta2Props> = ({
       } ${className}`}
     >
       <Link
-        href={author?.data?.attributes?.slug || ''}
+        href={`/${lang}/news/author/${author?.data?.attributes?.slug }`}
         className="flex items-center space-x-2 rtl:space-x-reverse"
       >
         <Avatar
@@ -51,8 +53,8 @@ const PostMeta2: FC<PostMeta2Props> = ({
       <div className="ms-3">
         <div className="flex items-center">
           <Link
-            href={author?.data?.attributes.slug || ''}
-            className="block font-semibold"
+        href={`/${lang}/news/author/${author?.data?.attributes?.slug }`}
+        className="block font-semibold"
           >
             {author?.data?.attributes?.name}
           </Link>

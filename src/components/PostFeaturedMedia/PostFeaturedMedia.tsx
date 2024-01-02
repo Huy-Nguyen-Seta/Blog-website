@@ -39,7 +39,7 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
     if (!galleryImgs) return null;
     return (
       <GallerySlider
-        href={`/${lang}/single/${slug}` || ''}
+        href={`/${lang}/news/single/${slug}` || ''}
         galleryImgs={thumbnailImage}
         className="absolute inset-0 z-10"
         galleryClass="absolute inset-0"
@@ -95,7 +95,7 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
       {renderContent()}
       {postType !== 'gallery' && (
         <Link
-          href={`/${lang}/single/${slug}` || ''}
+          href={`/${lang}/news/single/${slug}` || ''}
           className={`block absolute inset-0 ${
             !postType || postType === 'standard'
               ? 'bg-black/20 transition-opacity opacity-0 group-hover:opacity-100'

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { FC } from 'react';
 import PostCardSaveAction from '@/components/PostCardSaveAction/PostCardSaveAction';
 import { PostDataType } from '@/data/types';
@@ -34,9 +34,11 @@ const Card9: FC<Card9Props> = ({
     postType,
     createdAt,
     like,
-    slug
+    slug,
+    id,
+    comments,
   } = post;
-  const lang = useTrans()
+  const lang = useTrans();
   const renderMeta = () => {
     return (
       <div className="inline-flex items-center text-xs text-neutral-300">
@@ -46,7 +48,10 @@ const Card9: FC<Card9Props> = ({
               {title}
             </span>
           </h2>
-          <Link href={`/${lang}/author/${author?.slug}` || ''} className="flex mt-2.5 relative">
+          <Link
+            href={`/${lang}/news/author/${author?.slug}` || ''}
+            className="flex mt-2.5 relative"
+          >
             <span className="block text-neutral-200 hover:text-white font-medium truncate">
               {author?.name}
             </span>
@@ -65,8 +70,14 @@ const Card9: FC<Card9Props> = ({
       className={`nc-Card9 relative flex flex-col group rounded-3xl overflow-hidden z-0 ${hoverClass} ${className}`}
     >
       <div className="absolute inset-x-0 top-0 p-3 flex items-center justify-between transition-all opacity-0 z-[-1] group-hover:opacity-100 group-hover:z-10 duration-300">
-        <PostCardLikeAndComment likeCount={like} className="relative" />
-        <PostCardSaveAction hidenReadingTime className="relative" />
+        <PostCardLikeAndComment
+          slug={slug}
+          commentCount={comments?.length}
+          blogId={id}
+          likeCount={like}
+          className="relative"
+        />
+        <PostCardSaveAction postId={id} hidenReadingTime className="relative" />
       </div>
       <div className={`flex items-start relative w-full ${ratio}`}></div>
       {postType === 'audio' ? (
@@ -74,7 +85,7 @@ const Card9: FC<Card9Props> = ({
           <PostFeaturedMedia post={post} />
         </div>
       ) : (
-        <Link href={`/${lang}/single/${slug}` || ''}>
+        <Link href={`/${lang}/news/single/${slug}` || ''}>
           <Image
             fill
             alt=""
@@ -92,11 +103,14 @@ const Card9: FC<Card9Props> = ({
         </Link>
       )}
       <Link
-        href={`/${lang}/single/${slug}` || ''}
+        href={`/${lang}/news/single/${slug}` || ''}
         className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50"
       ></Link>
       <div className="absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow">
-        <Link href={`/${lang}/single/${slug}` || ''} className="absolute inset-0"></Link>
+        <Link
+          href={`/${lang}/news/single/${slug}` || ''}
+          className="absolute inset-0"
+        ></Link>
         <div className="mb-3">
           <CategoryBadgeList categories={tags} />
         </div>

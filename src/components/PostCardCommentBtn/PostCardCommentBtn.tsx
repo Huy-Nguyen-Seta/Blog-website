@@ -1,19 +1,24 @@
-import Link from "next/link";
-import React, { FC } from "react";
+import Link from 'next/link';
+import React, { FC } from 'react';
 
 export interface PostCardCommentBtnProps {
   className?: string;
   isATagOnSingle?: boolean;
+  numberComment?: number;
+  commentCount?: number;
+  slug?: string;
 }
 
 const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
-  className = "flex px-3 h-8 text-xs",
+  className = 'flex px-3 h-8 text-xs',
   isATagOnSingle = false,
+  commentCount = 0,
+  slug,
 }) => {
   if (isATagOnSingle) {
     return (
       <a
-        href={"#comments"}
+        href={'#comments'}
         className={`nc-PostCardCommentBtn relative items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
         title="Comments"
       >
@@ -46,7 +51,7 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
         </svg>
 
         <span className="ml-1 text-neutral-900 dark:text-neutral-200">
-          {"110"}
+          {commentCount}
         </span>
       </a>
     );
@@ -54,7 +59,7 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
 
   return (
     <Link
-      href={"/single/demo-slug#comments"}
+      href={`/news/single/${slug}#comments`}
       className={`nc-PostCardCommentBtn relative items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
       title="Comments"
     >
@@ -87,7 +92,7 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
       </svg>
 
       <span className="ml-1 text-neutral-900 dark:text-neutral-200">
-        {"110"}
+        {commentCount}
       </span>
     </Link>
   );

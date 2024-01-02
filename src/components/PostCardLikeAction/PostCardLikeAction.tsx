@@ -1,18 +1,21 @@
-"use client";
+'use client';
 
-import React, { FC, useState } from "react";
-import convertNumbThousand from "@/utils/convertNumbThousand";
+import React, { FC, useState } from 'react';
+import convertNumbThousand from '@/utils/convertNumbThousand';
+import { likedBlog } from '../utils/funtion';
 
 export interface PostCardLikeActionProps {
   className?: string;
   likeCount?: number;
   liked?: boolean;
+  blogId?: number | string;
 }
 
 const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
-  className = "px-3 h-8 text-xs",
+  className = 'px-3 h-8 text-xs',
   likeCount = 34,
   liked = false,
+  blogId,
 }) => {
   const [isLiked, setisLiked] = useState(liked);
 
@@ -20,16 +23,19 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
     <button
       className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className} ${
         isLiked
-          ? "text-rose-600 bg-rose-50 dark:bg-rose-100"
-          : "text-neutral-700 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 dark:hover:bg-rose-100 hover:text-rose-600 dark:hover:text-rose-500"
+          ? 'text-rose-600 bg-rose-50 dark:bg-rose-100'
+          : 'text-neutral-700 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 dark:hover:bg-rose-100 hover:text-rose-600 dark:hover:text-rose-500'
       }`}
-      onClick={() => setisLiked(!isLiked)}
+      onClick={() => {
+        setisLiked(!isLiked);
+        if (blogId && !isLiked) likedBlog(blogId);
+      }}
       title="Liked"
     >
       <svg
         width="24"
         height="24"
-        fill={isLiked ? "currentColor" : "none"}
+        fill={isLiked ? 'currentColor' : 'none'}
         viewBox="0 0 24 24"
       >
         <path
@@ -46,7 +52,7 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
       {likeCount && (
         <span
           className={`ml-1 ${
-            isLiked ? "text-rose-600" : "text-neutral-900 dark:text-neutral-200"
+            isLiked ? 'text-rose-600' : 'text-neutral-900 dark:text-neutral-200'
           }`}
         >
           {convertNumbThousand(isLiked ? likeCount + 1 : likeCount)}

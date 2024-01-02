@@ -27,7 +27,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   headingCenter = true,
   className = '',
 }) => {
-  const itemsPerPage = 2;
+  const itemsPerPage = 8;
   const [data, setData] = useState<any>([]);
   const [page, setPage] = useState<number>(0);
   const [total, setTotal] = useState<any>();
@@ -41,7 +41,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
     setTotal(total);
   };
   useEffect(() => {
-    fetchData(0, 2);
+    fetchData(0, 8);
   }, [lang]);
 
   let CardComponentName = CardCategory2;

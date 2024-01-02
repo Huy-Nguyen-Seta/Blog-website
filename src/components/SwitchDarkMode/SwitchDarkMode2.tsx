@@ -1,6 +1,6 @@
 "use client";
 
-import { Switch } from "@/app/[lang]/headlessui";
+import { Switch } from "@/app/[lang]/news/headlessui";
 import { useThemeMode } from "@/hooks/useThemeMode";
 import React from "react";
 

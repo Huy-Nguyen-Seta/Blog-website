@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import CategoryBadgeList from '@/components/CategoryBadgeList/CategoryBadgeList';
 import PostCardLikeAndComment from '@/components/PostCardLikeAndComment/PostCardLikeAndComment';
 import PostCardSaveAction from '@/components/PostCardSaveAction/PostCardSaveAction';
@@ -34,6 +34,8 @@ const Card2: FC<Card2Props> = ({
     tags,
     like,
     slug,
+    id,
+    comments,
   } = post;
   const lang = useTrans();
   return (
@@ -60,7 +62,7 @@ const Card2: FC<Card2Props> = ({
       </div>
 
       <Link
-        href={`/${lang}/single/${slug}` || ''}
+        href={`/${lang}/news/single/${slug}` || ''}
         className="absolute inset-0"
       />
 
@@ -78,7 +80,7 @@ const Card2: FC<Card2Props> = ({
             }`}
           >
             <Link
-              href={`/${lang}/single/${slug}` || ''}
+              href={`/${lang}/news/single/${slug}` || ''}
               className="line-clamp-2"
               title={title}
             >
@@ -91,8 +93,18 @@ const Card2: FC<Card2Props> = ({
         </div>
         <div className="my-5 border-t border-neutral-200 dark:border-neutral-700"></div>
         <div className="flex items-center justify-between">
-          <PostCardLikeAndComment likeCount={like} className="relative" />
-          <PostCardSaveAction className="relative" readingTime={readingTime} />
+          <PostCardLikeAndComment
+            commentCount={comments?.length}
+            blogId={id}
+            likeCount={like}
+            className="relative"
+            slug={slug}
+          />
+          <PostCardSaveAction
+            postId={id}
+            className="relative"
+            readingTime={readingTime}
+          />
         </div>
       </div>
     </div>

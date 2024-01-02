@@ -1,23 +1,33 @@
-"use client";
+'use client';
 
-import React, { FC, useState } from "react";
-import convertNumbThousand from "@/utils/convertNumbThousand";
-import twFocusClass from "@/utils/twFocusClass";
+import React, { FC, useState } from 'react';
+import convertNumbThousand from '@/utils/convertNumbThousand';
+import twFocusClass from '@/utils/twFocusClass';
+import { likedComment } from '../utils/funtion';
 
 export interface CommentCardLikeReplyProps {
   className?: string;
   onClickReply: () => void;
   likeCount: number;
-  isLiked: boolean;
+  isLiked?: boolean;
+  hiddenReply?: boolean;
+  idComment?: string | number;
 }
 
 const CommentCardLikeReply: FC<CommentCardLikeReplyProps> = ({
-  className = "",
+  className = '',
   likeCount,
   isLiked: likedProps,
   onClickReply = () => {},
+  hiddenReply,
+  idComment,
 }) => {
   const [isLiked, setIsLiked] = useState(likedProps);
+  const handleLikeComment = () => {
+    if (idComment && !isLiked) {
+      likedComment(idComment);
+    }
+  };
 
   const renderActionBtns = () => {
     return (
@@ -25,15 +35,18 @@ const CommentCardLikeReply: FC<CommentCardLikeReplyProps> = ({
         <button
           className={`min-w-[68px] flex items-center rounded-full leading-none px-3 h-8 text-xs ${twFocusClass()} ${
             isLiked
-              ? "text-rose-600 bg-rose-50"
-              : "text-neutral-700 bg-neutral-100 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 hover:text-rose-600 dark:hover:text-rose-500"
+              ? 'text-rose-600 bg-rose-50'
+              : 'text-neutral-700 bg-neutral-100 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 hover:text-rose-600 dark:hover:text-rose-500'
           }`}
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={() => {
+            setIsLiked(!isLiked);
+            handleLikeComment();
+          }}
           title="Liked"
         >
           <svg
             className="h-5 w-5 me-1"
-            fill={isLiked ? "currentColor" : "none"}
+            fill={isLiked ? 'currentColor' : 'none'}
             viewBox="0 0 24 24"
           >
             <path
@@ -50,36 +63,38 @@ const CommentCardLikeReply: FC<CommentCardLikeReplyProps> = ({
           <span
             className={`${
               isLiked
-                ? "text-rose-600"
-                : "text-neutral-900 dark:text-neutral-200"
+                ? 'text-rose-600'
+                : 'text-neutral-900 dark:text-neutral-200'
             }`}
           >
-            {convertNumbThousand(likeCount)}
+            {convertNumbThousand(isLiked ? likeCount + 1 : likeCount)}
           </span>
         </button>
-        <button
-          className={`flex items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-100 dark:text-neutral-200 dark:bg-neutral-800 px-3 h-8 hover:bg-teal-50 hover:text-teal-600 dark:hover:text-teal-500 ${twFocusClass()} `}
-          title="Reply"
-          onClick={onClickReply}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-[18px] w-[18px] me-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        {!hiddenReply && (
+          <button
+            className={`flex items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-100 dark:text-neutral-200 dark:bg-neutral-800 px-3 h-8 hover:bg-teal-50 hover:text-teal-600 dark:hover:text-teal-500 ${twFocusClass()} `}
+            title="Reply"
+            onClick={onClickReply}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-            />
-          </svg>
-          <span className="text-xs leading-none text-neutral-900 dark:text-neutral-200">
-            Reply
-          </span>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-[18px] w-[18px] me-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
+              />
+            </svg>
+            <span className="text-xs leading-none text-neutral-900 dark:text-neutral-200">
+              Reply
+            </span>
+          </button>
+        )}
       </>
     );
   };

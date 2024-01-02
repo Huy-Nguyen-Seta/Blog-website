@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react';
 import { Fragment, useState } from 'react';
-import { Listbox, Transition } from '@/app/[lang]/headlessui';
+import { Listbox, Transition } from '@/app/[lang]/news/headlessui';
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import Button from '../Button/Button';
 
