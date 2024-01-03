@@ -104,7 +104,7 @@ export const PageArchive = ({
     handleSelected();
     setSelected(value);
   };
-
+  console.log('dataInfor?.image', dataInfor?.image)
   return (
     <div className={`nc-PageArchive`}>
       {/* HEADER */}
@@ -123,7 +123,7 @@ export const PageArchive = ({
         <div className="w-full px-2 xl:max-w-screen-2xl mx-auto">
           <div className="relative aspect-w-16 aspect-h-13 sm:aspect-h-9 lg:aspect-h-8 xl:aspect-h-5 rounded-3xl md:rounded-[40px] overflow-hidden z-0">
             <Image
-              alt="archive"
+              alt={dataInfor?.image?.name}
               fill
               src={
                 getStrapiImage(dataInfor?.image, ScaleLevel.EXTRA_LARGE) || ''

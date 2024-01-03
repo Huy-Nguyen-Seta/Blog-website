@@ -77,7 +77,7 @@ export const PageAuthors = ({
             <div className="w-32 lg:w-40 flex-shrink-0 mt-12 sm:mt-0">
               <div className="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center overflow-hidden text-neutral-100 uppercase font-semibold rounded-full w-20 h-20 text-xl lg:text-2xl lg:w-36 lg:h-36 ring-4 ring-white dark:ring-0 shadow-2xl z-0">
                 <Image
-                  alt="Avatar"
+                  alt={authorInfor?.image?.name || ''}
                   src={getStrapiImage(authorInfor?.image) || ''}
                   fill
                   className="object-cover"
@@ -126,10 +126,12 @@ export const PageAuthors = ({
                   onClick={() => {}}
                   data={SOCIALS_DATA}
                   url={
-                  window?  window?.location.origin +
-                    `/${params?.lang}` +
-                    '/author/' +
-                    authorInfor?.slug : '#'
+                    window
+                      ? window?.location.origin +
+                        `/${params?.lang}` +
+                        '/author/' +
+                        authorInfor?.slug
+                      : '#'
                   }
                 />
               </div>

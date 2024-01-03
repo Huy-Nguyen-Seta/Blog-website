@@ -3,6 +3,7 @@ import Logo from '@/components/Logo/Logo';
 import SocialsList1 from '@/components/SocialsList1/SocialsList1';
 import { CustomLink } from '@/data/types';
 import MusicPlayer from '../MusicPlayer/MusicPlayer';
+import { getData } from '../utils/fetch-api';
 
 export interface WidgetFooterMenu {
   id: string;
@@ -52,7 +53,8 @@ const widgetMenus: WidgetFooterMenu[] = [
   },
 ];
 
-const Footer: React.FC = () => {
+const Footer = async ({ lang }: { lang: Language }) => {
+  const data = await getData(lang, '/getFooter');
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
       <div key={index} className="text-sm">
@@ -92,7 +94,7 @@ const Footer: React.FC = () => {
               <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 rtl:space-x-reverse lg:flex-col lg:space-y-2.5 lg:items-start" />
             </div>
           </div>
-          {widgetMenus.map(renderWidgetMenuItem)}
+          {(data || [])?.map(renderWidgetMenuItem)}
         </div>
       </div>
     </>

@@ -55,7 +55,7 @@ const Card15Podcast: FC<Card15PodcastProps> = ({
             className="object-cover w-full h-full"
             src={getStrapiImage(thumbnailImage) || ''}
             fill
-            alt={title}
+            alt={thumbnailImage?.name || ''}
             sizes="100px"
           />
         </Link>

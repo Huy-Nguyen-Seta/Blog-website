@@ -12,7 +12,7 @@ function Product({ products }: { products: any }) {
           <Link href={item?.link || '/'}  key={item?.id} className='!no-underline'>
             <div className="aspect-[3/2] w-full relative">
               <Image
-                alt=""
+                alt={item?.image?.data?.attributes?.name}
                 fill
                 src={getStrapiImage(item?.image?.data?.attributes) || ''}
                 sizes="(max-width: 600px) 480px, 800px"

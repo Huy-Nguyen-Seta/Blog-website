@@ -79,7 +79,7 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
     <div className={`nc-PostFeaturedMedia relative ${className}`}>
       {postType !== 'gallery' && (
         <Image
-          alt="featured"
+          alt={ thumbnailImage?.data?.attributes ?  thumbnailImage?.data?.attributes?.name : thumbnailImage?.name}
           fill
           className="object-cover"
           src={

@@ -88,7 +88,7 @@ const Card9: FC<Card9Props> = ({
         <Link href={`/${lang}/news/single/${slug}` || ''}>
           <Image
             fill
-            alt=""
+            alt={thumbnailImage?.name || ''}
             className="object-cover w-full h-full rounded-3xl"
             src={getStrapiImage(thumbnailImage) || ''}
             sizes="(max-width: 600px) 480px, 500px"

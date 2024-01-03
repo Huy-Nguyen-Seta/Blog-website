@@ -27,11 +27,13 @@ export async function generateMetadata({
       title: metadata?.metaTitle,
       description: metadata?.metaDescription,
       keywords: metadata?.keyword,
+      authors: metadata?.author,
       alternates: {
-        canonical: '/',
+        canonical: `/news/single/${params?.slug}`,
         languages: {
           'en-US': '/en',
           'ja-JP': '/ja',
+          'vi-VN': '/vi'
         },
       },
       openGraph: {

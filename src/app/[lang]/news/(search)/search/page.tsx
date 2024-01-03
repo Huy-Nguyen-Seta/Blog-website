@@ -20,6 +20,7 @@ import { getData } from '@/components/utils/fetch-api';
 import { DEMO_AUTHORS } from '@/data/authors';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -37,7 +38,10 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   const [authors, setAuthor] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch()
+  const [isDirty, setIsDirty] = useState(false);
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
 
   const handleFetch = async (
     searchValue: string = '',
@@ -57,15 +61,16 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
     return data;
   };
 
-  const fetchData = async (page?: number, limit?: number) => {
+  const fetchData = async (page?: number, limit?: number, search?: string) => {
     switch (tabActive) {
       case TABS[0]:
         const data = await handleFetch(
-          searchValue,
+          searchValue || search,
           '/getBLogsByQuery',
           page,
           limit
         );
+        console.log('data--', data?.data);
         if (page !== 0) {
           setBlogs([...blogs, ...data?.data]);
         } else {
@@ -114,8 +119,14 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   };
 
   useEffect(() => {
-    fetchData(0, 8);
-  }, [tabActive]);
+    if (search && !isDirty) {
+      setCurrentValue(search || '');
+      setSearchValue(search || '');
+      fetchData(0, 8, search);
+    } else {
+      fetchData(0, 8);
+    }
+  }, [search, tabActive]);
 
   useEffect(() => {
     handleFetchStorage(params?.lang, dispatch);
@@ -183,7 +194,10 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
                     placeholder="Nhập từ khóa tìm kiếm"
                     sizeClass="pl-14 py-5 pe-5 md:ps-16"
                     defaultValue={currentValue}
-                    onChange={(e) => setSearchValue(e?.target?.value)}
+                    onChange={(e) => {
+                      setSearchValue(e?.target?.value);
+                      setIsDirty(true);
+                    }}
                   />
                   <ButtonCircle
                     className="absolute end-2.5 top-1/2 transform -translate-y-1/2"
