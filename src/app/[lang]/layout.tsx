@@ -28,11 +28,13 @@ export async function generateMetadata({
       title: metadata?.metaTitle,
       description: metadata?.metaDescription,
       keywords: metadata?.keyword,
+      authors: metadata?.author,
       alternates: {
         canonical: '/',
         languages: {
           'en-US': '/en',
           'ja-JP': '/ja',
+          'vi-VN': '/vi'
         },
       },
       openGraph: {
@@ -84,8 +86,10 @@ const merriweather = Merriweather_Sans({
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Language };
 }) {
   return (
     <html lang="en" className={merriweather.className}>
@@ -93,7 +97,7 @@ export default function RootLayout({
         <div className="bg-[#f8f8f8] text-base dark:bg-neutral-900/95 text-neutral-900 dark:text-neutral-200">
           <SiteHeader />
           <StoreProvider> {children}</StoreProvider>
-          <Footer />
+          <Footer lang={params?.lang}/>
           <ToastContainer
             position="top-right"
             autoClose={5000}

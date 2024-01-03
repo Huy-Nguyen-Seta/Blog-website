@@ -78,7 +78,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
           className="object-cover w-full h-full"
           fill
           src={getStrapiImage(thumbnailImage) || ''}
-          alt={title}
+          alt={thumbnailImage?.name || ''}
         />
         <span className="absolute bottom-1 start-1">
           <PostTypeFeaturedIcon

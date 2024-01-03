@@ -46,7 +46,7 @@ const Card2: FC<Card2Props> = ({
           sizes="(max-width: 600px) 480px, 800px"
           className="object-cover rounded-3xl aspect-[3/2]"
           src={getStrapiImage(thumbnailImage) || ''}
-          alt={title}
+          alt={thumbnailImage?.name}
         />
         <PostTypeFeaturedIcon
           className="absolute bottom-2 left-2"

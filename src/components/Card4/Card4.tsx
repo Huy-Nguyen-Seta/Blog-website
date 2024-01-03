@@ -32,7 +32,7 @@ const Card4: FC<Card4Props> = ({ className = 'h-full', post }) => {
         <Image
           fill
           className="object-cover"
-          alt=""
+          alt={thumbnailImage?.name  || ''}
           sizes="(max-width: 600px) 480px, 800px"
           src={getStrapiImage(thumbnailImage) || ''}
         />

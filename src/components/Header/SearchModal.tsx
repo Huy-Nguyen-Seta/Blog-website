@@ -1,27 +1,30 @@
-"use client";
+'use client';
 
-import { FC, Fragment, ReactNode, useState } from "react";
-import { Combobox, Dialog, Transition } from "@headlessui/react";
+import { FC, Fragment, ReactNode, useEffect, useState } from 'react';
+import { Combobox, Dialog, Transition } from '@headlessui/react';
 import {
   ExclamationTriangleIcon,
   HashtagIcon,
   LifebuoyIcon,
   ClockIcon,
   MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { DEMO_AUTHORS } from "@/data/authors";
-import { DEMO_CATEGORIES } from "@/data/taxonomies";
-import { DEMO_POSTS } from "@/data/posts";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+} from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import { DEMO_AUTHORS } from '@/data/authors';
+import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { DEMO_POSTS } from '@/data/posts';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { getData } from '../utils/fetch-api';
+import useTrans from '@/hooks/useTranslate';
+import { getStrapiImage } from '../utils/api-helpers';
 
 const categories = DEMO_CATEGORIES.filter((_, i) => i < 9);
 const posts = DEMO_POSTS.filter((_, i) => i < 5);
 const authors = DEMO_AUTHORS.filter((_, i) => i < 9);
 
 function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 interface Props {
@@ -30,36 +33,60 @@ interface Props {
 
 const SearchModal: FC<Props> = ({ renderTrigger }) => {
   const [open, setOpen] = useState(false);
-  const [rawQuery, setRawQuery] = useState("a");
-
+  const lang = useTrans();
   const router = useRouter();
+  const [rawQuery, setRawQuery] = useState('a');
+  const [categories, setCategories] = useState<any[]>([]);
+  const [posts, setPosts] = useState<any[]>([]);
+  const [authors, setAuthors] = useState<any[]>([]);
+  useEffect(() => {
+    try {
+      const handleFetchData = async () => {
+        const cate = await getData(lang, '/getCategories');
+        setCategories(
+          cate
+            ?.filter((_: any, i: number) => i < 9)
+            ?.map((item: any) => ({ ...item, taxonomy: 'category' }))
+        );
+        const post = await getData(lang, '/getBLogsByQuery');
+        setPosts(post?.data?.filter((_: any, i: number) => i < 5));
+        const au = await getData(lang, '/getAuthors');
+        setAuthors(
+          au?.results
+            ?.filter((_: any, i: number) => i < 9)
+            ?.map((item: any) => ({ ...item, taxonomy: 'author' }))
+        );
+      };
+      handleFetchData();
+    } catch (err) {
+      console.log('err', err);
+    }
+  }, [lang]);
 
-  const query = rawQuery.toLowerCase().replace(/^[#>]/, "");
+  const query = rawQuery.toLowerCase().replace(/^[#>]/, '');
 
   const filteredPosts =
-    rawQuery === "#"
+    rawQuery === '#'
       ? posts
-      : query === "" || rawQuery.startsWith(">")
+      : query === '' || rawQuery.startsWith('>')
       ? []
-      : posts.filter((project) => project.title.toLowerCase().includes(query));
+      : posts.filter((project) => project?.title.toLowerCase().includes(query));
 
   const filteredProjects =
-    rawQuery === "#"
+    rawQuery === '#'
       ? categories
-      : query === "" || rawQuery.startsWith(">")
+      : query === '' || rawQuery.startsWith('>')
       ? []
       : categories.filter((project) =>
-          project.name.toLowerCase().includes(query)
+          project?.name.toLowerCase().includes(query)
         );
 
   const filteredUsers =
-    rawQuery === ">"
+    rawQuery === '>'
       ? authors
-      : query === "" || rawQuery.startsWith("#")
+      : query === '' || rawQuery.startsWith('#')
       ? []
-      : authors.filter((user) =>
-          user.displayName.toLowerCase().includes(query)
-        );
+      : authors.filter((user) => user?.name.toLowerCase().includes(query));
 
   return (
     <>
@@ -97,7 +124,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
       <Transition.Root
         show={open}
         as={Fragment}
-        afterLeave={() => setRawQuery("a")}
+        afterLeave={() => setRawQuery('a')}
         appear
       >
         <Dialog
@@ -132,13 +159,25 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                 as="form"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  router.push("/search");
+                  router.push(`/${lang}/news/search?search=${rawQuery}`);
                   setOpen(false);
                 }}
               >
                 <Combobox
                   onChange={(item: any) => {
-                    router.push(item.href);
+                    switch (item?.taxonomy) {
+                      case 'author':
+                        router?.push(`/news/author/${item.slug}`);
+
+                        break;
+                      case 'category':
+                        router?.push(`/news/archive/${item.slug}`);
+
+                        break;
+                      default:
+                        router?.push(`/news/single/${item.slug}`);
+                        break;
+                    }
                     setOpen(false);
                   }}
                   name="searchpallet"
@@ -165,7 +204,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                       {filteredPosts.length > 0 && (
                         <li>
                           <h2 className="text-xs font-semibold text-gray-900">
-                            Posts
+                            Bài viết
                           </h2>
                           <ul className="-mx-4 mt-2 text-sm text-gray-700">
                             {filteredPosts.map((post) => (
@@ -174,8 +213,8 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                                 value={post}
                                 className={({ active }) =>
                                   classNames(
-                                    "flex select-none items-center px-4 py-2",
-                                    active && "bg-indigo-600 text-white"
+                                    'flex select-none items-center px-4 py-2',
+                                    active && 'bg-indigo-600 text-white'
                                   )
                                 }
                               >
@@ -183,8 +222,8 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                                   <>
                                     <ClockIcon
                                       className={classNames(
-                                        "h-6 w-6 flex-none",
-                                        active ? "text-white" : "text-gray-400"
+                                        'h-6 w-6 flex-none',
+                                        active ? 'text-white' : 'text-gray-400'
                                       )}
                                       aria-hidden="true"
                                     />
@@ -202,7 +241,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                       {filteredProjects.length > 0 && (
                         <li>
                           <h2 className="text-xs font-semibold text-gray-900">
-                            Categories
+                            Thể loại
                           </h2>
                           <ul className="-mx-4 mt-2 text-sm text-gray-700">
                             {filteredProjects.map((project) => (
@@ -211,8 +250,8 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                                 value={project}
                                 className={({ active }) =>
                                   classNames(
-                                    "flex select-none items-center px-4 py-2",
-                                    active && "bg-indigo-600 text-white"
+                                    'flex select-none items-center px-4 py-2',
+                                    active && 'bg-indigo-600 text-white'
                                   )
                                 }
                               >
@@ -220,8 +259,8 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                                   <>
                                     <HashtagIcon
                                       className={classNames(
-                                        "h-6 w-6 flex-none",
-                                        active ? "text-white" : "text-gray-400"
+                                        'h-6 w-6 flex-none',
+                                        active ? 'text-white' : 'text-gray-400'
                                       )}
                                       aria-hidden="true"
                                     />
@@ -239,7 +278,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                       {filteredUsers.length > 0 && (
                         <li>
                           <h2 className="text-xs font-semibold text-gray-900">
-                            Authors
+                            Tác giả
                           </h2>
                           <ul className="-mx-4 mt-2 text-sm text-gray-700">
                             {filteredUsers.map((user) => (
@@ -248,19 +287,21 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                                 value={user}
                                 className={({ active }) =>
                                   classNames(
-                                    "flex select-none items-center px-4 py-2",
-                                    active && "bg-indigo-600 text-white"
+                                    'flex select-none items-center px-4 py-2',
+                                    active && 'bg-indigo-600 text-white'
                                   )
                                 }
                               >
                                 <Image
-                                  src={user.avatar}
+                                  src={getStrapiImage(user?.image) || ''}
                                   alt="author"
+                                  width={0}
+                                  height={0}
                                   className="h-6 w-6 flex-none rounded-full"
                                   sizes="30px"
                                 />
                                 <span className="ms-3 flex-auto truncate">
-                                  {user.displayName}
+                                  {user.name}
                                 </span>
                               </Combobox.Option>
                             ))}
@@ -270,26 +311,27 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     </Combobox.Options>
                   )}
 
-                  {rawQuery === "?" && (
+                  {rawQuery === '?' && (
                     <div className="py-14 px-6 text-center text-sm sm:px-14">
                       <LifebuoyIcon
                         className="mx-auto h-6 w-6 text-gray-400"
                         aria-hidden="true"
                       />
                       <p className="mt-4 font-semibold text-gray-900">
-                        Help with searching
+                        Trợ giúp tìm kiếm
                       </p>
                       <p className="mt-2 text-gray-500">
-                        Use this tool to quickly search for users and projects
-                        across our entire platform. You can also use the search
-                        modifiers found in the footer below to limit the results
-                        to just users or projects.
+                        Sử dụng công cụ này để nhanh chóng tìm kiếm người dùng
+                        và bài viết trên toàn bộ nền tảng của chúng tôi. Bạn
+                        cũng có thể sử dụng tìm kiếm công cụ sửa đổi được tìm
+                        thấy ở chân trang bên dưới để giới hạn kết quả chỉ dành
+                        cho người dùng hoặc bài viết.
                       </p>
                     </div>
                   )}
 
-                  {query !== "" &&
-                    rawQuery !== "?" &&
+                  {query !== '' &&
+                    rawQuery !== '?' &&
                     filteredProjects.length === 0 &&
                     filteredUsers.length === 0 && (
                       <div className="py-14 px-6 text-center text-sm sm:px-14">
@@ -298,60 +340,60 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                           aria-hidden="true"
                         />
                         <p className="mt-4 font-semibold text-gray-900">
-                          No results found
+                          Không tìm thấy kết quả
                         </p>
                         <p className="mt-2 text-gray-500">
-                          We couldn’t find anything with that term. Please try
-                          again.
+                          Chúng tôi không tìm thấy kết quả tìm kiếm nào cho từ
+                          khóa này. Vui lòng thử lại
                         </p>
                       </div>
                     )}
 
                   <div className="flex flex-wrap items-center bg-gray-50 py-2.5 px-4 text-xs text-gray-700">
-                    Type{" "}
+                    Nhập{' '}
                     <kbd
                       className={classNames(
-                        "mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2",
-                        rawQuery.startsWith("#")
-                          ? "border-indigo-600 text-indigo-600"
-                          : "border-gray-400 text-gray-900"
+                        'mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2',
+                        rawQuery.startsWith('#')
+                          ? 'border-indigo-600 text-indigo-600'
+                          : 'border-gray-400 text-gray-900'
                       )}
                     >
                       #
-                    </kbd>{" "}
-                    <span className="sm:hidden">for projects,</span>
+                    </kbd>{' '}
+                    <span className="sm:hidden">cho chủ đề,</span>
                     <span className="hidden sm:inline">
-                      to access projects,
+                      để truy cập bài viết,
                     </span>
                     <kbd
                       className={classNames(
-                        "mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2",
-                        rawQuery.startsWith(">")
-                          ? "border-indigo-600 text-indigo-600"
-                          : "border-gray-400 text-gray-900"
+                        'mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2',
+                        rawQuery.startsWith('>')
+                          ? 'border-indigo-600 text-indigo-600'
+                          : 'border-gray-400 text-gray-900'
                       )}
                     >
                       &gt;
-                    </kbd>{" "}
-                    for users,{" "}
+                    </kbd>{' '}
+                    cho người dùng,{' '}
                     <kbd
                       className={classNames(
-                        "mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2",
-                        rawQuery === "?"
-                          ? "border-indigo-600 text-indigo-600"
-                          : "border-gray-400 text-gray-900"
+                        'mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2',
+                        rawQuery === '?'
+                          ? 'border-indigo-600 text-indigo-600'
+                          : 'border-gray-400 text-gray-900'
                       )}
                     >
                       ?
-                    </kbd>{" "}
-                    for help, or{" "}
+                    </kbd>{' '}
+                    để trợ giúp, hoặc{' '}
                     <Link
-                      href={"/news/search"}
+                      href={'/news/search'}
                       className="mx-1 flex h-5 px-1.5 items-center justify-center rounded border bg-white sm:mx-2 border-primary-6000 text-neutral-900"
                       onClick={() => setOpen(false)}
                     >
-                      Go to search page
-                    </Link>{" "}
+                      Đến trang tìm kiếm
+                    </Link>{' '}
                   </div>
                 </Combobox>
               </Dialog.Panel>
