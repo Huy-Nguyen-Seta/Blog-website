@@ -21,7 +21,7 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
 }) => {
   const [tabActive, setTabActive] = useState<string>(categories?.[0]?.id);
   const [data, setData] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     async function fetchDataByCategory() {
