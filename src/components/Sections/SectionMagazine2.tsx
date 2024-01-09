@@ -40,6 +40,10 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
     if (user) dispatch(fetchStorageByIdUser({ userId: user?._id, lang: lang }));
   }, [lang, dispatch]);
 
+  const emtyItem = () => (
+    <div className="w-full h-full flex justify-center items-center font-semibold">Chưa có dữ liệu !</div>
+  );
+
   return (
     <div className={`nc-SectionMagazine2 ${className}`}>
       <HeaderFilterCustom
@@ -48,7 +52,7 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
         tabActive={tabActive}
         setTabActive={setTabActive}
       />
-      {!data?.length && <span>{!isLoading && <Loading />}</span>}
+      {!data?.length && <span>{isLoading ? <Loading /> : emtyItem()}</span>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <div className="grid gap-6">

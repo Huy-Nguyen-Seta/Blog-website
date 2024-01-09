@@ -38,7 +38,6 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isDirty, setIsDirty] = useState(false);
   const dispatch = useDispatch();
-
   const handleFetch = async (
     searchValue: string = '',
     path: string = '',
@@ -56,8 +55,12 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
     return data;
   };
 
-  const fetchData = async (page?: number, limit?: number, search?: string) => {
-    switch (tabActive) {
+  const fetchData = async (
+    page?: number,
+    limit?: number,
+    currentTab?: string
+  ) => {
+    switch (currentTab || tabActive) {
       case TABS[0]:
         const data = await handleFetch('', '/getBLogsByQuery', page, limit);
         if (page !== 0) {
@@ -98,8 +101,8 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
   };
 
   useEffect(() => {
-    fetchData(0, 8);
-  }, [tabActive]);
+    fetchData(0, 8, TABS[0]);
+  }, []);
 
   useEffect(() => {
     handleFetchStorage(params?.lang, dispatch);
@@ -110,8 +113,8 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
       return;
     }
     setPage(0);
-    fetchData(0, numberPerPage);
     setTabActive(item);
+    fetchData(0, numberPerPage, item);
   };
   return (
     <div className={`nc-PageList`}>
@@ -156,47 +159,49 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
             </Nav>
             <div className="block my-4 border-b w-full border-neutral-300 dark:border-neutral-500 sm:hidden"></div>
           </div>
-          {!total && (
+          {!total ? (
             <div className=" flex justify-center items-center">
               <span className="pt-10">
                 {isLoading ? <Loading /> : 'Danh sách rỗng !'}
               </span>
             </div>
+          ) : (
+            <>
+              {/* LOOP ITEMS */}
+              {/* LOOP ITEMS POSTS */}
+              {tabActive === TABS[0] && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
+                  {blogs?.map((post) => (
+                    <Card11 key={post.id} post={post} />
+                  ))}
+                </div>
+              )}
+              {/* LOOP ITEMS CATEGORIES */}
+              {tabActive === TABS[1] && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
+                  {categories?.map((cat) => (
+                    <CardCategory2 key={cat.id} taxonomy={cat} />
+                  ))}
+                </div>
+              )}
+              {/* LOOP ITEMS TAGS */}
+              {tabActive === TABS[2] && (
+                <div className="flex flex-wrap mt-12 ">
+                  {tags?.map((tag) => (
+                    <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
+                  ))}
+                </div>
+              )}
+              {/* LOOP ITEMS POSTS */}
+              {tabActive === TABS[3] && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
+                  {authors?.map((author) => (
+                    <CardAuthorBox2 key={author.id} author={author} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
-          {/* LOOP ITEMS */}
-          {/* LOOP ITEMS POSTS */}
-          {tabActive === TABS[0] && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {blogs?.map((post) => (
-                <Card11 key={post.id} post={post} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS CATEGORIES */}
-          {tabActive === TABS[1] && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {categories?.map((cat) => (
-                <CardCategory2 key={cat.id} taxonomy={cat} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS TAGS */}
-          {tabActive === TABS[2] && (
-            <div className="flex flex-wrap mt-12 ">
-              {tags?.map((tag) => (
-                <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS POSTS */}
-          {tabActive === TABS[3] && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {authors?.map((author) => (
-                <CardAuthorBox2 key={author.id} author={author} />
-              ))}
-            </div>
-          )}
-
           {/* PAGINATION */}
           {total > page + numberPerPage && tabActive !== TABS[2] && (
             <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-center sm:items-center">

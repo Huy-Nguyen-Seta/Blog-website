@@ -42,7 +42,6 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const search = searchParams.get('search');
-
   const handleFetch = async (
     searchValue: string = '',
     path: string = '',
@@ -61,8 +60,13 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
     return data;
   };
 
-  const fetchData = async (page?: number, limit?: number, search?: string) => {
-    switch (tabActive) {
+  const fetchData = async (
+    page?: number,
+    limit?: number,
+    search?: string,
+    currentTab?: string
+  ) => {
+    switch (currentTab || tabActive) {
       case TABS[0]:
         const data = await handleFetch(
           searchValue || search,
@@ -121,11 +125,11 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
     if (search && !isDirty) {
       setCurrentValue(search || '');
       setSearchValue(search || '');
-      fetchData(0, 8, search);
+      fetchData(0, 8, search, tabActive);
     } else {
-      fetchData(0, 8);
+      fetchData(0, 8, '', tabActive);
     }
-  }, [search, tabActive]);
+  }, [search]);
 
   useEffect(() => {
     handleFetchStorage(params?.lang, dispatch);
@@ -136,7 +140,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
       return;
     }
     setPage(0);
-    fetchData(0, numberPerPage);
+    fetchData(0, numberPerPage, '', item);
     setTabActive(item);
   };
   return (
@@ -244,59 +248,66 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
             </Nav>
             <div className="block my-4 border-b w-full border-neutral-300 dark:border-neutral-500 sm:hidden"></div>
           </div>
-          {!total && (
+          {!total ? (
             <div className=" flex justify-center items-center">
               <span className="pt-10">
-                {isLoading ? <Loading /> : 'Danh sách rỗng !'}
+                {isLoading ? (
+                  <Loading />
+                ) : (
+                  <div className="font-semibold">Danh sách rỗng !</div>
+                )}
               </span>
             </div>
-          )}
-          {/* LOOP ITEMS */}
-          {/* LOOP ITEMS POSTS */}
-          {tabActive === TABS[0] && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {blogs?.map((post) => (
-                <Card11 key={post.id} post={post} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS CATEGORIES */}
-          {tabActive === TABS[1] && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {categories?.map((cat) => (
-                <CardCategory2 key={cat.id} taxonomy={cat} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS TAGS */}
-          {tabActive === TABS[2] && (
-            <div className="flex flex-wrap mt-12 ">
-              {tags?.map((tag) => (
-                <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS POSTS */}
-          {tabActive === TABS[3] && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {authors?.map((author) => (
-                <CardAuthorBox2 key={author.id} author={author} />
-              ))}
-            </div>
-          )}
+          ) : (
+            <>
+              {/* LOOP ITEMS */}
+              {/* LOOP ITEMS POSTS */}
+              {tabActive === TABS[0] && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
+                  {blogs?.map((post) => (
+                    <Card11 key={post.id} post={post} />
+                  ))}
+                </div>
+              )}
+              {/* LOOP ITEMS CATEGORIES */}
+              {tabActive === TABS[1] && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
+                  {categories?.map((cat) => (
+                    <CardCategory2 key={cat.id} taxonomy={cat} />
+                  ))}
+                </div>
+              )}
+              {/* LOOP ITEMS TAGS */}
+              {tabActive === TABS[2] && (
+                <div className="flex flex-wrap mt-12 ">
+                  {tags?.map((tag) => (
+                    <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
+                  ))}
+                </div>
+              )}
+              {/* LOOP ITEMS POSTS */}
+              {tabActive === TABS[3] && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
+                  {authors?.map((author) => (
+                    <CardAuthorBox2 key={author.id} author={author} />
+                  ))}
+                </div>
+              )}
 
-          {/* PAGINATION */}
-          {total > page + numberPerPage && tabActive !== TABS[2] && (
-            <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-center sm:items-center">
-              <ButtonPrimary
-                onClick={() => {
-                  setPage((pre) => pre + numberPerPage);
-                  fetchData(page + numberPerPage, numberPerPage);
-                }}
-              >
-                Xem thêm
-              </ButtonPrimary>
-            </div>
+              {/* PAGINATION */}
+              {total > page + numberPerPage && tabActive !== TABS[2] && (
+                <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-center sm:items-center">
+                  <ButtonPrimary
+                    onClick={() => {
+                      setPage((pre) => pre + numberPerPage);
+                      fetchData(page + numberPerPage, numberPerPage);
+                    }}
+                  >
+                    Xem thêm
+                  </ButtonPrimary>
+                </div>
+              )}
+            </>
           )}
         </main>
 

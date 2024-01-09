@@ -49,7 +49,7 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
         ></path>
       </svg>
 
-      {likeCount && (
+      {(likeCount || likeCount === 0) && (
         <span
           className={`ml-1 ${
             isLiked ? 'text-rose-600' : 'text-neutral-900 dark:text-neutral-200'
