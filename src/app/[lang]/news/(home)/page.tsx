@@ -5,7 +5,7 @@ import SectionMagazine1 from '@/components/Sections/SectionMagazine1';
 import SectionMagazine2 from '@/components/Sections/SectionMagazine2';
 import SectionMagazine9 from '@/components/Sections/SectionMagazine9';
 import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
-import { getStrapiURL } from '@/components/utils/api-helpers';
+import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_POSTS, DEMO_POSTS_AUDIO } from '@/data/posts';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
@@ -46,7 +46,7 @@ export async function generateMetadata({
         siteName: 'Hallo',
         images: [
           {
-            url: getStrapiURL(image),
+            url: getStrapiMedia(image) || '',
           },
         ],
         type: 'website',

@@ -1,6 +1,6 @@
 // Tag and category have same data type - we will use one demo data
 
-import { getStrapiURL } from '@/components/utils/api-helpers';
+import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { Metadata } from 'next';
 import { PageArchive } from './PageArchive';
@@ -45,7 +45,7 @@ export async function generateMetadata({
         siteName: 'Hallo',
         images: [
           {
-            url: getStrapiURL(image),
+            url: getStrapiMedia(image) || '',
           },
         ],
         type: 'website',
