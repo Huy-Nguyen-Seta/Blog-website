@@ -75,8 +75,8 @@ const Footer = async ({ lang }: { lang: Language }) => {
         </div>
         <div className=" bg-gray-200 mt-8">
           <div className="container  grid grid-cols-2 gap-y-4  sm:gap-x-8 md:grid-cols-4  py-8 font-medium text-gray-500">
-            {data?.SubFooter?.map((item: any) => (
-              <div key={item?.id}>{item?.groupName}</div>
+            {data?.FooterBottom?.map((item: any) => (
+              <div key={item?.id}>{item?.label}</div>
             ))}
           </div>
         </div>
