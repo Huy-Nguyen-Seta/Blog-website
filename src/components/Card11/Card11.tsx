@@ -24,7 +24,8 @@ const Card11: FC<Card11Props> = ({
   hiddenAuthor = false,
   ratio = 'aspect-w-4 aspect-h-3',
 }) => {
-  const { title, href, tags, createdAt, like, slug, id, comments } = post;
+  
+  const { title, href, tag, createdAt, like, slug, id, comments, viewCount } = post;
   const lang = useTrans();
   const [isHover, setIsHover] = useState(false);
   return (
@@ -46,7 +47,7 @@ const Card11: FC<Card11Props> = ({
         className="absolute inset-0"
       ></Link>
       <span className="absolute top-3 inset-x-3 z-10">
-        <CategoryBadgeList categories={tags || tags?.data} />
+        <CategoryBadgeList categories={ tag?.data || tag} />
       </span>
 
       <div className="p-4 flex flex-col space-y-3">
@@ -71,6 +72,7 @@ const Card11: FC<Card11Props> = ({
             blogId={id}
             likeCount={like}
             className="relative"
+            viewCount={viewCount}
           />
           <PostCardSaveAction postId={id} className="relative" />
         </div>

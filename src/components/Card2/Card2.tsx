@@ -31,11 +31,12 @@ const Card2: FC<Card2Props> = ({
     categories,
     postType,
     thumbnailImage,
-    tags,
+    tag,
     like,
     slug,
     id,
     comments,
+    viewCount,
   } = post;
   const lang = useTrans();
   return (
@@ -57,7 +58,7 @@ const Card2: FC<Card2Props> = ({
         <CategoryBadgeList
           className="flex flex-wrap space-x-2 absolute top-3 left-3"
           itemClass="relative"
-          categories={tags}
+          categories={tag}
         />
       </div>
 
@@ -94,6 +95,7 @@ const Card2: FC<Card2Props> = ({
         <div className="my-5 border-t border-neutral-200 dark:border-neutral-700"></div>
         <div className="flex items-center justify-between">
           <PostCardLikeAndComment
+            viewCount={viewCount}
             commentCount={comments?.length}
             blogId={id}
             likeCount={like}

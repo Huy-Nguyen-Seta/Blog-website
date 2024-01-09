@@ -20,7 +20,7 @@ const DashboardSubcription = () => {
       </div>
       <div className="border-t border-neutral-200 dark:border-neutral-900">
         <dl>
-          {data.map((item, index) => {
+          {data?.map((item, index) => {
             return (
               <div
                 key={index}

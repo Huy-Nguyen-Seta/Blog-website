@@ -10,6 +10,8 @@ import emailjs from '@emailjs/browser';
 import { showErrorMessage, showSuccessMessage } from '../utils/toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../Button/Loading';
+import axios from 'axios';
+import { getStrapiURL } from '../utils/api-helpers';
 
 export interface SectionSubscribe2Props {
   className?: string;
@@ -20,6 +22,21 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMess] = useState('');
+
+  const handlePushToAdminManager = async () => {
+    const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+    try {
+      const data = await axios.post(
+        `${getStrapiURL('/api/postNotification')}`,
+        { name: name, email: email, message: message },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+    } catch (error) {
+      showErrorMessage('Gửi thông tin về trang quản trị thất bại' || '', {
+        autoClose: 10000,
+      });
+    }
+  };
 
   emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_INIT || '');
 
@@ -52,6 +69,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
     e.preventDefault();
     setIsSubmitting(true);
     createGoogleSheet();
+    handlePushToAdminManager();
     emailjs
       .sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',

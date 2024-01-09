@@ -23,6 +23,7 @@ export async function generateMetadata({
     if (!metadata) return {};
 
     const image = metadata?.metaImage?.url;
+    console.log('image', image)
 
     return {
       title: metadata?.metaTitle,

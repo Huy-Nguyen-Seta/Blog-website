@@ -3,13 +3,14 @@ import { getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import '@/styles/index.scss';
 import { Metadata } from 'next';
-import { Merriweather_Sans } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { i18n } from '../../../i18n-config';
 import StoreProvider from '../GlobalRedux/StoreProvider';
 import SiteHeader from './SiteHeader';
 import './globals.css';
+const FAVICON_VERSION = '?v=1';
 
 export async function generateMetadata({
   params,
@@ -25,7 +26,10 @@ export async function generateMetadata({
 
     return {
       metadataBase: new URL(`${process.env.BASE_URL}`),
-      title: metadata?.metaTitle,
+      title: {
+        template: '%s | Hallo.co',
+        absolute:''
+      },
       description: metadata?.metaDescription,
       keywords: metadata?.keyword,
       authors: metadata?.author,
@@ -34,7 +38,7 @@ export async function generateMetadata({
         languages: {
           'en-US': '/en',
           'ja-JP': '/ja',
-          'vi-VN': '/vi'
+          'vi-VN': '/vi',
         },
       },
       openGraph: {
@@ -50,24 +54,24 @@ export async function generateMetadata({
         type: 'website',
       },
       // Generate favicon with https://favicon.io/ and update the version if changed
-      // icons: {
-      //   icon: {
-      //     url: '/image/favicons/favicon.ico' + FAVICON_VERSION,
-      //     sizes: '48x48',
-      //     type: 'image/x-icon',
-      //   },
-      //   other: [
-      //     {
-      //       rel: 'apple-touch-icon',
-      //       url: '/image/favicons/apple-touch-icon.png' + FAVICON_VERSION,
-      //       sizes: '180x180',
-      //     },
-      //     {
-      //       rel: 'manifest',
-      //       url: '/image/favicons/site.webmanifest' + FAVICON_VERSION,
-      //     },
-      //   ],
-      // },
+      icons: {
+        icon: {
+          url: '/favicons/favicon.ico' + FAVICON_VERSION,
+          sizes: '48x48',
+          type: 'image/x-icon',
+        },
+        other: [
+          {
+            rel: 'apple-touch-icon',
+            url: '/favicons/apple-touch-icon.png' + FAVICON_VERSION,
+            sizes: '180x180',
+          },
+          {
+            rel: 'manifest',
+            url: '/favicons/site.webmanifest' + FAVICON_VERSION,
+          },
+        ],
+      },
     };
   } catch (error) {
     console.error(error);
@@ -78,7 +82,9 @@ export async function generateMetadata({
   }
 }
 
-const merriweather = Merriweather_Sans({
+const roboto = Roboto({
+  weight: ['400', '500', '700', '900'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-merriweather',
@@ -92,12 +98,12 @@ export default function RootLayout({
   params: { lang: Language };
 }) {
   return (
-    <html lang="en" className={merriweather.className}>
+    <html lang="en" className={roboto.className}>
       <body className="">
         <div className="bg-[#f8f8f8] text-base dark:bg-neutral-900/95 text-neutral-900 dark:text-neutral-200">
           <SiteHeader />
           <StoreProvider> {children}</StoreProvider>
-          <Footer lang={params?.lang}/>
+          <Footer lang={params?.lang} />
           <ToastContainer
             position="top-right"
             autoClose={5000}

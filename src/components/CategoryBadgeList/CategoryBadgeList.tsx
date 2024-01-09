@@ -21,18 +21,15 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
       className={`nc-CategoryBadgeList ${className}`}
       data-nc-id="CategoryBadgeList"
     >
-      {(categories?.data || categories)?.map((item: any, index: number) => (
         <Badge
           className={itemClass}
-          key={index}
-          name={item?.tagName || item?.attributes?.tagName}
+          name={categories?.tagName || categories?.attributes?.tagName}
           href={
-            `/${lang}/news/archive/tags/${item?.slug || item?.attributes?.slug}` ||
+            `/${lang}/news/archive/tags/${categories?.slug || categories?.attributes?.slug}` ||
             '/'
           }
-          color={item?.color || (item?.attributes?.color as any)}
+          color={categories?.color || (categories?.attributes?.color as any)}
         />
-      ))}
     </div>
   );
 };

@@ -2,11 +2,19 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import {
-  ChevronDoubleLeftIcon
-} from "@heroicons/react/24/solid";
+import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid';
 
-function TableOfContent({ data, lang }: { data: any; lang: Language }) {
+function TableOfContent({
+  data,
+  lang,
+  setIsLoadMore,
+  category
+}: {
+  data: any;
+  lang: Language;
+  setIsLoadMore: (data: boolean) => void;
+  category: any
+}) {
   const [active, setActive] = useState('');
   const [positionEnd, setPositionEnd] = useState(0);
 
@@ -42,35 +50,36 @@ function TableOfContent({ data, lang }: { data: any; lang: Language }) {
   const handleScrollToElement = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    e.preventDefault();
-    const href = e.currentTarget.href;
-    const targetId = href.replace(/.*\#/, '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      window.scrollTo({
-        behavior: 'smooth',
-        top:
-          element.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          100,
-      });
-    }
+    setIsLoadMore?.(false)
+
+  //   e.preventDefault();
+  //   const href = e.currentTarget.href;
+  //   const targetId = href.replace(/.*\#/, '');
+  //   const element = document.getElementById(targetId);
+  //   if (element) {
+      // window.scrollTo({
+      //   behavior: 'smooth',
+      //   top:
+      //     document.body.getBoundingClientRect().top -
+      //     81,
+      // });
+  //   }
   };
 
   return (
-    <div className="space-y-1 min-w-[20rem] relative hidden lg:block" id="wrap">
+    <div className="space-y-1 min-w-[20rem] relative hidden lg:block mr-4 " id="wrap">
       <div
-        className={` w-[20rem] ${!Boolean(positionEnd) ? 'fixed' : 'absolute'}`}
+        className={` w-[20rem] ${!Boolean(positionEnd) ? 'fixed' : 'absolute'} `}
         id="toc"
         style={{ ...(Boolean(positionEnd) && { top: positionEnd }) }}
       >
         <Link
-          href={`/${lang}/news/search`}
+          href={`/${lang}/news/archive/${category?.slug}`}
           className="pb-8 flex flex-row space-x-3 items-center cursor-pointer"
         >
-          <ChevronDoubleLeftIcon className='w-5 h-5 font-semibold'/>
-          <p className="text-[#01123C] font-semibold text-lg">
-            Quay lại danh sách
+          <ChevronDoubleLeftIcon className="w-5 h-5 font-semibold" />
+          <p className="text-[#01123C] dark:text-white font-semibold text-lg ">
+            Quay lại {category?.name}
           </p>
         </Link>
         <div>
@@ -85,8 +94,8 @@ function TableOfContent({ data, lang }: { data: any; lang: Language }) {
                   'text-base': item?.tagName === 'h1',
                 },
                 {
-                  'text-[#11295E] font-semibold': item?.href === active,
-                  'text-[#425466] font-normal': item?.href !== active,
+                  'text-[#11295E] font-bold': item?.href === active,
+                  'text-[#425466] dark:text-white font-semibold': item?.href !== active,
                 }
               )}
             >

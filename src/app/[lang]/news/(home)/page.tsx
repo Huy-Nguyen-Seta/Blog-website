@@ -82,7 +82,7 @@ const PageHome = async ({
       <div className="nc-PageHome relative">
         <div className="container relative">
           <SectionMagazine2
-            className="py-16 lg:py-24"
+            className="py-10 lg:py-16"
             posts={MAGAZINE2_POSTS}
             categories={filterCategories.concat(response?.NewPost?.categories)}
             lang={params?.lang}
@@ -90,10 +90,10 @@ const PageHome = async ({
           <SectionMagazine1
             heading={response?.PopularPost?.title}
             desc={response?.PopularPost?.description}
-            className="py-16 lg:py-28"
+            className="py-10 lg:py-16"
             posts={response?.PopularPost?.data}
           />
-          <div className="relative py-16">
+          <div className="relative py-10 lg:py-16">
             <BackgroundSection />
             <SectionMagazine9
               heading={response?.Section1?.title}
@@ -103,7 +103,7 @@ const PageHome = async ({
             />
           </div>
           {(postByCategory?.PostByCategory || [])?.map((item: any) => (
-            <div className="relative py-16" key={item?.id}>
+            <div className="relative py-10 lg:py-16" key={item?.id}>
               <BackgroundSection />
               <SectionSliderPosts
                 postCardName="card11"
@@ -112,7 +112,7 @@ const PageHome = async ({
                   item?.description ||
                   `Khám phá hơn ${item?.category?.blogs?.length} bài viết`
                 }
-                posts={item?.category?.blogs}
+                posts={item?.category?.blogs || []}
                 cate={item?.category}
               />
             </div>
@@ -120,7 +120,7 @@ const PageHome = async ({
           <SectionSubscribe2 />
 
           <SectionSliderNewCategories
-            className="py-16 lg:py-28"
+            className="py-10 lg:py-16"
             heading="Diễn đàn và thảo luận"
             subHeading="Khám phá hơn 233 chủ đề"
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}

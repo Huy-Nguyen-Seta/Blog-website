@@ -104,7 +104,6 @@ export const PageArchive = ({
     handleSelected();
     setSelected(value);
   };
-  console.log('dataInfor?.image', dataInfor?.image)
   return (
     <div className={`nc-PageArchive`}>
       {/* HEADER */}

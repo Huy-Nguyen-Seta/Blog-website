@@ -30,7 +30,7 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
         setisLiked(!isLiked);
         if (blogId && !isLiked) likedBlog(blogId);
       }}
-      title="Liked"
+      title="Lượt thích"
     >
       <svg
         width="24"

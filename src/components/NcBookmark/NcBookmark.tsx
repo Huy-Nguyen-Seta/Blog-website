@@ -8,6 +8,7 @@ import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStrapiURL } from '../utils/api-helpers';
 import { showErrorMessage, showSuccessMessage } from '../utils/toastify';
+import { useRouter } from 'next/navigation';
 
 export interface NcBookmarkProps {
   containerClassName?: string;
@@ -21,6 +22,7 @@ const NcBookmark: FC<NcBookmarkProps> = ({
   postId,
 }) => {
   const storage = useSelector((state: RootState) => state.storage.storage);
+  const router = useRouter()
   const lang = useTrans();
   const dispatch = useDispatch<AppDispatch>();
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -40,6 +42,7 @@ const NcBookmark: FC<NcBookmarkProps> = ({
     if (localStorage.getItem('userInfor')) {
       user = JSON.parse(localStorage.getItem('userInfor') || '');
     } else {
+      router.push('/news/login')
       showErrorMessage('Tính năng yêu cầu đăng nhập', { autoClose: 4000 });
       return;
     }
@@ -71,7 +74,7 @@ const NcBookmark: FC<NcBookmarkProps> = ({
   return (
     <button
       className={`nc-NcBookmark relative rounded-full flex items-center justify-center ${containerClassName}`}
-      title="Save to reading list"
+      title="Lưu vào yêu thích"
       onClick={handleBookMarked}
     >
       <svg

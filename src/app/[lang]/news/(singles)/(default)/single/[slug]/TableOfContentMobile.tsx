@@ -3,7 +3,13 @@ import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { ChevronDownIcon, ListBulletIcon } from '@heroicons/react/24/solid';
 
-function TableOfContentMobile({ data }: { data: any }) {
+function TableOfContentMobile({
+  data,
+  setIsLoadMore,
+}: {
+  data: any;
+  setIsLoadMore: (data: boolean) => void;
+}) {
   const [active, setActive] = useState('');
   const [isScrollToToc, setIsScrollToToc] = useState(false);
   const [isOpenTOC, setIsOpenTOC] = useState(false);
@@ -41,20 +47,7 @@ function TableOfContentMobile({ data }: { data: any }) {
   const handleScrollToElement = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
-    e.preventDefault();
-    const href = e.currentTarget.href;
-    const targetId = href.replace(/.*\#/, '');
-    const elem = document.getElementById(targetId);
-    // elem?.scrollIntoView({ behavior: "smooth", block:'start'})
-    if (elem) {
-      window.scrollTo({
-        behavior: 'smooth',
-        top:
-          elem.getBoundingClientRect().top -
-          document.body.getBoundingClientRect().top -
-          100,
-      });
-    }
+    setIsLoadMore?.(false);
   };
 
   return (

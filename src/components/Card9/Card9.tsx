@@ -29,7 +29,7 @@ const Card9: FC<Card9Props> = ({
     title,
     href,
     thumbnailImage,
-    tags,
+    tag,
     author,
     postType,
     createdAt,
@@ -37,6 +37,7 @@ const Card9: FC<Card9Props> = ({
     slug,
     id,
     comments,
+    viewCount
   } = post;
   const lang = useTrans();
   const renderMeta = () => {
@@ -76,6 +77,7 @@ const Card9: FC<Card9Props> = ({
           blogId={id}
           likeCount={like}
           className="relative"
+          viewCount={viewCount}
         />
         <PostCardSaveAction postId={id} hidenReadingTime className="relative" />
       </div>
@@ -112,7 +114,7 @@ const Card9: FC<Card9Props> = ({
           className="absolute inset-0"
         ></Link>
         <div className="mb-3">
-          <CategoryBadgeList categories={tags} />
+          <CategoryBadgeList categories={tag} />
         </div>
         {renderMeta()}
       </div>

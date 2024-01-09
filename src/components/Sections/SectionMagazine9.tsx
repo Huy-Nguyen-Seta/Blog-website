@@ -11,7 +11,7 @@ export interface SectionMagazine9Props {
   gapClassName?: string;
   heading?: string;
   desc?: string;
-  cate?: any
+  cate?: any;
 }
 
 const SectionMagazine9: FC<SectionMagazine9Props> = ({
@@ -20,7 +20,7 @@ const SectionMagazine9: FC<SectionMagazine9Props> = ({
   gapClassName = 'gap-6 md:gap-8',
   heading = 'Listen to audio live',
   desc,
-  cate
+  cate,
 }) => {
   const tag1 = Object.values(posts?.[0] || [])?.[0] as any[];
   const tag2 = Object.values(posts?.[1] || [])?.[0] as any[];
@@ -28,7 +28,11 @@ const SectionMagazine9: FC<SectionMagazine9Props> = ({
 
   return (
     <div className={`nc-SectionMagazine9 relative ${className}`}>
-      {heading && <Heading urlMore={`archive/${cate?.slug}`}  description={desc}>{heading}</Heading>}
+      {heading && (
+        <Heading urlMore={`archive/${cate?.slug}`} description={desc}>
+          {heading}
+        </Heading>
+      )}
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${gapClassName}`}
       >
@@ -39,27 +43,33 @@ const SectionMagazine9: FC<SectionMagazine9Props> = ({
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${gapClassName} mt-8`}
       >
-        <div className="flex group items-center space-y-8 h-full flex-col">
-          {(tag1 || [])
-            ?.filter((_, i) => i > 0 && i < 3)
-            ?.map((p, index) => (
-              <Card15Podcast key={index} post={p} />
-            ))}
-        </div>
-        <div className="flex group items-center space-y-8 h-full flex-col">
-          {(tag2 || [])
-            ?.filter((_, i) => i > 0 && i < 3)
-            ?.map((p, index) => (
-              <Card15Podcast key={index} post={p} />
-            ))}
-        </div>
-        <div className="flex group items-center space-y-8 h-full flex-col">
-          {(tag3 || [])
-            ?.filter((_, i) => i > 0 && i < 3)
-            ?.map((p, index) => (
-              <Card15Podcast key={index} post={p} />
-            ))}
-        </div>
+        {tag1?.length > 1 && (
+          <div className="flex group items-center space-y-8 h-full flex-col">
+            {(tag1 || [])
+              ?.filter((_, i) => i > 0 && i < 3)
+              ?.map((p, index) => (
+                <Card15Podcast key={index} post={p} />
+              ))}
+          </div>
+        )}
+        {tag2?.length > 1 && (
+          <div className="flex group items-center space-y-8 h-full flex-col">
+            {(tag2 || [])
+              ?.filter((_, i) => i > 0 && i < 3)
+              ?.map((p, index) => (
+                <Card15Podcast key={index} post={p} />
+              ))}
+          </div>
+        )}
+        {tag3?.length > 1 && (
+          <div className="flex group items-center space-y-8 h-full flex-col">
+            {(tag3 || [])
+              ?.filter((_, i) => i > 0 && i < 3)
+              ?.map((p, index) => (
+                <Card15Podcast key={index} post={p} />
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
