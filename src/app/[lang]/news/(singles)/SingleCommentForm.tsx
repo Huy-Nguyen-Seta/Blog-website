@@ -9,6 +9,7 @@ import {
   showWarningMessage,
 } from '@/utils/toastify';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import React, { FC, useEffect, useState } from 'react';
 
 export interface SingleCommentFormProps {
@@ -37,6 +38,7 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
   replyName,
 }) => {
   const [comment, setComment] = useState<string>('');
+  const router = useRouter()
   const handlePostComment = async (e?: any) => {
     e.preventDefault();
 
@@ -70,6 +72,7 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
         setComment('');
         onFetchComment?.();
       } else {
+        router.push('/news/login')
         showErrorMessage('Tính năng yêu cầu đăng nhập', { autoClose: 4000 });
       }
     } catch (err) {

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import PostCardCommentBtn from '@/components/PostCardCommentBtn/PostCardCommentBtn';
 import PostCardLikeAction from '@/components/PostCardLikeAction/PostCardLikeAction';
+import PostCardView from '../PostCardView/PostCardView';
 
 export interface PostCardLikeAndCommentProps {
   className?: string;
@@ -11,6 +12,7 @@ export interface PostCardLikeAndCommentProps {
   blogId?: number | string;
   commentCount?: number;
   slug?: string;
+  viewCount?: number;
 }
 
 const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
@@ -22,6 +24,7 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
   blogId,
   commentCount,
   slug,
+  viewCount = 0,
 }) => {
   return (
     <div
@@ -35,11 +38,10 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
       <PostCardCommentBtn
         slug={slug}
         commentCount={commentCount}
-        className={`${
-          hiddenCommentOnMobile ? 'hidden sm:flex' : 'flex'
-        }  ${itemClass}`}
+        className={`flex ${itemClass}`}
         isATagOnSingle={useOnSinglePage}
       />
+      <PostCardView viewCount={viewCount} className={"h-8 text-xs px-3  !min-w-[50px] !lg:min-w-[68px]"} />
     </div>
   );
 };

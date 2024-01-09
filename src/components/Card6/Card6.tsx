@@ -22,13 +22,14 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
     href,
     readingTime,
     featuredImage,
-    tags,
+    tag,
     postType,
     thumbnailImage,
     like,
     slug,
     id,
     comments,
+    viewCount
   } = post;
   const lang = useTrans();
   return (
@@ -41,7 +42,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
       ></Link>
       <div className="flex flex-col flex-grow">
         <div className="space-y-3 mb-4">
-          <CategoryBadgeList categories={tags} />
+          <CategoryBadgeList categories={tag} />
           <h2 className={`block font-semibold text-sm sm:text-base`}>
             <Link
               href={`/${lang}/news/single/${slug}` || ''}
@@ -59,6 +60,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
             commentCount={comments?.length}
             blogId={id}
             likeCount={like}
+            viewCount={viewCount}
             className="relative"
           />
           <PostCardSaveAction

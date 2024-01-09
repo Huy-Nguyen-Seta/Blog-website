@@ -27,10 +27,8 @@ import { useDispatch } from 'react-redux';
 const TABS = ['Bài viết', 'Thể loại', 'Thẻ', 'Tác giả'];
 const numberPerPage = 8;
 
-const PageSearch = ({ params }: { params: { lang: Language } }) => {
+const PageList = ({ params }: { params: { lang: Language } }) => {
   const [tabActive, setTabActive] = useState(TABS[0]);
-  const [searchValue, setSearchValue] = useState('');
-  const [currentValue, setCurrentValue] = useState('');
   const [page, setPage] = useState(0);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -40,8 +38,6 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isDirty, setIsDirty] = useState(false);
   const dispatch = useDispatch();
-  const searchParams = useSearchParams();
-  const search = searchParams.get('search');
 
   const handleFetch = async (
     searchValue: string = '',
@@ -51,7 +47,6 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   ): Promise<any> => {
     setIsLoading(true);
     const data = await getData(params?.lang, path, {
-      ...(searchValue && { searchValue: searchValue }),
       ...(limit && { limit: limit }),
       ...(page && { start: page }),
       populate: '*',
@@ -64,12 +59,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   const fetchData = async (page?: number, limit?: number, search?: string) => {
     switch (tabActive) {
       case TABS[0]:
-        const data = await handleFetch(
-          searchValue || search,
-          '/getBLogsByQuery',
-          page,
-          limit
-        );
+        const data = await handleFetch('', '/getBLogsByQuery', page, limit);
         if (page !== 0) {
           setBlogs([...blogs, ...data?.data]);
         } else {
@@ -78,12 +68,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
         setTotal(data?.total);
         break;
       case TABS[1]:
-        const cate = await handleFetch(
-          searchValue,
-          '/findCateByPaging',
-          page,
-          limit
-        );
+        const cate = await handleFetch('', '/findCateByPaging', page, limit);
         if (page !== 0) {
           setCategories([...categories, ...cate?.results]);
         } else {
@@ -92,18 +77,13 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
         setTotal(cate?.total);
         break;
       case TABS[2]:
-        const tags = await handleFetch(searchValue, '/getTags');
+        const tags = await handleFetch('', '/getTags');
         setTags(tags);
         setTotal(tags?.length);
 
         break;
       case TABS[3]:
-        const author = await handleFetch(
-          searchValue,
-          '/getAuthors',
-          page,
-          limit
-        );
+        const author = await handleFetch('', '/getAuthors', page, limit);
         if (page !== 0) {
           setAuthor([...authors, ...author?.results]);
         } else {
@@ -118,14 +98,8 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   };
 
   useEffect(() => {
-    if (search && !isDirty) {
-      setCurrentValue(search || '');
-      setSearchValue(search || '');
-      fetchData(0, 8, search);
-    } else {
-      fetchData(0, 8);
-    }
-  }, [search, tabActive]);
+    fetchData(0, 8);
+  }, [tabActive]);
 
   useEffect(() => {
     handleFetchStorage(params?.lang, dispatch);
@@ -140,7 +114,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
     setTabActive(item);
   };
   return (
-    <div className={`nc-PageSearch`}>
+    <div className={`nc-PageList`}>
       {/* HEADER */}
       <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl md:rounded-[40px] relative aspect-w-16 aspect-h-9 lg:aspect-h-5 overflow-hidden z-0">
@@ -152,75 +126,13 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
             className="object-cover w-full h-full"
             sizes="(max-width: 1280px) 100vw, 1536px"
           />
+          {/* <div className="inset-0 absolute flex items-end pb-20 justify-center">
+            <h2 className="inline-block align-middle text-5xl font-semibold md:text-6xl text-white">
+              Trang Danh Sách
+            </h2>
+          </div> */}
         </div>
         {/* CONTENT */}
-        <div className="relative container -mt-20 lg:-mt-48">
-          <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
-            <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center">
-              <h2 className="text-2xl sm:text-4xl font-semibold">
-                {currentValue}
-              </h2>
-              {currentValue && (
-                <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
-                  Tìm thấy{' '}
-                  <strong className="font-medium text-neutral-800 dark:text-neutral-100">
-                    {total}
-                  </strong>{' '}
-                  {tabActive} cho từ khóa{' '}
-                  <strong className="font-medium text-neutral-800 dark:text-neutral-100">
-                    {currentValue}
-                  </strong>
-                </span>
-              )}
-              <form
-                className="relative w-full mt-8 sm:mt-11 text-left"
-                method="post"
-                onSubmit={(e) => {
-                  e?.preventDefault();
-                  setCurrentValue(searchValue);
-                  fetchData(0, numberPerPage);
-                  setPage(0);
-                }}
-              >
-                <label
-                  htmlFor="search-input"
-                  className="text-neutral-500 dark:text-neutral-300"
-                >
-                  <span className="sr-only">Search all icons</span>
-                  <Input
-                    id="search-input"
-                    type="search"
-                    placeholder="Nhập từ khóa tìm kiếm"
-                    sizeClass="pl-14 py-5 pe-5 md:ps-16"
-                    defaultValue={currentValue}
-                    onChange={(e) => {
-                      setSearchValue(e?.target?.value);
-                      setIsDirty(true);
-                    }}
-                  />
-                  <ButtonCircle
-                    className="absolute end-2.5 top-1/2 transform -translate-y-1/2"
-                    size=" w-11 h-11"
-                    type="submit"
-                  >
-                    <ArrowRightIcon className="w-5 h-5 rtl:rotate-180" />
-                  </ButtonCircle>
-                  <span className="absolute start-5 top-1/2 transform -translate-y-1/2 text-2xl md:start-6">
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="1.5"
-                        d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"
-                      ></path>
-                    </svg>
-                  </span>
-                </label>
-              </form>
-            </header>
-          </div>
-        </div>
       </div>
       {/* ====================== END HEADER ====================== */}
 
@@ -232,7 +144,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
               containerClassName="w-full overflow-x-auto hiddenScrollbar"
               className="sm:space-x-2 rtl:space-x-reverse"
             >
-              {TABS.map((item, index) => (
+              {TABS?.map((item, index) => (
                 <NavItem
                   isActive={item === tabActive}
                   key={index}
@@ -324,4 +236,4 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
   );
 };
 
-export default PageSearch;
+export default PageList;

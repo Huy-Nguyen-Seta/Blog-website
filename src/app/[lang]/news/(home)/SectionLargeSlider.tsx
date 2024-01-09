@@ -39,7 +39,7 @@ const SectionLargeSlider: FC<SectionLargeSliderProps> = ({
   return (
     <div className={`nc-SectionLargeSlider relative ${className}`}>
       {!!heading && <Heading>{heading}</Heading>}
-      {posts.map((item, index) => {
+      {posts?.map((item, index) => {
         if (indexActive !== index) return null;
         return (
           <CardLarge1

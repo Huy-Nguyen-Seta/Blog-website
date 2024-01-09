@@ -33,7 +33,7 @@ const PageContact = ({}) => {
 
       <div className="grid gap-8 lg:grid-cols-2">
         <div className="max-w-sm space-y-6">
-          {info.map((item, index) => (
+          {info?.map((item, index) => (
             <div key={index}>
               <h3 className="uppercase font-semibold text-sm dark:text-neutral-200 tracking-wider">
                 {item.title}

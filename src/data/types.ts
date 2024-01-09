@@ -70,11 +70,12 @@ export interface PostDataType {
   audioUrl?: string | string[];
   galleryImgs?: string[];
   thumbnailImage?: any;
-  tags?: any,
+  tag?: any,
   createdAt?: string,
   attributes?: any,
   slug?: string,
-  comments?: any[]
+  comments?: any[],
+  viewCount?:number
 }
 
 export type TwMainColor =

@@ -31,12 +31,11 @@ const SingleHeader: FC<SingleHeaderProps> = ({
       user = JSON.parse(localStorage.getItem('userInfor') || '');
     if (user) dispatch(fetchStorageByIdUser({ userId: user?._id, lang: lang }));
   }, [lang, dispatch]);
-
   return (
     <>
       <div className={`nc-SingleHeader ${className}`}>
         <div className="space-y-5">
-          <CategoryBadgeList itemClass="!px-3" categories={data?.tags} />
+          <CategoryBadgeList itemClass="!px-3" categories={data?.tag?.data} />
           <SingleTitle mainClass={titleMainClass} title={data?.title} />
           {!hiddenDesc && (
             <span className="block text-base text-neutral-500 md:text-lg dark:text-neutral-400 pb-1">

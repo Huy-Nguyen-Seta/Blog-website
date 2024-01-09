@@ -111,7 +111,6 @@ const DashboardPosts = () => {
         start: start,
         limit: limit,
       });
-      console.log('response', response);
       setData(response?.blogs);
       setTotal(response?.total);
     }

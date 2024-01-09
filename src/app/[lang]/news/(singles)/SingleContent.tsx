@@ -5,12 +5,13 @@ import PostCardLikeAction from '@/components/PostCardLikeAction/PostCardLikeActi
 import Tag from '@/components/Tag/Tag';
 import { DEMO_TAGS } from '@/data/taxonomies';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { ArrowUpIcon } from '@heroicons/react/24/solid';
+import { ArrowUpIcon, ChevronDoubleDownIcon } from '@heroicons/react/24/solid';
 import { FC, useEffect, useRef, useState } from 'react';
 import '@/styles/ckedit-styles.css';
 import SingleAuthor from './SingleAuthor';
 import OtherPost from './(default)/single/[slug]/OtherPost';
 import Product from './(default)/single/[slug]/Product';
+import OtherPostNotImage from './(default)/single/[slug]/OtherPostNotImage';
 
 const demoTags = DEMO_TAGS.filter((_, i) => i < 9);
 
@@ -18,9 +19,17 @@ export interface SingleContentProps {
   data?: any;
   content?: any;
   output?: any;
+  isLoadMore?: boolean;
+  setIsLoadMore?: (data: boolean) => void;
 }
 
-const SingleContent: FC<SingleContentProps> = ({ data, content, output }) => {
+const SingleContent: FC<SingleContentProps> = ({
+  data,
+  content,
+  output,
+  isLoadMore,
+  setIsLoadMore,
+}) => {
   const endedAnchorRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLButtonElement>(null);
@@ -76,7 +85,9 @@ const SingleContent: FC<SingleContentProps> = ({ data, content, output }) => {
         {/* ENTRY CONTENT */}
         <div
           id="single-entry-content ckEditor ck-content"
-          className="prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert"
+          className={`prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert ${
+            isLoadMore ? 'max-h-96' : ''
+          } overflow-hidden`}
           ref={contentRef}
         >
           {content?.map((item: any) => {
@@ -89,17 +100,27 @@ const SingleContent: FC<SingleContentProps> = ({ data, content, output }) => {
                 return <OtherPost post={item?.blog} />;
               case 'content.content-product':
                 return <Product products={item?.product} />;
+              case 'content.single-link':
+                return <OtherPostNotImage post={item?.blog} />;
               default:
                 break;
             }
           })}
         </div>
-
+        {isLoadMore && (
+          <div
+            className="animate-bounce cursor-pointer flex justify-center "
+            onClick={() => setIsLoadMore?.(false)}
+          >
+            <div className=" hover:bg-slate-200 px-3 py-3 rounded-2xl space-x-3 flex justify-center items-center font-medium">
+              <p className=""> Xem thêm</p>
+              <ChevronDoubleDownIcon height={18} width={18} />
+            </div>
+          </div>
+        )}
         {/* TAGS */}
         <div className="max-w-screen-md mx-auto flex flex-wrap">
-          {data?.tags?.data?.map((item: any) => (
-            <Tag hideCount key={item.id} tag={item} className="me-2 mb-2" />
-          ))}
+          <Tag hideCount tag={data?.tag?.data} className="me-2 mb-2" />
         </div>
 
         {/* AUTHOR */}
@@ -115,10 +136,15 @@ const SingleContent: FC<SingleContentProps> = ({ data, content, output }) => {
         }`}
       >
         <div className="bg-white dark:bg-neutral-800 shadow-lg rounded-full ring-1 ring-offset-1 ring-neutral-900/5 p-1.5 flex items-center justify-center space-x-2 rtl:space-x-reverse text-xs">
-          <PostCardLikeAction className="px-3 h-9 text-xs" />
+          <PostCardLikeAction
+            blogId={data?.id}
+            likeCount={data?.like}
+            className="px-3 h-9 text-xs"
+          />
           <div className="border-s h-4 border-neutral-200 dark:border-neutral-700"></div>
           <PostCardCommentBtn
             isATagOnSingle
+            commentCount={data?.comments?.data?.length || 0}
             className={` flex px-3 h-9 text-xs`}
           />
           <div className="border-s h-4 border-neutral-200 dark:border-neutral-700"></div>
@@ -139,7 +165,7 @@ const SingleContent: FC<SingleContentProps> = ({ data, content, output }) => {
             className={`w-9 h-9 items-center justify-center ${
               isShowScrollToTop ? 'hidden' : 'flex'
             }`}
-            title="Go to top"
+            title="Lên đầu trang"
           >
             %
           </button>

@@ -21,7 +21,9 @@ const Logo: React.FC<LogoProps> = ({
     >
       {/* THIS USE FOR MY MULTI DEMO */}
       {/* IF YOU ARE MY CLIENT. PLESE DELETE THIS CODE AND YOU YOUR IMAGE PNG BY BELLOW CODE */}
-      <Image alt="Hallo" src={'/image/logo.png'} width={70} height={70}/>
+      <Image alt="Hallo" src={'/image/logo.png'} width={80} height={80} className='block dark:hidden'/>
+      <Image alt="Hallo" src={'/image/logo-w.png'} width={80} height={80} className='hidden dark:block'/>
+
     </Link>
   );
 };

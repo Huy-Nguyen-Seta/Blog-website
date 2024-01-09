@@ -29,6 +29,8 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
           likeCount={data?.like}
           blogId={data?.id}
           commentCount={data?.comments?.data?.length}
+          viewCount={data?.viewCount}
+
         />
         <div className="px-1">
           <div className="border-s border-neutral-200 dark:border-neutral-700 h-6" />

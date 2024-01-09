@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.ckEditor > * {
-    all: revert;
-  }
+.ckEditor>* {
+  all: revert;
+}
+
+html {
+  scroll-behavior: smooth;
+}

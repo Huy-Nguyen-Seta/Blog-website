@@ -42,7 +42,7 @@ const Heading: React.FC<HeadingProps> = ({
         )}
       </div>
       <Button pattern="white" sizeClass="px-6" className='!hidden md:!block py-[2.5] sm:py-3'>
-          <Link href={`/${lang}/news/${urlMore || 'search'}`} className=" md:!flex" >
+          <Link href={`/${lang}/news/${urlMore || 'list'}`} className=" md:!flex" >
             <span>Xem thêm</span>
             <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180" />
           </Link>

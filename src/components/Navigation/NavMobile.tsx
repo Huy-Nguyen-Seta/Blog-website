@@ -29,7 +29,6 @@ const NavMobile: React.FC<NavMobileProps> = ({
   const [search, setSearch] = useState<string>('');
   const handleSubmitForm = (e: any) => {
     e.preventDefault();
-    console.log('search', search);
     router.push(`/${lang}/news/search?search=${search}`);
   };
   useEffect(() => {

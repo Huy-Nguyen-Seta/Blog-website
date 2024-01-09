@@ -48,9 +48,7 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
         tabActive={tabActive}
         setTabActive={setTabActive}
       />
-      {!data?.length && (
-        <span>{!isLoading ? <Loading /> : 'Danh sách rỗng !'}</span>
-      )}
+      {!data?.length && <span>{!isLoading && <Loading />}</span>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <div className="grid gap-6">

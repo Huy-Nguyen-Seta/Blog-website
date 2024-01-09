@@ -6,12 +6,13 @@ export async function fetchAPI(
   path: string,
   urlParamsObject = {},
   options = {},
-  lang?: string
+  lang?: string,
+  notRevalidate?: boolean
 ) {
   try {
     // Merge default and user options
     const mergedOptions = {
-      next: { revalidate: 60 },
+      ...(!notRevalidate && { next: { revalidate: 60 } }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -25,7 +26,6 @@ export async function fetchAPI(
         lang ? `&locale=${lang}` : ''
       }`
     )}`;
-
     // // Trigger API call
     const response = await fetch(requestUrl, mergedOptions);
     const data = await response.json();
@@ -38,10 +38,21 @@ export async function fetchAPI(
   }
 }
 
-export async function getData(lang: Language, path: string, queryParams?: any) {
+export async function getData(
+  lang: Language,
+  path: string,
+  queryParams?: any,
+  notRevalidate?: boolean
+) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   const urlParamsObject = queryParams || { populate: '*' };
   const options = { headers: { Authorization: `Bearer ${token}` } };
-  const { data } = await fetchAPI(path, urlParamsObject, options, lang);
+  const { data } = await fetchAPI(
+    path,
+    urlParamsObject,
+    options,
+    lang,
+    notRevalidate
+  );
   return data;
 }
