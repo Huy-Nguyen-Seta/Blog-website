@@ -5,6 +5,7 @@ import { CustomLink } from '@/data/types';
 import MusicPlayer from '../MusicPlayer/MusicPlayer';
 import { getData } from '../utils/fetch-api';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export interface WidgetFooterMenu {
   id: string;
@@ -29,6 +30,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
                 key={index}
                 className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
                 href={item.href}
+                target='_blank'
               >
                 {item.label}
               </a>
@@ -76,7 +78,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
         <div className=" bg-gray-200 mt-8">
           <div className="container  grid grid-cols-2 gap-y-4  sm:gap-x-8 md:grid-cols-4  py-8 font-medium text-gray-500">
             {data?.FooterBottom?.map((item: any) => (
-              <div key={item?.id}>{item?.label}</div>
+              <Link target='_blank' href={item?.href || '#'} key={item?.id}>{item?.label}</Link>
             ))}
           </div>
         </div>
