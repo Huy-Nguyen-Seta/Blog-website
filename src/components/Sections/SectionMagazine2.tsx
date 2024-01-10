@@ -9,6 +9,9 @@ import Loading from '../Loading/Loading';
 import { fetchStorageByIdUser } from '@/app/GlobalRedux/action';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/app/GlobalRedux/store';
+import Button from '../Button/Button';
+import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 export interface SectionMagazine2Props extends SectionMagazine1Props {}
 
@@ -41,7 +44,9 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
   }, [lang, dispatch]);
 
   const emtyItem = () => (
-    <div className="w-full h-full flex justify-center items-center font-semibold">Chưa có dữ liệu !</div>
+    <div className="w-full h-full flex justify-center items-center font-semibold">
+      Chưa có dữ liệu !
+    </div>
   );
 
   return (
@@ -53,30 +58,51 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
         setTabActive={setTabActive}
       />
       {!data?.length && <span>{isLoading ? <Loading /> : emtyItem()}</span>}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <div className="grid gap-6">
-          {data
-            ?.filter((_, i) => i < 3 && i > 0)
-            ?.map((item, index) => {
-              return (
-                <Card11 ratio="aspect-w-5 aspect-h-3" key={index} post={item} />
-              );
-            })}
-        </div>
-        <div className="lg:col-span-2">
-          {data?.[0] && <Card2 size="large" post={data?.[0]} />}
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-1 md:col-span-3 xl:col-span-1">
-          {data
-            ?.filter((_, i) => i < 5 && i >= 3)
-            .map((item, index) => {
-              return (
-                <Card11 ratio="aspect-w-5 aspect-h-3" key={index} post={item} />
-              );
-            })}
-        </div>
-      </div>
+      {data?.length ? (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid gap-6">
+              {data
+                ?.filter((_, i) => i < 3 && i > 0)
+                ?.map((item, index) => {
+                  return (
+                    <Card11
+                      ratio="aspect-w-5 aspect-h-3"
+                      key={index}
+                      post={item}
+                    />
+                  );
+                })}
+            </div>
+            <div className="lg:col-span-2">
+              {data?.[0] && <Card2 size="large" post={data?.[0]} />}
+            </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-1 md:col-span-3 xl:col-span-1">
+              {data
+                ?.filter((_, i) => i < 5 && i >= 3)
+                .map((item, index) => {
+                  return (
+                    <Card11
+                      ratio="aspect-w-5 aspect-h-3"
+                      key={index}
+                      post={item}
+                    />
+                  );
+                })}
+            </div>
+          </div>
+          <div className="w-full  justify-center md:!hidden !flex pt-6">
+            <Button pattern="primary" sizeClass="px-6" className=" w-fit py-2">
+              <Link href={`/${lang}/news/list`} className="flex">
+                <span>Xem thêm</span>
+                <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180 r-0" />
+              </Link>
+            </Button>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

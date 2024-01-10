@@ -68,7 +68,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
 
   return (
     <div className={`nc-SectionGridCategoryBox relative ${className}`}>
-      <Heading description={`Khám phá hơn ${total} chủ đề`} isCenter={headingCenter}>
+      <Heading description={`Khám phá hơn ${total || 0} chủ đề`} isCenter={headingCenter}>
         Chủ đề nổi bật
       </Heading>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">

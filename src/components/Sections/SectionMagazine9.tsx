@@ -4,6 +4,9 @@ import Heading from '@/components/Heading/Heading';
 import { DEMO_POSTS_AUDIO } from '@/data/posts';
 import { PostDataType } from '@/data/types';
 import React, { FC } from 'react';
+import Button from '../Button/Button';
+import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 export interface SectionMagazine9Props {
   posts?: any[];
@@ -12,6 +15,7 @@ export interface SectionMagazine9Props {
   heading?: string;
   desc?: string;
   cate?: any;
+  lang?: Language
 }
 
 const SectionMagazine9: FC<SectionMagazine9Props> = ({
@@ -21,6 +25,7 @@ const SectionMagazine9: FC<SectionMagazine9Props> = ({
   heading = 'Listen to audio live',
   desc,
   cate,
+  lang
 }) => {
   const tag1 = Object.values(posts?.[0] || [])?.[0] as any[];
   const tag2 = Object.values(posts?.[1] || [])?.[0] as any[];
@@ -70,6 +75,14 @@ const SectionMagazine9: FC<SectionMagazine9Props> = ({
               ))}
           </div>
         )}
+      </div>
+      <div className="w-full  justify-center md:!hidden !flex pt-6">
+        <Button pattern="primary" sizeClass="px-6" className=" w-fit py-2">
+          <Link href={`/${lang}/news/archive/${cate?.slug}`} className="flex">
+            <span>Xem thêm</span>
+            <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180 r-0" />
+          </Link>
+        </Button>
       </div>
     </div>
   );

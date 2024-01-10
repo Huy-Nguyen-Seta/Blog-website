@@ -1,4 +1,5 @@
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
 import SectionMagazine1 from '@/components/Sections/SectionMagazine1';
@@ -36,7 +37,7 @@ export async function generateMetadata({
         languages: {
           'en-US': '/en',
           'ja-JP': '/ja',
-          'vi-VN': '/vi'
+          'vi-VN': '/vi',
         },
       },
       openGraph: {
@@ -82,12 +83,19 @@ const PageHome = async ({
       <div className="nc-PageHome relative">
         <div className="container relative">
           <SectionMagazine2
-            className="py-10 lg:py-16"
+            className="pt-10 pb-4 lg:py-16"
             posts={MAGAZINE2_POSTS}
             categories={filterCategories.concat(response?.NewPost?.categories)}
             lang={params?.lang}
           />
+          <div className="pt-10 pb-4 lg:py-16">
+            <SectionGridCategoryBox
+              categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+            />
+          </div>
+
           <SectionMagazine1
+            lang={params?.lang}
             heading={response?.PopularPost?.title}
             desc={response?.PopularPost?.description}
             className="py-10 lg:py-16"
@@ -100,6 +108,7 @@ const PageHome = async ({
               desc={response?.Section1?.description}
               posts={response?.Section1?.tagPost}
               cate={response?.Section1?.category}
+              lang={params?.lang}
             />
           </div>
           {(postByCategory?.PostByCategory || [])?.map((item: any) => (
@@ -110,10 +119,11 @@ const PageHome = async ({
                 heading={item?.title}
                 subHeading={
                   item?.description ||
-                  `Khám phá hơn ${item?.category?.blogs?.length} bài viết`
+                  `Khám phá hơn ${item?.category?.blogs?.length || 0} bài viết`
                 }
                 posts={item?.category?.blogs || []}
                 cate={item?.category}
+                lang={params?.lang}
               />
             </div>
           ))}

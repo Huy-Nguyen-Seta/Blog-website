@@ -3,6 +3,9 @@ import Card2 from '@/components/Card2/Card2';
 import { PostDataType } from '@/data/types';
 import Card6 from '@/components/Card6/Card6';
 import Heading from '../Heading/Heading';
+import Button from '../Button/Button';
+import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 export interface SectionMagazine1Props {
   posts: any[];
@@ -18,6 +21,7 @@ const SectionMagazine1: FC<SectionMagazine1Props> = ({
   heading = 'Latest Articles 🎈 ',
   desc,
   className = '',
+  lang
 }) => {
   return (
     <div className={`nc-SectionMagazine1 ${className}`}>
@@ -36,6 +40,14 @@ const SectionMagazine1: FC<SectionMagazine1Props> = ({
               <Card6 key={index} post={item} />
             ))}
         </div>
+      </div>
+      <div className="w-full  justify-center md:!hidden !flex pt-8">
+        <Button pattern="primary" sizeClass="px-6" className=" w-fit py-2">
+          <Link href={`/${lang}/news/${'list'}`} className="flex">
+            <span>Xem thêm</span>
+            <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180 r-0" />
+          </Link>
+        </Button>
       </div>
     </div>
   );

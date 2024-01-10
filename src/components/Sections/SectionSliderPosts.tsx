@@ -10,6 +10,9 @@ import Card10 from '@/components/Card10/Card10';
 import Card11 from '@/components/Card11/Card11';
 import Card10V2 from '@/components/Card10/Card10V2';
 import MySlider from '@/components/MySlider';
+import Button from '../Button/Button';
+import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 export interface SectionSliderPostsProps {
   className?: string;
@@ -19,6 +22,7 @@ export interface SectionSliderPostsProps {
   postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11';
   perView?: 2 | 3 | 4;
   cate?: any;
+  lang?: Language;
 }
 
 const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
@@ -29,6 +33,7 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
   postCardName = 'card4',
   perView = 4,
   cate,
+  lang,
 }) => {
   let CardComponent = Card4;
 
@@ -71,6 +76,14 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
         renderItem={(item, indx) => <CardComponent key={indx} post={item} />}
         itemPerRow={perView}
       />
+      <div className="w-full  justify-center md:!hidden !flex pt-6">
+        <Button pattern="primary" sizeClass="px-6" className=" w-fit py-2">
+          <Link href={`/${lang}/news/archive/${cate?.slug}`} className="flex">
+            <span>Xem thêm</span>
+            <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180 r-0" />
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 };
