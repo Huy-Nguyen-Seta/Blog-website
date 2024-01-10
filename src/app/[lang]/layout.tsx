@@ -23,12 +23,11 @@ export async function generateMetadata({
     if (!metadata) return {};
 
     const image = metadata?.metaImage;
-
     return {
       metadataBase: new URL(`${process.env.BASE_URL}`),
       title: {
         template: '%s | Hallo.co',
-        absolute:''
+        absolute: '',
       },
       description: metadata?.metaDescription,
       keywords: metadata?.keyword,
@@ -48,7 +47,7 @@ export async function generateMetadata({
         siteName: 'Hallo',
         images: [
           {
-            url: getStrapiMedia(image) || '',
+            url: getStrapiMedia(image?.url || {}) || '',
           },
         ],
         type: 'website',

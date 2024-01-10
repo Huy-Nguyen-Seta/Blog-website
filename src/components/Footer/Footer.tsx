@@ -23,7 +23,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">
           {menu?.groupName}
         </h2>
-        <ul className="mt-5 space-y-4">
+        <ul className="mt-5 md:space-y-4 space-y-2">
           {menu?.items.map((item, index) => (
             <li key={index}>
               <a
@@ -76,7 +76,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
           {(data?.Footer || [])?.map(renderWidgetMenuItem)}
         </div>
         <div className=" bg-gray-200 mt-8">
-          <div className="container  grid grid-cols-2 gap-y-4  sm:gap-x-8 md:grid-cols-4  py-8 font-medium text-gray-500">
+          <div className="container  grid grid-cols-2 gap-y-4  gap-x-5 sm:gap-x-8 md:grid-cols-4  py-8 font-medium text-gray-500 text-xs md:text-sm">
             {data?.FooterBottom?.map((item: any) => (
               <Link target='_blank' href={item?.href || '#'} key={item?.id}>{item?.label}</Link>
             ))}
