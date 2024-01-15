@@ -57,12 +57,12 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
           )}
           onClick={() => {}}
           data={SOCIALS_DATA}
-          url={window ? window?.location.origin + `/${lang}/news` + '/single/' + data?.slug : '#'}
+          url={window ? window?.location.origin + `/${lang}/news` + '/' + data?.slug : '#'}
         />
         <PostActionDropdown
           containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
           iconClass="h-5 w-5"
-          url={window ? window?.location.origin + '/single/' + data?.slug : '#'}
+          url={window ? window?.location.origin + '/news/' + data?.slug : '#'}
         />
       </div>
     </div>

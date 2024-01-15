@@ -23,7 +23,7 @@ const SectionMagazine6: FC<SectionMagazine6Props> = ({
   const renderMain = () => {
     const { featuredImage, author, title, date, description, href, readingTime } =
       posts[0];
-    const subPosts = posts.filter((_, i) => i > 0);
+    const subPosts = posts?.filter((_, i) => i > 0);
     return (
       <main className="relative">
         {/* Image */}

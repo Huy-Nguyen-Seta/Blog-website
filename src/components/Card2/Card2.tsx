@@ -63,7 +63,7 @@ const Card2: FC<Card2Props> = ({
       </div>
 
       <Link
-        href={`/${lang}/news/single/${slug}` || ''}
+        href={`/${lang}/news/${slug}` || ''}
         className="absolute inset-0"
       />
 
@@ -81,7 +81,7 @@ const Card2: FC<Card2Props> = ({
             }`}
           >
             <Link
-              href={`/${lang}/news/single/${slug}` || ''}
+              href={`/${lang}/news/${slug}` || ''}
               className="line-clamp-2"
               title={title}
             >

@@ -70,14 +70,14 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
       ? posts
       : query === '' || rawQuery.startsWith('>')
       ? []
-      : posts.filter((project) => project?.title.toLowerCase().includes(query));
+      : posts?.filter((project) => project?.title.toLowerCase().includes(query));
 
   const filteredProjects =
     rawQuery === '#'
       ? categories
       : query === '' || rawQuery.startsWith('>')
       ? []
-      : categories.filter((project) =>
+      : categories?.filter((project) =>
           project?.name.toLowerCase().includes(query)
         );
 
@@ -175,7 +175,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
 
                         break;
                       default:
-                        router?.push(`/news/single/${item.slug}`);
+                        router?.push(`/news/${item.slug}`);
                         break;
                     }
                     setOpen(false);
@@ -194,9 +194,9 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     />
                   </div>
 
-                  {(filteredProjects.length > 0 ||
-                    filteredUsers.length > 0 ||
-                    filteredPosts.length > 0) && (
+                  {(filteredProjects?.length > 0 ||
+                    filteredUsers?.length > 0 ||
+                    filteredPosts?.length > 0) && (
                     <Combobox.Options
                       static
                       className="max-h-80 scroll-py-10 scroll-pb-2 space-y-4 overflow-y-auto p-4 pb-2"
@@ -332,8 +332,8 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
 
                   {query !== '' &&
                     rawQuery !== '?' &&
-                    filteredProjects.length === 0 &&
-                    filteredUsers.length === 0 && (
+                    filteredProjects?.length === 0 &&
+                    filteredUsers?.length === 0 && (
                       <div className="py-14 px-6 text-center text-sm sm:px-14">
                         <ExclamationTriangleIcon
                           className="mx-auto h-6 w-6 text-gray-400"

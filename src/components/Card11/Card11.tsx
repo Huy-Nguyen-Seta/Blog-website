@@ -43,7 +43,7 @@ const Card11: FC<Card11Props> = ({
         </div>
       </div>
       <Link
-        href={`/${lang}/news/single/${slug}` || ''}
+        href={`/${lang}/news/${slug}` || ''}
         className="absolute inset-0"
       ></Link>
       <span className="absolute top-3 inset-x-3 z-10">
@@ -59,7 +59,7 @@ const Card11: FC<Card11Props> = ({
           </span>
         )}
         <h3 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100">
-          <Link href={`/${lang}/news/single/${slug}`}>
+          <Link href={`/${lang}/news/${slug}`}>
             <span className="line-clamp-2" title={title}>
               {title}
             </span>

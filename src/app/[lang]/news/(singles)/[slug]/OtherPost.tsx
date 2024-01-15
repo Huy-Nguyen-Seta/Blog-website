@@ -31,7 +31,7 @@ function OtherPost({ post }: { post: any }) {
             {post?.data?.attributes?.description}
           </div>
           <Link
-            href={`/${lang}/news/single/${post?.data?.attributes?.slug}` || '/'}
+            href={`/${lang}/news/${post?.data?.attributes?.slug}` || '/'}
           >
             <div className="text-[0.875rem] font-semibold text-[#4594FF] cursor-pointer flex items-center">
               Xem thêm

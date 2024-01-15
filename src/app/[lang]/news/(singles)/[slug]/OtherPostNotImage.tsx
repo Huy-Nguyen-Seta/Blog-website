@@ -13,7 +13,7 @@ function OtherPostNotImage({ post }: { post: any }) {
             Tham khảo thêm:{' '}
             <Link
               href={
-                `/${lang}/news/single/${post?.data?.attributes?.slug}` || '/'
+                `/${lang}/news/${post?.data?.attributes?.slug}` || '/'
               }
               className="!m-0 pl-2 font-normal text-[#0064c2] !no-underline"
             >

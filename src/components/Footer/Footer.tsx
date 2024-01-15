@@ -19,7 +19,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
   const data = await getData(lang, '/getFooter');
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
-      <div key={index} className="text-sm">
+      <div key={index} className="md:text-sm text-xs">
         <h2 className="font-semibold text-neutral-700 dark:text-neutral-200">
           {menu?.groupName}
         </h2>
@@ -62,21 +62,21 @@ const Footer = async ({ lang }: { lang: Language }) => {
                 src={'/image/bct.png'}
                 width={140}
                 height={140}
-                className="block dark:hidden"
+                className="block"
               />
               <Image
                 alt="Hallo"
                 src={'/image/dmca.png'}
                 width={140}
                 height={140}
-                className="block dark:hidden"
+                className="block"
               />
             </div>
           </div>
           {(data?.Footer || [])?.map(renderWidgetMenuItem)}
         </div>
         <div className=" bg-gray-200 mt-8">
-          <div className="container  grid grid-cols-2 gap-y-4  gap-x-5 sm:gap-x-8 md:grid-cols-4  py-8 font-medium text-gray-500 text-xs md:text-sm">
+          <div className="container  grid grid-cols-2 md:gap-y-4 gap-y-1   gap-x-5 sm:gap-x-8 md:grid-cols-4 py-4 md:py-8 font-medium text-gray-500 text-[0.5rem] leading-4 md:leading-6 md:text-sm">
             {data?.FooterBottom?.map((item: any) => (
               <Link target='_blank' href={item?.href || '#'} key={item?.id}>{item?.label}</Link>
             ))}
