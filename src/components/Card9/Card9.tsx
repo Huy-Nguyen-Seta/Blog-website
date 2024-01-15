@@ -87,7 +87,7 @@ const Card9: FC<Card9Props> = ({
           <PostFeaturedMedia post={post} />
         </div>
       ) : (
-        <Link href={`/${lang}/news/single/${slug}` || ''}>
+        <Link href={`/${lang}/news/${slug}` || ''}>
           <Image
             fill
             alt={thumbnailImage?.name || ''}
@@ -105,12 +105,12 @@ const Card9: FC<Card9Props> = ({
         </Link>
       )}
       <Link
-        href={`/${lang}/news/single/${slug}` || ''}
+        href={`/${lang}/news/${slug}` || ''}
         className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black opacity-50"
       ></Link>
       <div className="absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow">
         <Link
-          href={`/${lang}/news/single/${slug}` || ''}
+          href={`/${lang}/news/${slug}` || ''}
           className="absolute inset-0"
         ></Link>
         <div className="mb-3">

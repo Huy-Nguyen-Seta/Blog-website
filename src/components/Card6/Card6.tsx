@@ -37,7 +37,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
       className={`nc-Card6 relative flex group flex-row items-center sm:p-4 sm:rounded-3xl sm:bg-white sm:dark:bg-neutral-900 sm:border border-neutral-200 dark:border-neutral-700 ${className}`}
     >
       <Link
-        href={`/${lang}/news/single/${slug}` || ''}
+        href={`/${lang}/news/${slug}` || ''}
         className="absolute inset-0 z-0"
       ></Link>
       <div className="flex flex-col flex-grow">
@@ -45,7 +45,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
           <CategoryBadgeList categories={tag} />
           <h2 className={`block font-semibold text-sm sm:text-base`}>
             <Link
-              href={`/${lang}/news/single/${slug}` || ''}
+              href={`/${lang}/news/${slug}` || ''}
               className="line-clamp-2"
               title={title}
             >
@@ -72,7 +72,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
       </div>
 
       <Link
-        href={`/${lang}/news/single/${slug}` || ''}
+        href={`/${lang}/news/${slug}` || ''}
         className={`block relative flex-shrink-0 w-24 h-24 sm:w-40 sm:h-full ms-3 sm:ms-5 rounded-2xl overflow-hidden z-0`}
       >
         <Image

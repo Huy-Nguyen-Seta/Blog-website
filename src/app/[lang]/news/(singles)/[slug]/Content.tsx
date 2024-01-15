@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import TableOfContent from './TableOfContent';
-import SingleHeader from '../../../SingleHeader';
+import SingleHeader from '../SingleHeader';
 import TableOfContentMobile from './TableOfContentMobile';
-import SingleContent from '../../../SingleContent';
+import SingleContent from '../SingleContent';
 import useTrans from '@/hooks/useTranslate';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';

@@ -158,7 +158,7 @@ const DashboardPosts = () => {
                         />
                         <div className="ms-4 flex-grow">
                           <h2 className="inline-flex line-clamp-2 text-sm font-semibold  dark:text-neutral-300 hover:underline">
-                            <Link href={`/${lang}/news/single/${item?.slug}`}>
+                            <Link href={`/${lang}/news/${item?.slug}`}>
                               {' '}
                               {item.title}
                             </Link>
