@@ -17,6 +17,40 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
   className = '',
   data,
 }) => {
+  const isMobile = () => {
+    const toMatch = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i,
+    ];
+
+    return toMatch.some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+    });
+  };
+  const handleOnClick = (e: any) => {
+    e.preventDefault();
+    console.log('clg', navigator.share);
+    if (navigator.share && true) {
+      console.log('clg2');
+
+      navigator
+        .share({
+          title: `${data?.title}`,
+          url: document.location.href,
+        })
+        .then(() => {
+          console.log('Successfully shared');
+        })
+        .catch((error) => {
+          console.error('Something went wrong sharing the blog', error);
+        });
+    }
+  };
   const lang = useTrans();
   return (
     <div className={`nc-SingleMetaAction2 ${className}`}>
@@ -30,13 +64,15 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
           blogId={data?.id}
           commentCount={data?.comments?.data?.length}
           viewCount={data?.viewCount}
-
         />
         <div className="px-1">
           <div className="border-s border-neutral-200 dark:border-neutral-700 h-6" />
         </div>
 
-        <NcBookmark postId={data?.id} containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200" />
+        <NcBookmark
+          postId={data?.id}
+          containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
+        />
         <NcDropDown
           className="flex-shrink-0 flex items-center justify-center focus:outline-none h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-full"
           renderTrigger={() => (
@@ -55,10 +91,16 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
               />
             </svg>
           )}
-          onClick={() => {}}
+          onClick={handleOnClick}
           data={SOCIALS_DATA}
-          url={window ? window?.location.origin + `/${lang}/news` + '/' + data?.slug : '#'}
+          url={
+            window
+              ? window?.location.origin + `/${lang}/news` + '/' + data?.slug
+              : '#'
+          }
         />
+                <button onClick={handleOnClick}>test</button>
+
         <PostActionDropdown
           containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
           iconClass="h-5 w-5"
