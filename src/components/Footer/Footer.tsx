@@ -30,7 +30,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
                 key={index}
                 className="text-neutral-6000 dark:text-neutral-300 hover:text-black dark:hover:text-white"
                 href={item.href}
-                target='_blank'
+                target="_blank"
               >
                 {item.label}
               </a>
@@ -47,8 +47,8 @@ const Footer = async ({ lang }: { lang: Language }) => {
       <MusicPlayer />
 
       {/* footer */}
-      <div className="nc-Footer relative pt-16 lg:pt-28 border-t border-neutral-200 dark:border-neutral-700">
-        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
+      <div className="nc-Footer relative pt-10 md:pt-16 lg:pt-28 border-t border-neutral-200 dark:border-neutral-700">
+        <div className="container grid grid-cols-2 gap-y-5 md:gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
           <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
             <div className="col-span-2 md:col-span-1">
               <Logo />
@@ -56,14 +56,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
             <div className="col-span-2 flex items-center md:col-span-3">
               <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 rtl:space-x-reverse lg:flex-col lg:space-y-2.5 lg:items-start" />
             </div>
-            <div className="flex flex-row items-start  space-x-4 pr-8">
-              <Image
-                alt="Hallo"
-                src={'/image/bct.png'}
-                width={140}
-                height={140}
-                className="block"
-              />
+            <div className="lg:flex flex-row items-start  space-x-4 pr-8 hidden ">
               <Image
                 alt="Hallo"
                 src={'/image/dmca.png'}
@@ -74,11 +67,22 @@ const Footer = async ({ lang }: { lang: Language }) => {
             </div>
           </div>
           {(data?.Footer || [])?.map(renderWidgetMenuItem)}
+          <div className="flex md:hidden flex-row items-start  space-x-4 pr-8 ">
+            <Image
+              alt="Hallo"
+              src={'/image/dmca.png'}
+              width={100}
+              height={100}
+              className="block"
+            />
+          </div>
         </div>
         <div className=" bg-gray-200 mt-8">
           <div className="container  grid grid-cols-2 md:gap-y-4 gap-y-1   gap-x-5 sm:gap-x-8 md:grid-cols-4 py-4 md:py-8 font-medium text-gray-500 text-[0.5rem] leading-4 md:leading-6 md:text-sm">
             {data?.FooterBottom?.map((item: any) => (
-              <Link target='_blank' href={item?.href || '#'} key={item?.id}>{item?.label}</Link>
+              <Link target="_blank" href={item?.href || '#'} key={item?.id}>
+                {item?.label}
+              </Link>
             ))}
           </div>
         </div>
