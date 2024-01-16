@@ -36,7 +36,7 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
   const lang = useTrans();
   return (
     <div className={`nc-SingleMetaAction2 ${className}`}>
-      <div className="flex flex-row md:space-x-2.5 rtl:space-x-reverse items-center">
+      <div className="flex flex-row md:space-x-2.5 space-x-1.5 rtl:space-x-reverse items-center">
         <PostCardLikeAndComment
           itemClass="px-4 h-9 text-sm"
           hiddenCommentOnMobile
