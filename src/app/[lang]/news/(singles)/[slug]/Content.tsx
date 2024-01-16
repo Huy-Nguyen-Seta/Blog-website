@@ -61,7 +61,7 @@ function Content({
           </div>
         </header>
 
-        <div className=" lg:!pl-0  mt-10">
+        <div className=" lg:!pl-0  md:mt-0 mt-10">
           <TableOfContentMobile data={output} setIsLoadMore={setIsLoadMore} />
           <SingleContent
             isLoadMore={isLoadMore}
