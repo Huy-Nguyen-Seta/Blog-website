@@ -36,12 +36,12 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
   const lang = useTrans();
   return (
     <div className={`nc-SingleMetaAction2 ${className}`}>
-      <div className="flex flex-row md:space-x-2.5 space-x-1.5 rtl:space-x-reverse items-center">
+      <div className="flex flex-row md:space-x-2.5 space-x-0.5 rtl:space-x-reverse items-center">
         <PostCardLikeAndComment
           itemClass="px-4 h-9 text-sm"
           hiddenCommentOnMobile
           useOnSinglePage
-          className="!space-x-2.5 rtl:!space-x-reverse"
+          className="!md:space-x-2.5 !space-x-1 rtl:!space-x-reverse"
           likeCount={data?.like}
           blogId={data?.id}
           commentCount={data?.comments?.data?.length}
@@ -59,18 +59,25 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
           className="flex-shrink-0 hidden md:flex items-center justify-center focus:outline-none h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-full"
           renderTrigger={() => (
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
               fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+              height="20px"
+              width="20px"
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
+              <g>
+                <g>
+                  <path
+                    d="M512,241.7L273.643,3.343v156.152c-71.41,3.744-138.015,33.337-188.958,84.28C30.075,298.384,0,370.991,0,448.222v60.436
+			l29.069-52.985c45.354-82.671,132.173-134.027,226.573-134.027c5.986,0,12.004,0.212,18.001,0.632v157.779L512,241.7z
+			 M255.642,290.666c-84.543,0-163.661,36.792-217.939,98.885c26.634-114.177,129.256-199.483,251.429-199.483h15.489V78.131
+			l163.568,163.568L304.621,405.267V294.531l-13.585-1.683C279.347,291.401,267.439,290.666,255.642,290.666z"
+                    fill="currentColor"
+                  />
+                </g>
+              </g>
             </svg>
           )}
           onClick={() => {}}
@@ -83,22 +90,28 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
         />
         <button
           onClick={handleOnClick}
-          className="flex-shrink-0 flex items-center justify-center focus:outline-none h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-full md:hidden"
+          className="flex-shrink-0 flex items-center justify-center focus:outline-none h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-6000 dark:text-neutral-300 rounded-full md:hidden"
         >
-          {' '}
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
             fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+            height="20px"
+            width="20px"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-            />
+            <g>
+              <g>
+                <path
+                  d="M512,241.7L273.643,3.343v156.152c-71.41,3.744-138.015,33.337-188.958,84.28C30.075,298.384,0,370.991,0,448.222v60.436
+			l29.069-52.985c45.354-82.671,132.173-134.027,226.573-134.027c5.986,0,12.004,0.212,18.001,0.632v157.779L512,241.7z
+			 M255.642,290.666c-84.543,0-163.661,36.792-217.939,98.885c26.634-114.177,129.256-199.483,251.429-199.483h15.489V78.131
+			l163.568,163.568L304.621,405.267V294.531l-13.585-1.683C279.347,291.401,267.439,290.666,255.642,290.666z"
+                  fill="currentColor"
+                />
+              </g>
+            </g>
           </svg>
         </button>
 
