@@ -56,7 +56,7 @@ const Footer = async ({ lang }: { lang: Language }) => {
             <div className="col-span-2 flex items-center md:col-span-3">
               <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 rtl:space-x-reverse lg:flex-col lg:space-y-2.5 lg:items-start" />
             </div>
-            <div className="lg:flex flex-row items-start  space-x-4 pr-8 hidden ">
+            <div className="lg:flex flex-row items-start  space-x-4 pr-8 hidden dark:hidden">
               <Image
                 alt="Hallo"
                 src={'/image/dmca.png'}
@@ -67,12 +67,12 @@ const Footer = async ({ lang }: { lang: Language }) => {
             </div>
           </div>
           {(data?.Footer || [])?.map(renderWidgetMenuItem)}
-          <div className="flex md:hidden flex-row items-start  space-x-4 pr-8 ">
+          <div className="flex md:hidden dark:hidden flex-row items-start  space-x-4 pr-8 ">
             <Image
               alt="Hallo"
               src={'/image/dmca.png'}
-              width={100}
-              height={100}
+              width={70}
+              height={70}
               className="block"
             />
           </div>
