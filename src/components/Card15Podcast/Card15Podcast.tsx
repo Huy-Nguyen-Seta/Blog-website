@@ -44,7 +44,7 @@ const Card15Podcast: FC<Card15PodcastProps> = ({
 
   return (
     <div
-      className={`nc-Card15Podcast relative flex group items-center p-3 rounded-3xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 ${className}`}
+      className={`nc-Card15Podcast min-w-full relative flex group items-center p-3 rounded-3xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 ${className}`}
     >
       <div className="w-1/4 flex-shrink-0">
         <Link
