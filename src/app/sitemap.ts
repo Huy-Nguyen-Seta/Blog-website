@@ -48,11 +48,11 @@ export default async function sitemap() {
     ]);
 
   const newsEngUrls = (newsEng?.data ?? [])
-    .map((item: any) => getEngLanguageUrl(`news/single/${item?.slug}`))
+    .map((item: any) => getEngLanguageUrl(`news/${item?.slug}`))
     .flat();
 
   const newsViUrls = (newVi?.data ?? [])
-    .map((item: any) => getViLanguageUrl(`news/single/${item?.slug}`))
+    .map((item: any) => getViLanguageUrl(`news/${item?.slug}`))
     .flat();
 
   const authorEngUrls = (authorEn?.results ?? [])

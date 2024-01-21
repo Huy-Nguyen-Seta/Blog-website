@@ -6,7 +6,7 @@ import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 import { visit } from 'unist-util-visit';
-import SingleRelatedPosts from '../../../SingleRelatedPosts';
+import SingleRelatedPosts from '../SingleRelatedPosts';
 import Content from './Content';
 export async function generateMetadata({
   params,
@@ -26,7 +26,7 @@ export async function generateMetadata({
       keywords: metadata?.keyword,
       authors: metadata?.author,
       alternates: {
-        canonical: `/news/single/${params?.slug}`,
+        canonical: `/news/${params?.slug}`,
         languages: {
           'vi-VN': '/vi',
           'ja-JP': '/ja',

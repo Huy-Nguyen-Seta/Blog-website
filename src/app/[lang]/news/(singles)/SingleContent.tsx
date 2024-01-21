@@ -9,9 +9,9 @@ import { ArrowUpIcon, ChevronDoubleDownIcon } from '@heroicons/react/24/solid';
 import { FC, useEffect, useRef, useState } from 'react';
 import '@/styles/ckedit-styles.css';
 import SingleAuthor from './SingleAuthor';
-import OtherPost from './(default)/single/[slug]/OtherPost';
-import Product from './(default)/single/[slug]/Product';
-import OtherPostNotImage from './(default)/single/[slug]/OtherPostNotImage';
+import OtherPost from './[slug]/OtherPost';
+import Product from './[slug]/Product';
+import OtherPostNotImage from './[slug]/OtherPostNotImage';
 
 const demoTags = DEMO_TAGS.filter((_, i) => i < 9);
 
@@ -34,7 +34,7 @@ const SingleContent: FC<SingleContentProps> = ({
   const contentRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLButtonElement>(null);
   //
-  const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(false);
+  const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(true);
   //
 
   const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
@@ -59,7 +59,7 @@ const SingleContent: FC<SingleContentProps> = ({
 
       progressBarContent.innerText = scrolled.toFixed(0) + '%';
 
-      if (scrolled >= 100) {
+      if (scrolled >= 90) {
         setIsShowScrollToTop(true);
       } else {
         setIsShowScrollToTop(false);
@@ -85,7 +85,7 @@ const SingleContent: FC<SingleContentProps> = ({
         {/* ENTRY CONTENT */}
         <div
           id="single-entry-content ckEditor ck-content"
-          className={`prose lg:prose-lg !max-w-screen-md mx-auto dark:prose-invert ${
+          className={`prose lg:prose-lg lg:prose-h2:my-8 lg:prose-h3:my-6 lg:prose-h1:my-10 !max-w-screen-md mx-auto dark:prose-invert ${
             isLoadMore ? 'max-h-96' : ''
           } overflow-hidden`}
           ref={contentRef}
@@ -94,7 +94,10 @@ const SingleContent: FC<SingleContentProps> = ({
             switch (item?.__component) {
               case 'content.content':
                 return (
-                  <div dangerouslySetInnerHTML={{ __html: item?.content }} />
+                  <div
+                    className="ck-content"
+                    dangerouslySetInnerHTML={{ __html: item?.content }}
+                  />
                 );
               case 'content.link':
                 return <OtherPost post={item?.blog} />;
@@ -119,10 +122,11 @@ const SingleContent: FC<SingleContentProps> = ({
           </div>
         )}
         {/* TAGS */}
-        <div className="max-w-screen-md mx-auto flex flex-wrap">
-          <Tag hideCount tag={data?.tag?.data} className="me-2 mb-2" />
-        </div>
-
+        {data?.tag?.data && (
+          <div className="max-w-screen-md mx-auto flex flex-wrap">
+            <Tag hideCount tag={data?.tag?.data} className="me-2 mb-2" />
+          </div>
+        )}
         {/* AUTHOR */}
         <div className="max-w-screen-md mx-auto border-b border-t border-neutral-100 dark:border-neutral-700"></div>
         <div className="max-w-screen-md mx-auto ">
