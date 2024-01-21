@@ -24,14 +24,9 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'admin-hallo-api.onrender.com',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "admin.hallo.co",
+        pathname: "/**",
       },
     ],
   },

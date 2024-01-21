@@ -26,9 +26,8 @@ export async function generateMetadata({
       alternates: {
         canonical: `/news/author/${params?.slug}`,
         languages: {
-          'en-US': '/en',
+          'vi-VN': '/vi',
           'ja-JP': '/ja',
-          'vi-VN': '/vi'
         },
       },
       openGraph: {

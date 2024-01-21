@@ -28,9 +28,8 @@ export async function generateMetadata({
       alternates: {
         canonical: `/news/${params?.slug}`,
         languages: {
-          'en-US': '/en',
-          'ja-JP': '/ja',
           'vi-VN': '/vi',
+          'ja-JP': '/ja',
         },
       },
       openGraph: {
@@ -191,5 +190,4 @@ export async function generateStaticParams({
   );
 }
 
-export const dynamicParams = false;
 export const dynamic = 'force-dynamic';
