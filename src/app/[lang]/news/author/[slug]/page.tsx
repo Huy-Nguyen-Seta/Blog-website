@@ -2,6 +2,7 @@ import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { PageAuthors } from './PageAuthors';
 import { getData } from '@/components/utils/fetch-api';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -61,7 +62,13 @@ const PageAuthor = async ({
     params?.lang,
     `/findAuthorSeoBySlug/${params?.slug}`
   );
-
+  const responseData = await getData(
+    params?.lang,
+    `/findAuthorBySlug/${params?.slug}`
+  );
+  if (!responseData) {
+    notFound();
+  }
   return (
     <section>
       <script

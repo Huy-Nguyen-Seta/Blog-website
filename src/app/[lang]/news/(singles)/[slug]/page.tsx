@@ -8,6 +8,7 @@ import { unified } from 'unified';
 import { visit } from 'unist-util-visit';
 import SingleRelatedPosts from '../SingleRelatedPosts';
 import Content from './Content';
+import { notFound } from 'next/navigation';
 export async function generateMetadata({
   params,
 }: {
@@ -18,7 +19,8 @@ export async function generateMetadata({
     const metadata = response?.attributes?.meta;
     if (!metadata) return {};
 
-    const image = metadata?.metaImage?.url || metadata?.metaImage?.data?.attributes?.url;
+    const image =
+      metadata?.metaImage?.url || metadata?.metaImage?.data?.attributes?.url;
 
     return {
       title: metadata?.metaTitle,
@@ -65,6 +67,10 @@ const PageSingle = async ({
     null,
     true
   );
+
+  if (!response) {
+    notFound();
+  }
   const responseSeo = await getData(
     params?.lang,
     `/getBlogSeo/${params?.slug}`
@@ -189,5 +195,5 @@ export async function generateStaticParams({
       ?.filter((item: any) => item.slug) || []
   );
 }
-
+export const dynamicParams = false;
 export const dynamic = 'force-dynamic';
