@@ -96,7 +96,7 @@ export default function RootLayout({
   params: { lang: Language };
 }) {
   return (
-    <html lang="en" className={roboto.className}>
+    <html lang="vi" className={roboto.className}>
       <body className="">
         <div className="bg-[#f8f8f8] text-base dark:bg-neutral-900/95 text-neutral-900 dark:text-neutral-200">
           <SiteHeader />
