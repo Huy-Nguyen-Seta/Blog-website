@@ -7,6 +7,7 @@ import AvatarDropdown from "./AvatarDropdown";
 import Navigation from "@/components/Navigation/Navigation";
 import SearchModal from "./SearchModal";
 import NotifyDropdown from "./NotifyDropdown";
+import SwitchDarkMode from "../SwitchDarkMode/SwitchDarkMode";
 
 export interface MainNav2LoggedProps {}
 
@@ -28,6 +29,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
 
         <div className="flex-1 flex items-center justify-end text-slate-700 dark:text-slate-100">
           <SearchModal />
+          <SwitchDarkMode />
           <NotifyDropdown />
           <AvatarDropdown />
         </div>
