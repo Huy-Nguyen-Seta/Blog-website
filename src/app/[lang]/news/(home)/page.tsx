@@ -35,9 +35,8 @@ export async function generateMetadata({
       alternates: {
         canonical: '/news',
         languages: {
-          'en-US': '/en',
-          'ja-JP': '/ja',
           'vi-VN': '/vi',
+          'ja-JP': '/ja',
         },
       },
       openGraph: {

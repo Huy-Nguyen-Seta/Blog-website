@@ -23,7 +23,6 @@ export async function generateMetadata({
     if (!metadata) return {};
 
     const image = metadata?.metaImage?.url;
-    console.log('image', image)
 
     return {
       title: metadata?.metaTitle,
@@ -33,9 +32,8 @@ export async function generateMetadata({
       alternates: {
         canonical: `/news/archive/${isTag ? 'tags/' : ''}${currentSlug}`,
         languages: {
-          'en-US': '/en',
-          'ja-JP': '/ja',
           'vi-VN': '/vi',
+          'ja-JP': '/ja',
         },
       },
       openGraph: {

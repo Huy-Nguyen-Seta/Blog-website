@@ -45,7 +45,7 @@ const SectionHero3: FC<SectionHero3Props> = ({ posts, className = "" }) => {
   };
 
   const renderSubPosts = () => {
-    const subPosts = posts.filter((_, i) => i >= 1 && i < 4);
+    const subPosts = posts?.filter((_, i) => i >= 1 && i < 4);
     return (
       <div className="lg:px-14 xl:px-20 2xl:px-28 grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8 transform mt-6 md:-mt-20">
         {subPosts.map((post) => (

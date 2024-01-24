@@ -17,20 +17,23 @@ const CategoryBadgeList: FC<CategoryBadgeListProps> = ({
 }) => {
   const lang = useTrans();
   return (
-    <div
-      className={`nc-CategoryBadgeList ${className}`}
-      data-nc-id="CategoryBadgeList"
-    >
+    categories && (
+      <div
+        className={`nc-CategoryBadgeList ${className}`}
+        data-nc-id="CategoryBadgeList"
+      >
         <Badge
           className={itemClass}
           name={categories?.tagName || categories?.attributes?.tagName}
           href={
-            `/${lang}/news/archive/tags/${categories?.slug || categories?.attributes?.slug}` ||
-            '/'
+            `/${lang}/news/archive/tags/${
+              categories?.slug || categories?.attributes?.slug
+            }` || '/'
           }
           color={categories?.color || (categories?.attributes?.color as any)}
         />
-    </div>
+      </div>
+    )
   );
 };
 

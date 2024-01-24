@@ -6,8 +6,9 @@ import rehypeParse from 'rehype-parse';
 import rehypeStringify from 'rehype-stringify';
 import { unified } from 'unified';
 import { visit } from 'unist-util-visit';
-import SingleRelatedPosts from '../../../SingleRelatedPosts';
+import SingleRelatedPosts from '../SingleRelatedPosts';
 import Content from './Content';
+import { notFound } from 'next/navigation';
 export async function generateMetadata({
   params,
 }: {
@@ -18,7 +19,8 @@ export async function generateMetadata({
     const metadata = response?.attributes?.meta;
     if (!metadata) return {};
 
-    const image = metadata?.metaImage?.url || metadata?.metaImage?.data?.attributes?.url;
+    const image =
+      metadata?.metaImage?.url || metadata?.metaImage?.data?.attributes?.url;
 
     return {
       title: metadata?.metaTitle,
@@ -26,11 +28,10 @@ export async function generateMetadata({
       keywords: metadata?.keyword,
       authors: metadata?.author,
       alternates: {
-        canonical: `/news/single/${params?.slug}`,
+        canonical: `/news/${params?.slug}`,
         languages: {
-          'en-US': '/en',
-          'ja-JP': '/ja',
           'vi-VN': '/vi',
+          'ja-JP': '/ja',
         },
       },
       openGraph: {
@@ -66,6 +67,10 @@ const PageSingle = async ({
     null,
     true
   );
+
+  if (!response) {
+    notFound();
+  }
   const responseSeo = await getData(
     params?.lang,
     `/getBlogSeo/${params?.slug}`
@@ -190,6 +195,5 @@ export async function generateStaticParams({
       ?.filter((item: any) => item.slug) || []
   );
 }
-
 export const dynamicParams = false;
 export const dynamic = 'force-dynamic';
