@@ -32,7 +32,7 @@ function TableOfContent({
       data.forEach((element: any) => {
         if (
           (document.getElementById(element?.href)?.offsetTop || 0) <=
-          window.scrollY - 440
+          window.scrollY - 400
         ) {
           selectItem = element?.href;
         }
