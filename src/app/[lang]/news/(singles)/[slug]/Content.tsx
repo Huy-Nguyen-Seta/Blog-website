@@ -34,7 +34,7 @@ function Content({
           <div className="pb-4 flex items-center space-x-1 text-[#676767] font-medium text-sm">
             <Link
               className="px-[10px] py-[3px] rounded-2xl border border-solid border-[#e7e7e7]"
-              href={'/news'}
+              href={`/${lang}/news`}
             >
               Trang chủ
             </Link>
@@ -48,7 +48,7 @@ function Content({
             />
             <Link
               className=" dark:text-white font-medium px-[10px] py-[3px] rounded-2xl border border-solid border-[#e7e7e7]"
-              href={`/news/archive/${response?.attributes?.category?.data?.attributes?.slug}`}
+              href={`/${lang}/news/archive/${response?.attributes?.category?.data?.attributes?.slug}`}
             >
               {response?.attributes?.category?.data?.attributes?.name}
             </Link>
