@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 import ButtonSecondary from '../Button/ButtonSecondary';
 import { getData } from '../utils/fetch-api';
 import useTrans from '@/hooks/useTranslate';
+import Button from '../Button/Button';
 
 export interface SectionGridCategoryBoxProps {
   categories?: TaxonomyType[];
@@ -27,11 +28,20 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   headingCenter = true,
   className = '',
 }) => {
-  const itemsPerPage = 8;
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   const [data, setData] = useState<any>([]);
   const [page, setPage] = useState<number>(0);
   const [total, setTotal] = useState<any>();
   const lang = useTrans();
+  useEffect(() => {
+
+    if (window.innerWidth <= 800) {
+      setItemsPerPage(4);
+    } else {
+      setItemsPerPage(10);
+    }
+  }, []);
+
   const fetchData = async (page: number, limit: number) => {
     const { results, total } = await getData(lang, '/findCateByPaging', {
       start: page,
@@ -41,8 +51,8 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
     setTotal(total);
   };
   useEffect(() => {
-    fetchData(0, 8);
-  }, [lang]);
+    fetchData(0, itemsPerPage);
+  }, [lang, itemsPerPage]);
 
   let CardComponentName = CardCategory2;
   switch (categoryCardType) {
@@ -68,7 +78,10 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
 
   return (
     <div className={`nc-SectionGridCategoryBox relative ${className}`}>
-      <Heading description={`Khám phá hơn ${total || 0} chủ đề`} isCenter={headingCenter}>
+      <Heading
+        description={`Khám phá hơn ${total || 0} chủ đề`}
+        isCenter={headingCenter}
+      >
         Chủ đề nổi bật
       </Heading>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
@@ -82,14 +95,15 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
       </div>
       {total > page + itemsPerPage && (
         <div className="text-center mx-auto mt-10 md:mt-16">
-          <ButtonSecondary
+          <Button
+            pattern="primary"
             onClick={() => {
               setPage((pre: number) => pre + itemsPerPage);
               fetchData(page + itemsPerPage, itemsPerPage);
             }}
           >
             Xem thêm
-          </ButtonSecondary>
+          </Button>
         </div>
       )}
     </div>
