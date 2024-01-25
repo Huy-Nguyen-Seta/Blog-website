@@ -15,10 +15,12 @@ import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionG
 import SectionSliderNewAuthors from '@/components/SectionSliderNewAthors/SectionSliderNewAuthors';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
 import Tag from '@/components/Tag/Tag';
+import { getStrapiImage } from '@/components/utils/api-helpers';
 import { handleFetchStorage } from '@/components/utils/dispatch';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_AUTHORS } from '@/data/authors';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { ScaleLevel } from '@/interface/Strapi';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -36,7 +38,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
   const [authors, setAuthor] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDirty, setIsDirty] = useState(false);
+  const [listData, setListData] = useState<any>();
   const dispatch = useDispatch();
   const handleFetch = async (
     searchValue: string = '',
@@ -53,6 +55,14 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
     setIsLoading(false);
 
     return data;
+  };
+
+  const fetchListData = async () => {
+    const listData = await getData(params?.lang, `/list-page`, {
+      populate: ['thumbnailImage'],
+    });
+    setListData(listData?.attributes);
+    console.log('listData', listData);
   };
 
   const fetchData = async (
@@ -101,6 +111,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
   };
 
   useEffect(() => {
+    fetchListData();
     fetchData(0, 8, TABS[0]);
   }, []);
 
@@ -125,7 +136,11 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
             alt="search"
             fill
             containerClassName="absolute inset-0"
-            src="https://images.pexels.com/photos/2138922/pexels-photo-2138922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            src={
+              listData
+                ? getStrapiImage(listData?.thumbnailImage?.data?.attributes, ScaleLevel.EXTRA_LARGE) || ''
+                : ''
+            }
             className="object-cover w-full h-full"
             sizes="(max-width: 1280px) 100vw, 1536px"
           />

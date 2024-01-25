@@ -65,7 +65,6 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
     <div className={`nc-SectionSliderPosts ${className}`}>
       <Heading
         description={subHeading}
-        isCenter
         urlMore={`archive/${cate?.slug}`}
       >
         {heading}
