@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import React, { FC } from "react";
-import Logo from "@/components/Logo/Logo";
-import MenuBar from "@/components/MenuBar/MenuBar";
-import LangDropdown from "./LangDropdown";
-import AvatarDropdown from "./AvatarDropdown";
-import TemplatesDropdown from "./TemplatesDropdown";
-import NotifyDropdown from "./NotifyDropdown";
-import SwitchDarkMode from "../SwitchDarkMode/SwitchDarkMode";
-import Input from "../Input/Input";
-import SearchModal from "./SearchModal";
+import React, { FC } from 'react';
+import Logo from '@/components/Logo/Logo';
+import MenuBar from '@/components/MenuBar/MenuBar';
+import LangDropdown from './LangDropdown';
+import AvatarDropdown from './AvatarDropdown';
+import TemplatesDropdown from './TemplatesDropdown';
+import NotifyDropdown from './NotifyDropdown';
+import SwitchDarkMode from '../SwitchDarkMode/SwitchDarkMode';
+import Input from '../Input/Input';
+import SearchModal from './SearchModal';
 
 export interface MainNav2Props {
   className?: string;
 }
 
-const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
+const MainNav2: FC<MainNav2Props> = ({ className = '' }) => {
   const renderSearchForm = () => {
     return (
       <div className="relative group">
@@ -76,9 +76,9 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
           <div className="flex-1 flex items-center justify-end ">
             <TemplatesDropdown />
             <LangDropdown />
-            <SwitchDarkMode />
             <NotifyDropdown className="hidden md:block" />
             <AvatarDropdown />
+            <SwitchDarkMode />
           </div>
         </div>
       </div>

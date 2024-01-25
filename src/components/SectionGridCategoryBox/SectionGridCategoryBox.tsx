@@ -28,7 +28,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   headingCenter = true,
   className = '',
 }) => {
-  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [itemsPerPage, setItemsPerPage] = useState(0);
   const [data, setData] = useState<any>([]);
   const [page, setPage] = useState<number>(0);
   const [total, setTotal] = useState<any>();
@@ -38,7 +38,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
     if (window.innerWidth <= 800) {
       setItemsPerPage(4);
     } else {
-      setItemsPerPage(10);
+      setItemsPerPage(5);
     }
   }, []);
 
@@ -51,6 +51,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
     setTotal(total);
   };
   useEffect(() => {
+    if(itemsPerPage !== 0)
     fetchData(0, itemsPerPage);
   }, [lang, itemsPerPage]);
 
@@ -80,7 +81,6 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
     <div className={`nc-SectionGridCategoryBox relative ${className}`}>
       <Heading
         description={`Khám phá hơn ${total || 0} chủ đề`}
-        isCenter={headingCenter}
       >
         Chủ đề nổi bật
       </Heading>

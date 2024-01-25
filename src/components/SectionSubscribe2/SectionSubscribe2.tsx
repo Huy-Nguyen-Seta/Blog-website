@@ -102,7 +102,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
       className={`nc-SectionSubscribe2 relative flex flex-col lg:flex-row items-center ${className}`}
     >
       <div className="flex-shrink-0 mb-14 lg:mb-0 lg:me-10 lg:w-2/5">
-        <h2 className="font-semibold text-4xl">Liên hệ với chúng tôi 🎉</h2>
+        <h2 className="font-semibold text-4xl">Liên hệ với chúng tôi</h2>
         <span className="block mt-6 text-neutral-500 dark:text-neutral-400">
           Để được tư vấn và hỗ trợ miễn phí. HALLO cam kết tư vấn minh bạch và
           bảo mật thông tin khách hàng
