@@ -95,7 +95,7 @@ const SingleContent: FC<SingleContentProps> = ({
               case 'content.content':
                 return (
                   <div
-                    className="ck-content"
+                    className="ck-content text-lg"
                     dangerouslySetInnerHTML={{ __html: item?.content }}
                   />
                 );
