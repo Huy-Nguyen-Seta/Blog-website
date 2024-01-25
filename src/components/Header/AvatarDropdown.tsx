@@ -27,6 +27,10 @@ export default function AvatarDropdown() {
     if (!localStorage.getItem('userInfor')) {
       e.preventDefault();
       router.push(`/${lang}/news/login`);
+    }else {
+      let user = JSON.parse(localStorage.getItem('userInfor') || '');
+      setUser(user)
+
     }
   };
   const handleLogOut = () => {
