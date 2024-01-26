@@ -41,7 +41,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
   emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_INIT || '');
 
   const createGoogleSheet = () => {
-    fetch('https://sheetdb.io/api/v1/zq5rc4rojmcjf', {
+    fetch('https://sheetdb.io/api/v1/yeqkhhh6st0ws', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
