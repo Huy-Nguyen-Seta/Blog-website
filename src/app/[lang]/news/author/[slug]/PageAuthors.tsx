@@ -80,7 +80,7 @@ export const PageAuthors = ({
                   alt={authorInfor?.image?.name || ''}
                   src={getStrapiImage(authorInfor?.image) || ''}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   priority
                 />
               </div>
