@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
-import Heading from '@/components/Heading/Heading';
-import { PostDataType } from '@/data/types';
+'use client';
 import Card11 from '@/components/Card11/Card11';
-import Card9 from '@/components/Card9/Card9';
-import { DEMO_POSTS } from '@/data/posts';
-import { Route } from '@/routers/types';
+import Heading from '@/components/Heading/Heading';
+import MySlider from '@/components/MySlider';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
+import { DEMO_POSTS } from '@/data/posts';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { PostDataType } from '@/data/types';
+import { Route } from '@/routers/types';
+import { FC } from 'react';
 
 export interface SingleRelatedPostsProps {
   relatedPosts?: PostDataType[] | any;
@@ -47,11 +48,11 @@ const SingleRelatedPosts: FC<SingleRelatedPostsProps> = ({
           >
             Bài viết liên quan
           </Heading>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-            {relatedPosts?.map((post : any) => (
-              <Card11 key={post.id} post={{...post?.attributes, id: post?.id}} />
-            ))}
-          </div>
+          <MySlider
+            data={relatedPosts}
+            renderItem={(item, indx) => <Card11 key={indx} post={item} />}
+            itemPerRow={4}
+          />
         </div>
 
         {/* MORE FROM AUTHOR */}

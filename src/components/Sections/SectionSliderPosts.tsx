@@ -16,7 +16,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 export interface SectionSliderPostsProps {
   className?: string;
-  heading: string;
+  heading?: string;
   subHeading?: string;
   posts: PostDataType[];
   postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11';

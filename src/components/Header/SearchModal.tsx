@@ -86,7 +86,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
       ? authors
       : query === '' || rawQuery.startsWith('#')
       ? []
-      : authors.filter((user) => user?.name.toLowerCase().includes(query));
+      : authors?.filter((user) => user?.name.toLowerCase().includes(query));
 
   return (
     <>
