@@ -76,7 +76,7 @@ const PageSingle = async ({
   if (response?.attributes?.category?.data?.id) {
     relatePost = await getData(
       params?.lang,
-      `/byCate/${response?.attributes?.category?.data?.id}`
+      `/byCateNoLimit/${response?.attributes?.category?.data?.id}`
     );
   }
   relatePost = relatePost?.filter((item: any) => item?.id !== response?.id)
