@@ -4,14 +4,17 @@ import Input from '@/components/Input/Input';
 import rightImg from '@/images/SVG-subcribe2.png';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Textarea from '../Textarea/Textarea';
 import emailjs from '@emailjs/browser';
 import { showErrorMessage, showSuccessMessage } from '../utils/toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../Button/Loading';
 import axios from 'axios';
-import { getStrapiURL } from '../utils/api-helpers';
+import { getStrapiImage, getStrapiURL } from '../utils/api-helpers';
+import { getData } from '../utils/fetch-api';
+import useTrans from '@/hooks/useTranslate';
+import { ScaleLevel } from '@/interface/Strapi';
 
 export interface SectionSubscribe2Props {
   className?: string;
@@ -22,6 +25,15 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMess] = useState('');
+  const [dataContact, setDataContact] = useState<any>();
+  const lang = useTrans();
+  useEffect(() => {
+    const handleFetchGlobal = async () => {
+      const data = await getData(lang, '/global', { populate: 'contactImage' });
+      setDataContact(data?.attributes?.contactImage);
+    };
+    handleFetchGlobal();
+  }, []);
 
   const handlePushToAdminManager = async () => {
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -158,9 +170,16 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
       </div>
       <div className="flex-grow">
         <Image
-          alt="subsc"
+          alt="Contact Form Hallo"
           sizes="(max-width: 768px) 100vw, 50vw"
-          src={rightImg}
+          height={803}
+          width={1120}
+          src={
+            getStrapiImage(
+              dataContact?.data?.attributes,
+              ScaleLevel.EXTRA_SMALL
+            ) || rightImg
+          }
         />
       </div>
     </div>

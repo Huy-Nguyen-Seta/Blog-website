@@ -10,7 +10,7 @@ export interface MySliderProps<T> {
   className?: string;
   itemPerRow?: number;
   data: T[];
-  renderItem?: (item: T, indx: number) => ReactNode;
+  renderItem?: (item: T | any, indx: number) => ReactNode;
   arrowBtnClass?: string;
 }
 

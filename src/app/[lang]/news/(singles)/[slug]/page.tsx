@@ -71,6 +71,15 @@ const PageSingle = async ({
   if (!response) {
     notFound();
   }
+
+  let relatePost = [];
+  if (response?.attributes?.category?.data?.id) {
+    relatePost = await getData(
+      params?.lang,
+      `/byCate/${response?.attributes?.category?.data?.id}`
+    );
+  }
+  relatePost = relatePost?.filter((item: any) => item?.id !== response?.id)
   const responseSeo = await getData(
     params?.lang,
     `/getBlogSeo/${params?.slug}`
@@ -170,7 +179,7 @@ const PageSingle = async ({
         />
         <CommentComponent id={response?.id} slug={response?.attributes?.slug} />
         {/* RELATED POSTS */}
-        <SingleRelatedPosts relatedPosts={response?.attributes?.blogs?.data} />
+        <SingleRelatedPosts relatedPosts={relatePost} />
       </div>
     </>
   );
