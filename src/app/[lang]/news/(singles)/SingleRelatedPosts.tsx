@@ -38,7 +38,7 @@ const SingleRelatedPosts: FC<SingleRelatedPostsProps> = ({
   moreFromAuthorPosts = demoMoreFromAuthor,
 }) => {
   return (
-    <div className="relative bg-neutral-100 dark:bg-neutral-800 py-16 lg:py-28 mt-16 lg:mt-28">
+    <div className="relative bg-neutral-100 dark:bg-neutral-800 pt-16 lg:pt-28 mt-16 lg:mt-28">
       {/* RELATED  */}
       <div className="container">
         <div>
