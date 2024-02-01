@@ -10,6 +10,7 @@ import { i18n } from '../../../i18n-config';
 import StoreProvider from '../GlobalRedux/StoreProvider';
 import SiteHeader from './SiteHeader';
 import './globals.css';
+import GoogleAnalytics from '@/utils/google-analytics';
 const FAVICON_VERSION = '?v=1';
 
 export async function generateMetadata({
@@ -97,6 +98,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi" className={roboto.className}>
+      <GoogleAnalytics />
       <body className="">
         <div className="bg-[#f8f8f8] text-base dark:bg-neutral-900/95 text-neutral-900 dark:text-neutral-200">
           <SiteHeader />
