@@ -94,7 +94,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
         ))}
       </div>
       {total > page + itemsPerPage && (
-        <div className="text-center mx-auto mt-10 md:mt-16">
+        <div className="text-center mx-auto mt-6">
           <Button
             pattern="primary"
             onClick={() => {

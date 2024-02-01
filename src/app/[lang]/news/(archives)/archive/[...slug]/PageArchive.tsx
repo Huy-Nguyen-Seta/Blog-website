@@ -16,6 +16,8 @@ import { useDispatch } from 'react-redux';
 import ModalCategories from '../../ModalCategories';
 import ModalTags from '../../ModalTags';
 import { AppDispatch } from '@/app/GlobalRedux/store';
+import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
+import { DEMO_CATEGORIES } from '@/data/taxonomies';
 
 export const PageArchive = ({
   params,
@@ -143,7 +145,7 @@ export const PageArchive = ({
       )}
       {/* ====================== END HEADER ====================== */}
 
-      <div className="container pt-10 pb-16 lg:pb-28 lg:pt-20 space-y-16 lg:space-y-28">
+      <div className="container pt-10 pb-16 lg:pb-8 lg:pt-20 space-y-16 lg:space-y-28">
         <div>
           <div className="flex flex-col sm:justify-between sm:flex-row">
             <div className="flex space-x-2.5 rtl:space-x-reverse">
@@ -190,7 +192,7 @@ export const PageArchive = ({
 
         {/* MORE SECTIONS */}
         {/* === SECTION 5 === */}
-        <div className="relative py-16">
+        <div className="relative py-16 !my-8">
           <BackgroundSection />
           <SectionGridCategoryBox
             categories={categories?.filter((_, i) => i < 10)}
@@ -206,6 +208,13 @@ export const PageArchive = ({
 
         {/* SUBCRIBES */}
         <SectionSubscribe2 />
+        <SectionSliderNewCategories
+          className="py-10 lg:pt-16 !my-8"
+          heading="Diễn đàn và thảo luận"
+          subHeading="Khám phá hơn 233 chủ đề"
+          categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+          categoryCardType="card4"
+        />
       </div>
     </div>
   );

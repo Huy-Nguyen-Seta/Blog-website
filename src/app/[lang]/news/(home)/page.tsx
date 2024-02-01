@@ -87,7 +87,7 @@ const PageHome = async ({
             categories={filterCategories.concat(response?.NewPost?.categories)}
             lang={params?.lang}
           />
-          <div className="pt-10 pb-4 lg:py-16">
+          <div className="pt-10 pb-4 lg:py-0">
             <SectionGridCategoryBox
               categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             />

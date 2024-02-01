@@ -234,7 +234,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
 
         {/* MORE SECTIONS */}
         {/* === SECTION 5 === */}
-        <div className="relative py-16">
+        <div className="relative py-16 !my-8">
           <BackgroundSection />
           <SectionGridCategoryBox
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
