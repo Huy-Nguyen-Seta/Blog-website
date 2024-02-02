@@ -23,7 +23,7 @@ const NavItem: FC<NavItemProps> = ({
       <button
         className={`flex items-center justify-center font-medium ${className} ${radius} ${
           isActive
-            ? "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-black"
+            ? "bg-[#ED4631] text-neutral-50 dark:bg-[#ED4631] "
             : "text-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-100 hover:text-neutral-900 hover:bg-neutral-100 dark:hover:bg-neutral-800"
         } `}
         onClick={onClick}

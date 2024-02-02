@@ -155,7 +155,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
           <ButtonCircle
             disabled={isSubmitting}
             type="submit"
-            className="bg-indigo-600 shadow-xl hover:bg-indigo-500 text-white font-bold rounded-full px-4 py-6  !w-48 space-x-2 flex flex-row justify-center items-center"
+            className="bg-[#ED4631] shadow-xl hover:bg-[#ED4631]  text-white font-bold rounded-full px-4 py-6  !w-48 space-x-2 flex flex-row justify-center items-center"
           >
             {isSubmitting ? (
               <Loading />
