@@ -5,6 +5,7 @@ import Badge from '@/components/Badge/Badge';
 import Link from 'next/link';
 import { getStrapiImage } from '../utils/api-helpers';
 import useTrans from '@/hooks/useTranslate';
+import { ScaleLevel } from '@/interface/Strapi';
 
 export interface CardCategory2Props {
   className?: string;
@@ -45,9 +46,8 @@ const CardCategory2: FC<CardCategory2Props> = ({
       )}
       <NcImage
         containerClassName={`relative flex-shrink-0 w-20 h-20 rounded-full shadow-lg overflow-hidden z-0`}
-        src={getStrapiImage(image || thumbnail) || ''}
+        src={getStrapiImage(image || thumbnail, ScaleLevel.EXTRA_LARGE) || ''}
         fill
-        sizes="80px"
         alt="categories"
         className="object-cover "
       />

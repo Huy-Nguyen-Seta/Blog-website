@@ -13,6 +13,7 @@ import NavItem from '@/components/NavItem/NavItem';
 import NcImage from '@/components/NcImage/NcImage';
 import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
 import SectionSliderNewAuthors from '@/components/SectionSliderNewAthors/SectionSliderNewAuthors';
+import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
 import Tag from '@/components/Tag/Tag';
 import { getStrapiImage } from '@/components/utils/api-helpers';
@@ -138,7 +139,10 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
             containerClassName="absolute inset-0"
             src={
               listData
-                ? getStrapiImage(listData?.thumbnailImage?.data?.attributes, ScaleLevel.EXTRA_LARGE) || ''
+                ? getStrapiImage(
+                    listData?.thumbnailImage?.data?.attributes,
+                    ScaleLevel.EXTRA_LARGE
+                  ) || ''
                 : ''
             }
             className="object-cover w-full h-full"
@@ -234,7 +238,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
 
         {/* MORE SECTIONS */}
         {/* === SECTION 5 === */}
-        <div className="relative py-16 !my-8">
+        <div className="relative pt-8 py-4 !my-8">
           <BackgroundSection />
           <SectionGridCategoryBox
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
@@ -251,6 +255,13 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
 
         {/* SUBCRIBES */}
         <SectionSubscribe2 />
+        <SectionSliderNewCategories
+          className="py-10 lg:py-4"
+          heading="Diễn đàn và thảo luận"
+          subHeading="Khám phá hơn 233 chủ đề"
+          categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+          categoryCardType="card4"
+        />
       </div>
     </div>
   );
