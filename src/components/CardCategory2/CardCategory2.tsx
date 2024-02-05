@@ -35,7 +35,7 @@ const CardCategory2: FC<CardCategory2Props> = ({
       href={`/${lang}/news/archive/${slug}` || '/'}
       className={`nc-CardCategory2 relative flex flex-col items-center justify-center text-center px-3 py-5 sm:p-6 bg-white dark:bg-neutral-900 rounded-3xl transition-colors ${className}`}
     >
-      {index && (
+      {/* {index && (
         <Badge
           color={
             colorArr[Math.floor(Math.random() * colorArr.length)] as TwMainColor
@@ -43,7 +43,7 @@ const CardCategory2: FC<CardCategory2Props> = ({
           name={index}
           className="absolute -top-2 sm:top-3 left-3"
         />
-      )}
+      )} */}
       <NcImage
         containerClassName={`relative flex-shrink-0 w-20 h-20 rounded-full shadow-lg overflow-hidden z-0`}
         src={getStrapiImage(image || thumbnail, ScaleLevel.EXTRA_LARGE) || ''}
