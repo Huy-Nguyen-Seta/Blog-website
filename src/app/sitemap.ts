@@ -19,33 +19,44 @@ function getLanguageUrls(slug: string) {
 }
 
 export default async function sitemap() {
-  const [newsEng, newVi, authorEn, authorVi, enCate, viCate, enTag, viTag] =
-    await Promise.all([
-      getData('en', '/getBLogsByQuery', {
-        populate: '*',
-      }),
-      getData('vi', '/getBLogsByQuery', {
-        populate: '*',
-      }),
-      getData('en', '/getAuthors', {
-        populate: '*',
-      }),
-      getData('vi', '/getAuthors', {
-        populate: '*',
-      }),
-      getData('en', '/getCategories', {
-        populate: '*',
-      }),
-      getData('vi', '/getCategories', {
-        populate: '*',
-      }),
-      getData('en', '/getTags', {
-        populate: '*',
-      }),
-      getData('vi', '/getTags', {
-        populate: '*',
-      }),
-    ]);
+  const [
+    newsEng,
+    newVi,
+    authorEn,
+    authorVi,
+    enCate,
+    viCate,
+    enTag,
+    viTag,
+    viPartner,
+  ] = await Promise.all([
+    getData('en', '/getBLogsByQuery', {
+      populate: '*',
+    }),
+    getData('vi', '/getBLogsByQuery', {
+      populate: '*',
+    }),
+    getData('en', '/getAuthors', {
+      populate: '*',
+    }),
+    getData('vi', '/getAuthors', {
+      populate: '*',
+    }),
+    getData('en', '/getCategories', {
+      populate: '*',
+    }),
+    getData('vi', '/getCategories', {
+      populate: '*',
+    }),
+    getData('en', '/getTags', {
+      populate: '*',
+    }),
+    getData('vi', '/getTags', {
+      populate: '*',
+    }),
+    getData('vi', '/getPartners', { populate: '*' }),
+    
+  ]);
 
   const newsEngUrls = (newsEng?.data ?? [])
     .map((item: any) => getEngLanguageUrl(`news/${item?.slug}`))
@@ -78,7 +89,9 @@ export default async function sitemap() {
   const tagViUrl = (viTag ?? [])
     .map((item: any) => getViLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
-
+  const partnerUrl = (viPartner?.data ?? [])
+    .map((item: any) => getViLanguageUrl(`news/partner/${item?.slug}`))
+    .flat();
   const urls = [
     ...getLanguageUrls(''),
     ...getLanguageUrls('search'),
@@ -90,6 +103,7 @@ export default async function sitemap() {
     ...cateViUrl,
     ...tagEngUrls,
     ...tagViUrl,
+    ...partnerUrl
   ];
 
   return urls;

@@ -17,7 +17,7 @@ export interface SectionMagazine6Props {
 
 const SectionMagazine6: FC<SectionMagazine6Props> = ({
   posts = MAGAZINE1_POSTS,
-  heading = "Latest Articles 🎈 ",
+  heading = "Latest Bài viết 🎈 ",
   className = "",
 }) => {
   const renderMain = () => {

@@ -42,7 +42,7 @@ const SectionMagazine11: FC<SectionMagazine11Props> = ({
             color={category.color as TwMainColor}
           />
           <a href="##" className="flex items-center text-xs text-neutral-500">
-            <span>More Articles</span>
+            <span>More Bài viết</span>
             <ArrowRightIcon className="ms-1.5 w-3 h-3" />
           </a>
         </div>

@@ -9,7 +9,7 @@ export interface SectionMagazine4Props extends SectionMagazine1Props {}
 const SectionMagazine4: FC<SectionMagazine4Props> = ({
   posts,
   className = "",
-  heading = "Latest Articles 🎈",
+  heading = "Latest Bài viết 🎈",
 }) => {
   return (
     <div className={`nc-SectionMagazine4 ${className}`}>

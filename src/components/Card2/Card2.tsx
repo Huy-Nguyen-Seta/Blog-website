@@ -15,12 +15,14 @@ export interface Card2Props {
   className?: string;
   post: PostDataType;
   size?: 'normal' | 'large';
+  subClassName?: string
 }
 
 const Card2: FC<Card2Props> = ({
   className = 'h-full',
   size = 'normal',
   post,
+  subClassName = ''
 }) => {
   const {
     title,
@@ -41,7 +43,7 @@ const Card2: FC<Card2Props> = ({
   const lang = useTrans();
   return (
     <div className={`nc-Card2 group relative flex flex-col ${className}`}>
-      <div className="block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] z-0">
+      <div className={`block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] z-0 ${subClassName}`}>
         <Image
           fill
           sizes="(max-width: 600px) 480px, 800px"

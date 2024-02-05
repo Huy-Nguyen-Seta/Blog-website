@@ -12,7 +12,7 @@ const FOUNDER_DEMO: Statistic[] = [
     id: "1",
     heading: "10 million",
     subHeading:
-      "Articles have been public around the world (as of Sept. 30, 2021)",
+      "Bài viết have been public around the world (as of Sept. 30, 2021)",
   },
   {
     id: "2",

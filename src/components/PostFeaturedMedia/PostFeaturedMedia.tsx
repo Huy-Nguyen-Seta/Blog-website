@@ -15,12 +15,14 @@ export interface PostFeaturedMediaProps {
   className?: string;
   post: PostDataType;
   isHover?: boolean;
+  newLink?: string
 }
 
 const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
   className = 'w-full h-full',
   post,
   isHover = false,
+  newLink
 }) => {
   const lang = useTrans();
   const {
@@ -95,7 +97,7 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
       {renderContent()}
       {postType !== 'gallery' && (
         <Link
-          href={`/${lang}/news/${slug}` || ''}
+          href={ newLink || `/${lang}/news/${slug}` || ''}
           className={`block absolute inset-0 ${
             !postType || postType === 'standard'
               ? 'bg-black/20 transition-opacity opacity-0 group-hover:opacity-100'

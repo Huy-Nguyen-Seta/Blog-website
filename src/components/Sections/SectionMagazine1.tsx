@@ -18,7 +18,7 @@ export interface SectionMagazine1Props {
 
 const SectionMagazine1: FC<SectionMagazine1Props> = ({
   posts,
-  heading = 'Latest Articles 🎈 ',
+  heading = 'Latest Bài viết 🎈 ',
   desc,
   className = '',
   lang
@@ -32,7 +32,7 @@ const SectionMagazine1: FC<SectionMagazine1Props> = ({
       )}
       {!posts?.length && <span>Danh sách rỗng !</span>}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-        {posts?.[0] && <Card2 size="large" post={posts?.[0]} />}
+        {posts?.[0] && <Card2 subClassName='!h-auto aspect-[6/5] w-full' size="large" post={posts?.[0]} />}
         <div className="grid gap-6 md:gap-8">
           {posts
             ?.filter((_, i) => i < 4 && i > 0)

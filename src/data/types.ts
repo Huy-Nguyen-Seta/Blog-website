@@ -75,7 +75,9 @@ export interface PostDataType {
   attributes?: any,
   slug?: string,
   comments?: any[],
-  viewCount?:number
+  viewCount?:number,
+  name?: string,
+  createdDate?: string
 }
 
 export type TwMainColor =

@@ -17,7 +17,7 @@ export interface SectionMagazine2Props extends SectionMagazine1Props {}
 
 const SectionMagazine2: FC<SectionMagazine2Props> = ({
   posts,
-  heading = '🎈 Latest Articles',
+  heading = '🎈 Latest Bài viết',
   className,
   categories,
   lang = 'en',
