@@ -50,14 +50,12 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
           {currentAuthor?.name}
         </span>
       </Link>
-      <>
         <span className="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">
           ·
         </span>
         <span className="text-neutral-500 dark:text-neutral-400 font-normal">
           {moment(createdAt).format('MMM DD, YYYY')}
         </span>
-      </>
     </div>
   );
 };
