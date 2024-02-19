@@ -6,7 +6,7 @@ import PostTypeFeaturedIcon from '@/components/PostTypeFeaturedIcon/PostTypeFeat
 import { PostDataType } from '@/data/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PostCardMeta from '../PostCardMeta/PostCardMeta';
 import { getStrapiImage } from '../utils/api-helpers';
 import useTrans from '@/hooks/useTranslate';
@@ -15,14 +15,14 @@ export interface Card2Props {
   className?: string;
   post: PostDataType;
   size?: 'normal' | 'large';
-  subClassName?: string
+  subClassName?: string;
 }
 
 const Card2: FC<Card2Props> = ({
   className = 'h-full',
   size = 'normal',
   post,
-  subClassName = ''
+  subClassName = '',
 }) => {
   const {
     title,
@@ -41,9 +41,15 @@ const Card2: FC<Card2Props> = ({
     viewCount,
   } = post;
   const lang = useTrans();
-  return (
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  return isClient ? (
     <div className={`nc-Card2 group relative flex flex-col ${className}`}>
-      <div className={`block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] z-0 ${subClassName}`}>
+      <div
+        className={`block flex-shrink-0 flex-grow relative w-full h-0 pt-[75%] sm:pt-[55%] z-0 ${subClassName}`}
+      >
         <Image
           fill
           sizes="(max-width: 600px) 480px, 800px"
@@ -64,10 +70,7 @@ const Card2: FC<Card2Props> = ({
         />
       </div>
 
-      <Link
-        href={`/${lang}/news/${slug}` || ''}
-        className="absolute inset-0"
-      />
+      <Link href={`/${lang}/news/${slug}` || ''} className="absolute inset-0" />
 
       <div className="mt-5 px-4 flex flex-col">
         <div className="space-y-3">
@@ -112,6 +115,8 @@ const Card2: FC<Card2Props> = ({
         </div>
       </div>
     </div>
+  ) : (
+    <div></div>
   );
 };
 
