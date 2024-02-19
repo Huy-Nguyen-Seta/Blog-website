@@ -31,6 +31,7 @@ export function middleware(request: NextRequest) {
       '/robots.txt',
       '/googleb52229e2c40fd382.html',
       '/googled2cb4a3832a37b3a.html',
+      'googlec2ff4a0fc522f3bc.html'
       // Your other files in `public`
     ].some((path) => pathname.startsWith('/image') || pathname.includes(path)) || pathname.startsWith('/favicons')
   )
