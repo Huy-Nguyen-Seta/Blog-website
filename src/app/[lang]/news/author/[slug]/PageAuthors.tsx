@@ -126,8 +126,8 @@ export const PageAuthors = ({
                   onClick={() => {}}
                   data={SOCIALS_DATA}
                   url={
-                    window
-                      ? window?.location.origin +
+                    process.env.NEXT_PUBLIC_HOST
+                      ? process.env.NEXT_PUBLIC_HOST +
                         `/${params?.lang}` +
                         '/author/' +
                         authorInfor?.slug

@@ -101,7 +101,7 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
           </div>
         </>
       ) : (
-        <></>
+        <div></div>
       )}
     </div>
   );

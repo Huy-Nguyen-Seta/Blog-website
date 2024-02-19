@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+'use client';
+import React, { FC, useEffect, useState } from 'react';
 import Avatar from '@/components/Avatar/Avatar';
 import { PostDataType } from '@/data/types';
 import Link from 'next/link';
@@ -19,10 +20,16 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
   hiddenAvatar = false,
   avatarSize = 'h-7 w-7 text-sm',
 }) => {
-  const lang = useTrans()
+  const lang = useTrans();
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const { createdAt, author } = meta;
-  const currentAuthor = author?.data ? author?.data?.attributes : author
-  const authorImage = currentAuthor?.image?.data ? currentAuthor?.image?.data?.attributes : currentAuthor?.image
+  const currentAuthor = author?.data ? author?.data?.attributes : author;
+  const authorImage = currentAuthor?.image?.data
+    ? currentAuthor?.image?.data?.attributes
+    : currentAuthor?.image;
   return (
     <div
       className={`nc-PostCardMeta inline-flex items-center flex-wrap text-neutral-800 dark:text-neutral-200 ${className}`}

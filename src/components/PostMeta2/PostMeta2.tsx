@@ -1,3 +1,4 @@
+'use client'
 import Avatar from '@/components/Avatar/Avatar';
 import { DEMO_POSTS } from '@/data/posts';
 import { PostDataType } from '@/data/types';
