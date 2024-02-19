@@ -28,7 +28,7 @@ const socials: SocialType[] = [
   </g>
   </svg>
   `,
-    href: '#',
+    href: 'https://www.facebook.com/dichvuhallo',
     Button: FacebookShareButton,
   },
   {

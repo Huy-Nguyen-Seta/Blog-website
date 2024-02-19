@@ -40,7 +40,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
         href={`/${lang}/news/${slug}` || ''}
         className="absolute inset-0 z-0"
       ></Link>
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col flex-grow ">
         <div className="space-y-3 mb-4">
           <CategoryBadgeList categories={tag} />
           <h2 className={`block font-semibold text-sm sm:text-base`}>
@@ -73,7 +73,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
 
       <Link
         href={`/${lang}/news/${slug}` || ''}
-        className={`block relative flex-shrink-0 w-24 h-24 sm:w-40 sm:h-full ms-3 sm:ms-5 rounded-2xl overflow-hidden z-0`}
+        className={`block relative flex-shrink-0  min-w-[35%] aspect-[6/5] sm:w-40  ms-3 sm:ms-5 rounded-2xl overflow-hidden z-0`}
       >
         <Image
           sizes="(max-width: 600px) 180px, 400px"
