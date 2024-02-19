@@ -30,7 +30,7 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
   const authorImage = currentAuthor?.image?.data
     ? currentAuthor?.image?.data?.attributes
     : currentAuthor?.image;
-  return (
+  return isClient ? (
     <div
       className={`nc-PostCardMeta inline-flex items-center flex-wrap text-neutral-800 dark:text-neutral-200 ${className}`}
     >
@@ -50,13 +50,15 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
           {currentAuthor?.name}
         </span>
       </Link>
-        <span className="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">
-          ·
-        </span>
-        <span className="text-neutral-500 dark:text-neutral-400 font-normal">
-          {moment(createdAt).format('MMM DD, YYYY')}
-        </span>
+      <span className="text-neutral-500 dark:text-neutral-400 mx-[6px] font-medium">
+        ·
+      </span>
+      <span className="text-neutral-500 dark:text-neutral-400 font-normal">
+        {moment(createdAt).format('MMM DD, YYYY')}
+      </span>
     </div>
+  ) : (
+    <div></div>
   );
 };
 
