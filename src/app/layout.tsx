@@ -53,22 +53,22 @@ export async function generateMetadata({
       icons: {
         icon: [
           {
-            url: '/image/favicons/favicon-16x16.png' + FAVICON_VERSION,
+            url: '/favicons/favicon-16x16.png' + FAVICON_VERSION,
             sizes: '16x16',
             type: 'image/png',
           },
           {
-            url: '/image/favicons/favicon-32x32.png' + FAVICON_VERSION,
+            url: '/favicons/favicon-32x32.png' + FAVICON_VERSION,
             sizes: '32x32',
             type: 'image/png',
           },
           {
-            url: '/image/favicons/favicon-48x48.png' + FAVICON_VERSION,
+            url: '/favicons/favicon-48x48.png' + FAVICON_VERSION,
             sizes: '48x48',
             type: 'image/png',
           },
           {
-            url: '/image/favicons/favicon.ico' + FAVICON_VERSION,
+            url: '/favicons/favicon.ico' + FAVICON_VERSION,
             sizes: '48x48',
             type: 'image/x-icon',
           },
@@ -76,7 +76,7 @@ export async function generateMetadata({
         other: [
           {
             rel: 'apple-touch-icon',
-            url: '/image/favicons/apple-touch-icon.png' + FAVICON_VERSION,
+            url: '/favicons/apple-touch-icon.png' + FAVICON_VERSION,
             sizes: '180x180',
           },
         ],
