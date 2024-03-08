@@ -2,6 +2,8 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { ChevronDownIcon, ListBulletIcon } from '@heroicons/react/24/solid';
+import { translateLanguage } from '@/utils/translateLanguage';
+import useTrans from '@/hooks/useTranslate';
 
 function TableOfContentMobile({
   data,
@@ -14,7 +16,7 @@ function TableOfContentMobile({
   const [isScrollToToc, setIsScrollToToc] = useState(false);
   const [isOpenTOC, setIsOpenTOC] = useState(false);
   const [isOpenList, setIsOpenList] = useState(false);
-
+  const lang = useTrans();
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -61,7 +63,7 @@ function TableOfContentMobile({
           onClick={() => setIsOpenTOC(!isOpenTOC)}
         >
           <p className="text-[#01123C] text-xl font-semibold ">
-            {'Danh mục bài viết'}
+            {translateLanguage('list_post', lang)}
           </p>
           <ChevronDownIcon
             className={classNames({ 'rotate-180': isOpenTOC }, 'h-5 w-5')}
@@ -119,7 +121,7 @@ function TableOfContentMobile({
         >
           <div className=" flex justify-between items-start sticky top-0 bg-white py-4 flex-col  border-b border-[#CBD6E1]">
             <p className="text-[#01123C] text-xl font-semibold">
-              Danh mục bài viết
+              {translateLanguage('list_post', lang)}
             </p>
           </div>
           <div className="pb-4">

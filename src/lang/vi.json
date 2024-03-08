@@ -65,5 +65,7 @@
   "not_found_page_desc" : "Trang bạn tìm kiếm không tồn tại vui lòng thử lại",
   "back_home":"Quay lại trang chủ",
   "emty_list": "Danh sách rỗng!",
-  "back":"Quay lại"
+  "back":"Quay lại",
+  "total":"Tổng số",
+  "list_post":"Danh mục bài viết"
 }

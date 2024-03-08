@@ -117,7 +117,7 @@ export const PageArchive = ({
               {dataInfor?.tagName}
             </h2>
             <span className="block mt-4">
-              Tổng số {dataInfor?.blogs?.count || 0} bài viết
+              {translateLanguage('total', params?.lang)}{dataInfor?.blogs?.count || 0} {translateLanguage('post', params?.lang)}
             </span>
           </div>
         </div>
@@ -138,7 +138,7 @@ export const PageArchive = ({
                 {dataInfor?.name}
               </h2>
               <span className="block mt-4 text-neutral-300">
-                {dataInfor?.blogs?.count} bài viết
+                {dataInfor?.blogs?.count} {translateLanguage('post', params?.lang)}
               </span>
             </div>
           </div>

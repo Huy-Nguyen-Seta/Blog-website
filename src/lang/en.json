@@ -65,6 +65,7 @@
   "not_found_page_desc": "The page you are looking for does not exist, please try again",
   "back_home": "Return to home page",
   "emty_list": "Empty list!",
-  "back":"Back"
-
+  "back": "Back",
+  "total": "Total",
+  "list_post": "List of posts"
 }
