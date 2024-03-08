@@ -33,7 +33,8 @@ export async function generateMetadata({
         canonical: `/news/archive/${isTag ? 'tags/' : ''}${currentSlug}`,
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',
+          'ja-JP': '/ja',    
+          'en-US': '/en',
         },
       },
       openGraph: {

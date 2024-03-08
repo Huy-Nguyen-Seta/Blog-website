@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { ChevronDoubleLeftIcon } from '@heroicons/react/24/solid';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 function TableOfContent({
   data,
@@ -79,7 +80,7 @@ function TableOfContent({
         >
           <ChevronDoubleLeftIcon className="w-5 h-5 font-semibold" />
           <p className="text-[#01123C] dark:text-white font-semibold text-lg ">
-            Quay lại {category?.name}
+            {translateLanguage('back', lang)} {category?.name}
           </p>
         </Link>
         <div>

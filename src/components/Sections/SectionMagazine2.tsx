@@ -12,12 +12,13 @@ import { AppDispatch } from '@/app/GlobalRedux/store';
 import Button from '../Button/Button';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface SectionMagazine2Props extends SectionMagazine1Props {}
 
 const SectionMagazine2: FC<SectionMagazine2Props> = ({
   posts,
-  heading = '🎈 Latest Bài viết',
+  heading = '',
   className,
   categories,
   lang = 'en',
@@ -45,7 +46,7 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
 
   const emtyItem = () => (
     <div className="w-full h-full flex justify-center items-center font-semibold">
-      Chưa có dữ liệu !
+      {translateLanguage('emty', lang)} !
     </div>
   );
 
@@ -94,7 +95,7 @@ const SectionMagazine2: FC<SectionMagazine2Props> = ({
           <div className="w-full  justify-center md:!hidden !flex pt-6">
             <Button pattern="primary" sizeClass="px-6" className=" w-fit py-2">
               <Link href={`/${lang}/news/list`} className="flex">
-                <span>Xem thêm</span>
+                <span> {translateLanguage('watch_more', lang)}</span>
                 <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180 r-0" />
               </Link>
             </Button>

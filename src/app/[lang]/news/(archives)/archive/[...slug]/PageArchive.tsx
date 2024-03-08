@@ -18,6 +18,7 @@ import ModalTags from '../../ModalTags';
 import { AppDispatch } from '@/app/GlobalRedux/store';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export const PageArchive = ({
   params,
@@ -26,8 +27,8 @@ export const PageArchive = ({
 }) => {
   const numberPerPage = 8;
   const FILTERS = [
-    { id: 1, name: 'Gần đây nhất' },
-    { id: 2, name: 'Yêu thích nhất' },
+    { id: 1, name: translateLanguage('most_recent', params?.lang) },
+    { id: 2, name: translateLanguage('Favourite', params?.lang) },
   ];
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -164,7 +165,7 @@ export const PageArchive = ({
           {!blogs.length && (
             <div className=" flex justify-center items-center">
               <span className="pt-10">
-                {isLoading ? <Loading /> : 'Danh sách rỗng !'}
+                {isLoading ? <Loading /> : translateLanguage('emty_list', params?.lang)}
               </span>
             </div>
           )}
@@ -184,7 +185,7 @@ export const PageArchive = ({
                   fetchDataBlogs(page + numberPerPage, numberPerPage);
                 }}
               >
-                Xem thêm
+                {translateLanguage('watch_more', params?.lang)}
               </ButtonPrimary>
             </div>
           )}
@@ -210,8 +211,8 @@ export const PageArchive = ({
         <SectionSubscribe2 />
         <SectionSliderNewCategories
           className="py-10 lg:pt-16 !my-8"
-          heading="Diễn đàn và thảo luận"
-          subHeading="Khám phá hơn 233 chủ đề"
+          heading={translateLanguage('forum', params?.lang)}
+          subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
           categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
           categoryCardType="card4"
         />

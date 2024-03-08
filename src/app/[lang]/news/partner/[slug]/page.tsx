@@ -28,7 +28,8 @@ export async function generateMetadata({
         canonical: `/news/partner/${params?.slug}`,
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',
+          'ja-JP': '/ja',    
+          'en-US': '/en',
         },
       },
       openGraph: {

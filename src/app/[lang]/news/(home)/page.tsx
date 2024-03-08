@@ -10,6 +10,7 @@ import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_POSTS, DEMO_POSTS_AUDIO } from '@/data/posts';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { translateLanguage } from '@/utils/translateLanguage';
 import { Metadata } from 'next';
 
 //
@@ -36,7 +37,8 @@ export async function generateMetadata({
         canonical: '/news',
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',
+          'ja-JP': '/ja',    
+          'en-US': '/en',
         },
       },
       openGraph: {
@@ -70,7 +72,7 @@ const PageHome = async ({
 
   const response = await getData(params?.lang, '/homepage/data');
   const postByCategory = await getData(params?.lang, '/homepage/postByCate');
-  const filterCategories = [{ id: 0, name: 'Tất cả' }];
+  const filterCategories = [{ id: 0, name: translateLanguage('All', params?.lang) }];
   return (
     <section>
       <script
@@ -118,7 +120,7 @@ const PageHome = async ({
                 heading={item?.title}
                 subHeading={
                   item?.description ||
-                  `Khám phá hơn ${item?.category?.blogs?.length || 0} bài viết`
+                  `${translateLanguage('explore_more', params?.lang)} ${item?.category?.blogs?.length || 0} ${translateLanguage('topic', params?.lang)}`
                 }
                 posts={item?.category?.blogs || []}
                 cate={item?.category}
@@ -130,8 +132,8 @@ const PageHome = async ({
 
           <SectionSliderNewCategories
             className="py-10 lg:py-16"
-            heading="Diễn đàn và thảo luận"
-            subHeading="Khám phá hơn 233 chủ đề"
+            heading={translateLanguage('forum', params?.lang)}
+            subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"
           />

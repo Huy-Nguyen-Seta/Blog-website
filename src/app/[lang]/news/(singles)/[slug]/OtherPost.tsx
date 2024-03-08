@@ -1,6 +1,7 @@
 'use client'
 import { getStrapiImage } from '@/components/utils/api-helpers';
 import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -34,7 +35,7 @@ function OtherPost({ post }: { post: any }) {
             href={`/${lang}/news/${post?.data?.attributes?.slug}` || '/'}
           >
             <div className="text-[0.875rem] font-semibold text-[#4594FF] cursor-pointer flex items-center">
-              Xem thêm
+              {translateLanguage("watch_more", lang)}
               <span className="pl-[0.38rem] flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

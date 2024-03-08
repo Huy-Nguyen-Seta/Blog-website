@@ -3,6 +3,8 @@
 import React, { FC, useState } from 'react';
 import convertNumbThousand from '@/utils/convertNumbThousand';
 import { likedBlog } from '../utils/funtion';
+import { translateLanguage } from '@/utils/translateLanguage';
+import useTrans from '@/hooks/useTranslate';
 
 export interface PostCardLikeActionProps {
   className?: string;
@@ -18,7 +20,7 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
   blogId,
 }) => {
   const [isLiked, setisLiked] = useState(liked);
-
+  const lang = useTrans()
   return (
     <button
       className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className} ${
@@ -30,7 +32,7 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
         setisLiked(!isLiked);
         if (blogId && !isLiked) likedBlog(blogId);
       }}
-      title="Lượt thích"
+      title={translateLanguage('Like', lang)}
     >
       <svg
         width="24"

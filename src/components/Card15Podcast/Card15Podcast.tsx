@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { getStrapiImage } from '../utils/api-helpers';
 import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface Card15PodcastProps {
   className?: string;
@@ -79,7 +80,7 @@ const Card15Podcast: FC<Card15PodcastProps> = ({
           >
             <p className="text-xs sm:text-sm font-medium">
               {' '}
-              Xem chi tiết
+              {translateLanguage('see_details', lang)}
             </p>
             <ArrowRightCircleIcon className="w-8 h-8 flex items-center justify-center rounded-full bg-primary-50 dark:bg-neutral-800 text-primary-6000 dark:text-primary-200 ms-3 " />
           </div>{' '}

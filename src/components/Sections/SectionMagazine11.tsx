@@ -78,7 +78,7 @@ const SectionMagazine11: FC<SectionMagazine11Props> = ({
   return (
     <div className={`nc-SectionMagazine11 relative ${className}`}>
       <Heading description={"Click on music icon and enjoy music or podcast"}>
-        Listen to audio live
+        
       </Heading>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-4 md:gap-7">
         {categories.map((cate, i) => renderListByCat(cate, posts[i]))}

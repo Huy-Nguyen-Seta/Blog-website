@@ -13,6 +13,7 @@ import MySlider from '@/components/MySlider';
 import Button from '../Button/Button';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface SectionSliderPostsProps {
   className?: string;
@@ -63,10 +64,7 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
 
   return (
     <div className={`nc-SectionSliderPosts ${className}`}>
-      <Heading
-        description={subHeading}
-        urlMore={`archive/${cate?.slug}`}
-      >
+      <Heading description={subHeading} urlMore={`archive/${cate?.slug}`}>
         {heading}
       </Heading>
 
@@ -78,7 +76,7 @@ const SectionSliderPosts: FC<SectionSliderPostsProps> = ({
       <div className="w-full  justify-center md:!hidden !flex pt-6">
         <Button pattern="primary" sizeClass="px-6" className=" w-fit py-2">
           <Link href={`/${lang}/news/archive/${cate?.slug}`} className="flex">
-            <span>Xem thêm</span>
+            <span> {translateLanguage('watch_more', lang || 'vi')}</span>
             <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180 r-0" />
           </Link>
         </Button>

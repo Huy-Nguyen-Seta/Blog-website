@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getStrapiURL } from '../utils/api-helpers';
 import { showErrorMessage, showSuccessMessage } from '../utils/toastify';
 import { useRouter } from 'next/navigation';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface NcBookmarkProps {
   containerClassName?: string;
@@ -22,7 +23,7 @@ const NcBookmark: FC<NcBookmarkProps> = ({
   postId,
 }) => {
   const storage = useSelector((state: RootState) => state.storage.storage);
-  const router = useRouter()
+  const router = useRouter();
   const lang = useTrans();
   const dispatch = useDispatch<AppDispatch>();
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -42,8 +43,10 @@ const NcBookmark: FC<NcBookmarkProps> = ({
     if (localStorage.getItem('userInfor')) {
       user = JSON.parse(localStorage.getItem('userInfor') || '');
     } else {
-      router.push('/news/login')
-      showErrorMessage('Tính năng yêu cầu đăng nhập', { autoClose: 4000 });
+      router.push('/news/login');
+      showErrorMessage(translateLanguage('require_login', lang), {
+        autoClose: 4000,
+      });
       return;
     }
     if (postId) {
@@ -57,16 +60,18 @@ const NcBookmark: FC<NcBookmarkProps> = ({
         );
 
         if (data?.data?.isAdd) {
-          showSuccessMessage('Lưu bài viết thành công', { autoClose: 4000 });
+          showSuccessMessage(translateLanguage('save_success', lang), { autoClose: 4000 });
         } else if (data?.data?.isDelete) {
-          showSuccessMessage('Bỏ lưu bài viết thành công', {
+          showSuccessMessage(translateLanguage('unsave_success', lang), {
             autoClose: 4000,
           });
         }
         handleFetchStorage(user?._id, lang);
       } catch (err) {
         console.log('err', err);
-        showErrorMessage('Vui lòng thử lại', { autoClose: 4000 });
+        showErrorMessage(translateLanguage('try_again', lang), {
+          autoClose: 4000,
+        });
       }
       setIsBookmarked(!isBookmarked);
     }
@@ -74,7 +79,7 @@ const NcBookmark: FC<NcBookmarkProps> = ({
   return (
     <button
       className={`nc-NcBookmark relative rounded-full flex items-center justify-center ${containerClassName}`}
-      title="Lưu vào yêu thích"
+      title={translateLanguage('save_to_favorites', lang)}
       onClick={handleBookMarked}
     >
       <svg

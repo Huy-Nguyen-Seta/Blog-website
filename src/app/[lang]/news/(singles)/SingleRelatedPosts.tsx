@@ -6,7 +6,9 @@ import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/
 import { DEMO_POSTS } from '@/data/posts';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { PostDataType } from '@/data/types';
+import useTrans from '@/hooks/useTranslate';
 import { Route } from '@/routers/types';
+import { translateLanguage } from '@/utils/translateLanguage';
 import { FC } from 'react';
 
 export interface SingleRelatedPostsProps {
@@ -37,6 +39,7 @@ const SingleRelatedPosts: FC<SingleRelatedPostsProps> = ({
   relatedPosts,
   moreFromAuthorPosts = demoMoreFromAuthor,
 }) => {
+  const lang = useTrans();
   return (
     <div className="relative bg-neutral-100 dark:bg-neutral-800 pt-16 lg:pt-28 mt-16 lg:mt-28">
       {/* RELATED  */}
@@ -46,7 +49,7 @@ const SingleRelatedPosts: FC<SingleRelatedPostsProps> = ({
             className="mb-10 text-neutral-900 dark:text-neutral-50"
             description=""
           >
-            Bài viết liên quan
+            {translateLanguage('relate_post', lang)}
           </Heading>
           <MySlider
             data={relatedPosts}
@@ -58,8 +61,8 @@ const SingleRelatedPosts: FC<SingleRelatedPostsProps> = ({
         {/* MORE FROM AUTHOR */}
         <SectionSliderNewCategories
           className="py-16 lg:py-28"
-          heading="Diễn đàn và thảo luận"
-          subHeading="Khám phá hơn 233 chủ đề"
+          heading={translateLanguage('forum',lang)}
+          subHeading={`${translateLanguage('explore_more', lang)} 233 ${translateLanguage('topic', lang)}`}
           categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
           categoryCardType="card4"
         />

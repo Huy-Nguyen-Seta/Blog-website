@@ -4,6 +4,7 @@ import React, { FC, useState } from 'react';
 import convertNumbThousand from '@/utils/convertNumbThousand';
 import twFocusClass from '@/utils/twFocusClass';
 import { likedComment } from '../utils/funtion';
+import useTrans from '@/hooks/useTranslate';
 
 export interface CommentCardLikeReplyProps {
   className?: string;
@@ -22,10 +23,11 @@ const CommentCardLikeReply: FC<CommentCardLikeReplyProps> = ({
   hiddenReply,
   idComment,
 }) => {
+  const lang = useTrans()
   const [isLiked, setIsLiked] = useState(likedProps);
   const handleLikeComment = () => {
     if (idComment && !isLiked) {
-      likedComment(idComment);
+      likedComment(idComment, lang);
     }
   };
 

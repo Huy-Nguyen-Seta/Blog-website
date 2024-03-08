@@ -3,11 +3,13 @@ import Button from '@/components/Button/Button';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import Textarea from '@/components/Textarea/Textarea';
 import { getStrapiURL } from '@/components/utils/api-helpers';
+import useTrans from '@/hooks/useTranslate';
 import {
   showErrorMessage,
   showSuccessMessage,
   showWarningMessage,
 } from '@/utils/toastify';
+import { translateLanguage } from '@/utils/translateLanguage';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { FC, useEffect, useState } from 'react';
@@ -37,6 +39,7 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
   commentId,
   replyName,
 }) => {
+  const lang = useTrans()
   const [comment, setComment] = useState<string>('');
   const router = useRouter()
   const handlePostComment = async (e?: any) => {
@@ -67,16 +70,16 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
         }
 
         if (data?.status === 200) {
-          showSuccessMessage('Đăng bình luận thành công', { autoClose: 4000 });
+          showSuccessMessage(translateLanguage("comment_success", lang), { autoClose: 4000 });
         }
         setComment('');
         onFetchComment?.();
       } else {
         router.push('/news/login')
-        showErrorMessage('Tính năng yêu cầu đăng nhập', { autoClose: 4000 });
+        showErrorMessage(translateLanguage("require_login", lang), { autoClose: 4000 });
       }
     } catch (err) {
-      showErrorMessage('Vui lòng thử lại', { autoClose: 4000 });
+      showErrorMessage(translateLanguage('try_again', lang), { autoClose: 4000 });
     }
   };
   useEffect(() => {
@@ -97,9 +100,9 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
         value={comment}
       />
       <div className="mt-2 space-x-3">
-        <ButtonPrimary onClick={handlePostComment}>Gửi bình luận</ButtonPrimary>
+        <ButtonPrimary onClick={handlePostComment}>{translateLanguage('send_comment', lang)}</ButtonPrimary>
         <Button type="button" pattern="white" onClick={onClickCancel}>
-          Hủy
+        {translateLanguage('Cancel', lang)}
         </Button>
       </div>
     </form>

@@ -10,6 +10,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { showSuccessMessage } from '@/utils/toastify';
 import { TrashIcon } from '@heroicons/react/24/solid';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 const people = [
   {
@@ -90,7 +91,7 @@ const DashboardPosts = () => {
       );
 
       if (data?.data?.isDelete) {
-        showSuccessMessage('Bỏ lưu bài viết thành công', {
+        showSuccessMessage(translateLanguage('save_success', lang), {
           autoClose: 4000,
         });
       }
@@ -129,10 +130,10 @@ const DashboardPosts = () => {
               <thead className="bg-neutral-50 dark:bg-neutral-800">
                 <tr className="text-start text-xs font-medium text-neutral-500 dark:text-neutral-300 uppercase tracking-wider">
                   <th scope="col" className="px-6 py-3">
-                    Bài viết
+                    {translateLanguage('post', lang)}
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Tác giả
+                  {translateLanguage('author',lang)}
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Ngày đăng

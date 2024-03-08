@@ -22,15 +22,22 @@ import { getData } from '@/components/utils/fetch-api';
 import { DEMO_AUTHORS } from '@/data/authors';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { ScaleLevel } from '@/interface/Strapi';
+import { translateLanguage } from '@/utils/translateLanguage';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-const TABS = ['Bài viết', 'Thể loại', 'Thẻ', 'Tác giả'];
 const numberPerPage = 8;
 
 const PageList = ({ params }: { params: { lang: Language } }) => {
+  const TABS = [
+    translateLanguage('post', params?.lang),
+    translateLanguage('Category', params?.lang),
+    translateLanguage('tag', params?.lang),
+    translateLanguage('author',params?.lang),
+  ];
+
   const [tabActive, setTabActive] = useState(TABS[0]);
   const [page, setPage] = useState(0);
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -181,7 +188,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
           {!total ? (
             <div className=" flex justify-center items-center">
               <span className="pt-10">
-                {isLoading ? <Loading /> : 'Danh sách rỗng !'}
+                {isLoading ? <Loading /> : translateLanguage('emty_list', params?.lang)}
               </span>
             </div>
           ) : (
@@ -230,7 +237,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
                   fetchData(page + numberPerPage, numberPerPage);
                 }}
               >
-                Xem thêm
+                {translateLanguage('watch_more', params?.lang)}
               </ButtonPrimary>
             </div>
           )}
@@ -248,8 +255,8 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
 
         {/* === SECTION 5 === */}
         <SectionSliderNewAuthors
-          heading="Những tác giả hàng đầu"
-          subHeading="Khám phá những tác giả hàng đầu của chúng tôi"
+          heading={translateLanguage('top_author', params?.lang)}
+          subHeading={translateLanguage('Explore_our_top_authors', params?.lang)}
           authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
         />
 
@@ -257,8 +264,11 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
         <SectionSubscribe2 />
         <SectionSliderNewCategories
           className="py-10 lg:py-4"
-          heading="Diễn đàn và thảo luận"
-          subHeading="Khám phá hơn 233 chủ đề"
+          heading={translateLanguage('forum', params?.lang)}
+          subHeading={`${translateLanguage(
+            'explore_more',
+            params?.lang
+          )} 233 ${translateLanguage('topic', params?.lang)}`}
           categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
           categoryCardType="card4"
         />

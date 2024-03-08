@@ -4,6 +4,7 @@ import SingleCommentLists from '@/app/[lang]/news/(singles)/SingleCommentLists';
 import useTrans from '@/hooks/useTranslate';
 import { useEffect, useState } from 'react';
 import { getData } from '../utils/fetch-api';
+import { translateLanguage } from '@/utils/translateLanguage';
 const limitComment = 3;
 
 function CommentComponent({ slug, id }: { slug: string; id: string | number }) {
@@ -49,7 +50,7 @@ function CommentComponent({ slug, id }: { slug: string; id: string | number }) {
         className="scroll-mt-20 max-w-screen-md mx-auto pt-5  lg:pl-[4.25rem]"
       >
         <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-          Bình luận ({total})
+          {translateLanguage('comment', lang)} ({total})
         </h3>
         <SingleCommentForm blogId={id} onFetchComment={handleFetchComment} />
       </div>

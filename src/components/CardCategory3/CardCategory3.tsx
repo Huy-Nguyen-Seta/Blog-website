@@ -1,7 +1,10 @@
+'use client'
 import React, { FC } from "react";
 import { TaxonomyType } from "@/data/types";
 import Link from "next/link";
 import Image from "next/image";
+import { translateLanguage } from "@/utils/translateLanguage";
+import useTrans from "@/hooks/useTranslate";
 
 export interface CardCategory3Props {
   className?: string;
@@ -12,6 +15,7 @@ const CardCategory3: FC<CardCategory3Props> = ({
   className = "",
   taxonomy,
 }) => {
+  const lang = useTrans()
   const { count, name, href = "/", thumbnail } = taxonomy;
   return (
     <Link href={href || ''} className={`nc-CardCategory3 flex flex-col ${className}`}>
@@ -34,7 +38,7 @@ const CardCategory3: FC<CardCategory3Props> = ({
         <span
           className={`block mt-1 text-sm text-neutral-6000 dark:text-neutral-400`}
         >
-          {count} Bài viết
+          {count} {translateLanguage('post', lang)}
         </span>
       </div>
     </Link>

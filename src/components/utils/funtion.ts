@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { getStrapiURL } from './api-helpers';
 import { showSuccessMessage } from './toastify';
+import { translateLanguage } from '@/utils/translateLanguage';
 
-export const likedBlog = async (blogId: number | string) => {
+export const likedBlog = async (blogId: number | string, lang?: Language) => {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   try {
@@ -12,18 +13,18 @@ export const likedBlog = async (blogId: number | string) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     if (response?.status === 200) {
-      showSuccessMessage('Đã thích', {
+      showSuccessMessage(translateLanguage('liked', lang || 'en'), {
         autoClose: 4000,
       });
     }
   } catch {
-    showSuccessMessage('Vui lòng thử lại sau', {
+    showSuccessMessage(translateLanguage('try_again', lang || 'en'), {
       autoClose: 4000,
     });
   }
 };
 
-export const likedComment = async (commentId: number | string) => {
+export const likedComment = async (commentId: number | string, lang?: Language) => {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   try {
@@ -33,12 +34,12 @@ export const likedComment = async (commentId: number | string) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     if (response?.status === 200) {
-      showSuccessMessage('Đã thích bình luận', {
+      showSuccessMessage(translateLanguage('liked', lang || 'en'), {
         autoClose: 4000,
       });
     }
   } catch {
-    showSuccessMessage('Vui lòng thử lại sau', {
+    showSuccessMessage(translateLanguage('try_again', lang || 'en'), {
       autoClose: 4000,
     });
   }
