@@ -8,10 +8,13 @@ import Navigation from '@/components/Navigation/Navigation';
 import SearchModal from './SearchModal';
 import NotifyDropdown from './NotifyDropdown';
 import SwitchDarkMode from '../SwitchDarkMode/SwitchDarkMode';
+import SwitchLanguage from '../SwitchLanguage/SwitchLanguage';
+import useTrans from '@/hooks/useTranslate';
 
 export interface MainNav2LoggedProps {}
 
 const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
+  const lang = useTrans()
   const renderContent = () => {
     return (
       <div className="h-20 flex justify-between">
@@ -32,6 +35,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
           <NotifyDropdown />
           <AvatarDropdown />
           <SwitchDarkMode />
+          <SwitchLanguage lang={lang}/>
         </div>
       </div>
     );

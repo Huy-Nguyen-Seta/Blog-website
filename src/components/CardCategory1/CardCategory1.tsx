@@ -4,6 +4,7 @@ import { TaxonomyType } from '@/data/types';
 import Link from 'next/link';
 import { getStrapiImage } from '../utils/api-helpers';
 import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface CardCategory1Props {
   className?: string;
@@ -46,7 +47,7 @@ const CardCategory1: FC<CardCategory1Props> = ({
             size === 'large' ? 'text-sm' : 'text-xs'
           } block mt-[2px] text-neutral-500 dark:text-neutral-400`}
         >
-          {blogs?.count} Bài viết
+          {blogs?.count} {translateLanguage('post', lang)}
         </span>
       </div>
     </Link>

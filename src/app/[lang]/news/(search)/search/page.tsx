@@ -19,15 +19,21 @@ import { handleFetchStorage } from '@/components/utils/dispatch';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_AUTHORS } from '@/data/authors';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { translateLanguage } from '@/utils/translateLanguage';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-const TABS = ['Bài viết', 'Thể loại', 'Thẻ', 'Tác giả'];
 const numberPerPage = 8;
 
 const PageSearch = ({ params }: { params: { lang: Language } }) => {
+  const TABS = [
+    translateLanguage('post', params?.lang),
+    translateLanguage('Category', params?.lang),
+    translateLanguage('tag', params?.lang),
+    translateLanguage('author', params?.lang),
+  ];
   const [tabActive, setTabActive] = useState(TABS[0]);
   const [searchValue, setSearchValue] = useState('');
   const [currentValue, setCurrentValue] = useState('');
@@ -166,11 +172,11 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
               </h2>
               {currentValue && (
                 <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
-                  Tìm thấy{' '}
+                  {translateLanguage('found', params?.lang)}{' '}
                   <strong className="font-medium text-neutral-800 dark:text-neutral-100">
                     {total}
                   </strong>{' '}
-                  {tabActive} cho từ khóa{' '}
+                  {tabActive} {translateLanguage('for_keyword', params?.lang)}{' '}
                   <strong className="font-medium text-neutral-800 dark:text-neutral-100">
                     {currentValue}
                   </strong>
@@ -194,7 +200,10 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
                   <Input
                     id="search-input"
                     type="search"
-                    placeholder="Nhập từ khóa tìm kiếm"
+                    placeholder={translateLanguage(
+                      'enter_keyword',
+                      params?.lang
+                    )}
                     sizeClass="pl-14 py-5 pe-5 md:ps-16"
                     defaultValue={currentValue}
                     onChange={(e) => {
@@ -254,7 +263,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
                 {isLoading ? (
                   <Loading />
                 ) : (
-                  <div className="font-semibold">Danh sách rỗng !</div>
+                  <div className="font-semibold">{translateLanguage('emty_list', params?.lang)}</div>
                 )}
               </span>
             </div>
@@ -303,7 +312,7 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
                       fetchData(page + numberPerPage, numberPerPage);
                     }}
                   >
-                    Xem thêm
+                    {translateLanguage('watch_more', params?.lang)}
                   </ButtonPrimary>
                 </div>
               )}
@@ -323,8 +332,8 @@ const PageSearch = ({ params }: { params: { lang: Language } }) => {
 
         {/* === SECTION 5 === */}
         <SectionSliderNewAuthors
-          heading="Những tác giả hàng đầu"
-          subHeading="Khám phá những tác giả hàng đầu của chúng tôi"
+          heading={translateLanguage('top_author', params?.lang)}
+          subHeading={translateLanguage('Explore_our_top_authors', params?.lang)}
           authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
         />
 

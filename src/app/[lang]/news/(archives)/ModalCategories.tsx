@@ -6,12 +6,15 @@ import CardCategory1 from "@/components/CardCategory1/CardCategory1";
 import NcModal from "@/components/NcModal/NcModal";
 import Button from "@/components/Button/Button";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { translateLanguage } from "@/utils/translateLanguage";
+import useTrans from "@/hooks/useTranslate";
 
 export interface ModalCategoriesProps {
   categories: TaxonomyType[];
 }
 
 const ModalCategories: FC<ModalCategoriesProps> = ({ categories }) => {
+  const lang = useTrans()
   const renderModalContent = () => {
     return (
       <div className="grid gap-6 sm:grid-cols-2 sm:py-2 md:gap-8 md:grid-cols-3 lg:grid-cols-4 xl:md:grid-cols-5">
@@ -32,7 +35,7 @@ const ModalCategories: FC<ModalCategoriesProps> = ({ categories }) => {
             onClick={openModal}
           >
             <div>
-              <span className="hidden sm:inline">Thể loại</span> khác
+              <span className="hidden sm:inline">{translateLanguage('Category', lang)}</span> {translateLanguage('other', lang)}
             </div>
             <ChevronDownIcon
               className="w-4 h-4 ms-2 -me-1"
@@ -40,7 +43,7 @@ const ModalCategories: FC<ModalCategoriesProps> = ({ categories }) => {
             />
           </Button>
         )}
-        modalTitle="Khám phá các thể loại khác"
+        modalTitle={translateLanguage('explore_cate', lang)}
         renderContent={renderModalContent}
       />
     </div>

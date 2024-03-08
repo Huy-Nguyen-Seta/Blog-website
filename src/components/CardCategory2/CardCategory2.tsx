@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { getStrapiImage } from '../utils/api-helpers';
 import useTrans from '@/hooks/useTranslate';
 import { ScaleLevel } from '@/interface/Strapi';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface CardCategory2Props {
   className?: string;
@@ -56,7 +57,7 @@ const CardCategory2: FC<CardCategory2Props> = ({
         <span
           className={`block mt-1 text-sm text-neutral-500 dark:text-neutral-400`}
         >
-          {taxonomy?.blogs?.count || 0} Bài viết
+          {taxonomy?.blogs?.count || 0} {translateLanguage('post', lang)}
         </span>
       </div>
     </Link>

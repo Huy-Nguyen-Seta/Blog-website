@@ -15,6 +15,7 @@ import { getStrapiImage, getStrapiURL } from '../utils/api-helpers';
 import { getData } from '../utils/fetch-api';
 import useTrans from '@/hooks/useTranslate';
 import { ScaleLevel } from '@/interface/Strapi';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface SectionSubscribe2Props {
   className?: string;
@@ -44,7 +45,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
     } catch (error) {
-      showErrorMessage('Gửi thông tin về trang quản trị thất bại' || '', {
+      showErrorMessage(translateLanguage('send_infor_fail', lang) || '', {
         autoClose: 10000,
       });
     }
@@ -71,7 +72,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
     }).then(
       (response) => {},
       (err) =>
-        showErrorMessage('Nhập thông tin vào sheet thất bại' || '', {
+        showErrorMessage(translateLanguage('enter_infor_fail', lang) || '', {
           autoClose: 10000,
         })
     );
@@ -102,7 +103,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
           console.log('error');
 
           setIsSubmitting(false);
-          showErrorMessage('Gửi thông tin thất bại' || '', {
+          showErrorMessage(translateLanguage('send_fail', lang)|| '', {
             autoClose: 10000,
           });
         }
@@ -114,10 +115,11 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
       className={`nc-SectionSubscribe2 relative flex flex-col lg:flex-row items-center ${className}`}
     >
       <div className="flex-shrink-0 mb-14 lg:mb-0 lg:me-10 lg:w-2/5">
-        <h2 className="font-semibold text-4xl">Liên hệ với chúng tôi</h2>
+        <h2 className="font-semibold text-4xl">
+          {translateLanguage('contact_us', lang)}
+        </h2>
         <span className="block mt-6 text-neutral-500 dark:text-neutral-400">
-          Để được tư vấn và hỗ trợ miễn phí. HALLO cam kết tư vấn minh bạch và
-          bảo mật thông tin khách hàng
+          {translateLanguage('contact_desc', lang)}
         </span>
         <form
           className="mt-10 relative max-w-sm space-y-3"
@@ -127,7 +129,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
           <Input
             required
             aria-required
-            placeholder="Họ và tên"
+            placeholder={translateLanguage('name', lang)}
             id="name"
             name="name"
             onChange={(e) => setName(e?.target?.value)}
@@ -136,7 +138,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
           <Input
             required
             aria-required
-            placeholder="Nhập email của bạn"
+            placeholder={translateLanguage('enter_email', lang)}
             type="email"
             id="email"
             name="email"
@@ -146,7 +148,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
           <Textarea
             required
             aria-required
-            placeholder="Nhập tin nhắn của bạn"
+            placeholder={translateLanguage('enter_mess', lang)}
             id="message"
             name="message"
             onChange={(e) => setMess(e?.target?.value)}
@@ -161,7 +163,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
               <Loading />
             ) : (
               <>
-                <span>Gửi thông tin</span>
+                <span>{translateLanguage('send', lang)}</span>
                 <ArrowRightIcon className="w-5 h-5 rtl:rotate-180" />
               </>
             )}

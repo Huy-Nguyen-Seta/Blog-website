@@ -7,6 +7,7 @@ import Button from '../Button/Button';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import useTrans from '@/hooks/useTranslate';
 import Link from 'next/link';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface HeaderFilterProps {
   tabs?: any[];
@@ -45,9 +46,9 @@ const HeaderFilterCustom: FC<HeaderFilterProps> = ({
             </NavItem>
           ))}
         </Nav>
-        <Button pattern="white" sizeClass="px-6" className='!hidden md:!block'>
-          <Link href={`/${lang}/news/list`} className=" md:!flex" >
-            <span>Xem thêm</span>
+        <Button pattern="white" sizeClass="px-6" className="!hidden md:!block">
+          <Link href={`/${lang}/news/list`} className=" md:!flex">
+            <span> {translateLanguage('watch_more', lang)}</span>
             <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180" />
           </Link>
         </Button>

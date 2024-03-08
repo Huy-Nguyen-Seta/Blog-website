@@ -35,7 +35,8 @@ export async function generateMetadata({
         canonical: '/',
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',
+          'ja-JP': '/ja',    
+          'en-US': '/en',
         },
       },
       openGraph: {

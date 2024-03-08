@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { getData } from '../utils/fetch-api';
 import useTrans from '@/hooks/useTranslate';
 import { getStrapiImage } from '../utils/api-helpers';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 const categories = DEMO_CATEGORIES.filter((_, i) => i < 9);
 const posts = DEMO_POSTS.filter((_, i) => i < 5);
@@ -70,7 +71,9 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
       ? posts
       : query === '' || rawQuery.startsWith('>')
       ? []
-      : posts?.filter((project) => project?.title.toLowerCase().includes(query));
+      : posts?.filter((project) =>
+          project?.title.toLowerCase().includes(query)
+        );
 
   const filteredProjects =
     rawQuery === '#'
@@ -204,7 +207,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                       {filteredPosts.length > 0 && (
                         <li>
                           <h2 className="text-xs font-semibold text-gray-900">
-                            Bài viết
+                            {translateLanguage('post', lang)}
                           </h2>
                           <ul className="-mx-4 mt-2 text-sm text-gray-700">
                             {filteredPosts.map((post) => (
@@ -241,7 +244,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                       {filteredProjects.length > 0 && (
                         <li>
                           <h2 className="text-xs font-semibold text-gray-900">
-                            Thể loại
+                            {translateLanguage('Category', lang)}
                           </h2>
                           <ul className="-mx-4 mt-2 text-sm text-gray-700">
                             {filteredProjects.map((project) => (
@@ -278,7 +281,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                       {filteredUsers.length > 0 && (
                         <li>
                           <h2 className="text-xs font-semibold text-gray-900">
-                            Tác giả
+                            {translateLanguage('author', lang)}
                           </h2>
                           <ul className="-mx-4 mt-2 text-sm text-gray-700">
                             {filteredUsers.map((user) => (
@@ -318,14 +321,10 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                         aria-hidden="true"
                       />
                       <p className="mt-4 font-semibold text-gray-900">
-                        Trợ giúp tìm kiếm
+                        {translateLanguage('search_support', lang)}
                       </p>
                       <p className="mt-2 text-gray-500">
-                        Sử dụng công cụ này để nhanh chóng tìm kiếm người dùng
-                        và bài viết trên toàn bộ nền tảng của chúng tôi. Bạn
-                        cũng có thể sử dụng tìm kiếm công cụ sửa đổi được tìm
-                        thấy ở chân trang bên dưới để giới hạn kết quả chỉ dành
-                        cho người dùng hoặc bài viết.
+                        {translateLanguage('use_tool', lang)}
                       </p>
                     </div>
                   )}
@@ -340,17 +339,16 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                           aria-hidden="true"
                         />
                         <p className="mt-4 font-semibold text-gray-900">
-                          Không tìm thấy kết quả
+                          {translateLanguage('not_found', lang)}
                         </p>
                         <p className="mt-2 text-gray-500">
-                          Chúng tôi không tìm thấy kết quả tìm kiếm nào cho từ
-                          khóa này. Vui lòng thử lại
+                          {translateLanguage('we_not_found', lang)}
                         </p>
                       </div>
                     )}
 
                   <div className="flex flex-wrap items-center bg-gray-50 py-2.5 px-4 text-xs text-gray-700">
-                    Nhập{' '}
+                    {translateLanguage('enter', lang)}{' '}
                     <kbd
                       className={classNames(
                         'mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2',
@@ -361,9 +359,11 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     >
                       #
                     </kbd>{' '}
-                    <span className="sm:hidden">cho chủ đề,</span>
+                    <span className="sm:hidden">
+                      {translateLanguage('for_topic', lang)}
+                    </span>
                     <span className="hidden sm:inline">
-                      để truy cập bài viết,
+                      {translateLanguage('to_access', lang)}
                     </span>
                     <kbd
                       className={classNames(
@@ -375,7 +375,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     >
                       &gt;
                     </kbd>{' '}
-                    cho người dùng,{' '}
+                    {translateLanguage('for_user', lang)}{' '}
                     <kbd
                       className={classNames(
                         'mx-1 flex h-5 w-5 items-center justify-center rounded border bg-white font-semibold sm:mx-2',
@@ -386,13 +386,13 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     >
                       ?
                     </kbd>{' '}
-                    để trợ giúp, hoặc{' '}
+                    {translateLanguage('to_help', lang)}{' '}
                     <Link
                       href={'/news/search'}
                       className="mx-1 flex h-5 px-1.5 items-center justify-center rounded border bg-white sm:mx-2 border-primary-6000 text-neutral-900"
                       onClick={() => setOpen(false)}
                     >
-                      Đến trang tìm kiếm
+                      {translateLanguage('go_search', lang)}
                     </Link>{' '}
                   </div>
                 </Combobox>

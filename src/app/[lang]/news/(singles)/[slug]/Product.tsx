@@ -1,9 +1,13 @@
+'use client';
 import { getStrapiImage } from '@/components/utils/api-helpers';
+import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 function Product({ products }: { products: any }) {
+  const lang = useTrans();
   if (products?.length === 1) {
     const item = products[0];
     return (
@@ -39,7 +43,7 @@ function Product({ products }: { products: any }) {
             </div>
           </div>
           <button className="bg-orange-500 hover:bg-orange-600 px-4 py-2 text-white rounded text-sm w-fit font-semibold">
-            Xem thêm
+            {translateLanguage('watch_more', lang)}
           </button>
         </div>
       </Link>
@@ -86,7 +90,7 @@ function Product({ products }: { products: any }) {
               </div>
             </div>
             <button className="bg-orange-500 hover:bg-orange-600 px-2 py-1 text-white rounded text-sm w-fit">
-              Xem thêm
+              {translateLanguage('watch_more', lang)}
             </button>
           </Link>
         ))}

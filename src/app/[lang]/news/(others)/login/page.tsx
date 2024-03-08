@@ -2,7 +2,9 @@
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import Heading2 from '@/components/Heading/Heading2';
 import Input from '@/components/Input/Input';
+import useTrans from '@/hooks/useTranslate';
 import { showErrorMessage, showSuccessMessage } from '@/utils/toastify';
+import { translateLanguage } from '@/utils/translateLanguage';
 import axios from 'axios';
 import { redirect, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -29,7 +31,7 @@ const PageLogin = ({}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
-
+  const lang = useTrans()
   const handleSubmitForm = async (e: any) => {
     e.preventDefault();
     try {
@@ -44,7 +46,7 @@ const PageLogin = ({}) => {
         }
       );
       if (inforUser?.data?.data) {
-        showSuccessMessage('Đăng nhập thành công', { autoClose: 4000 });
+        showSuccessMessage(translateLanguage('login_success', lang), { autoClose: 4000 });
         localStorage.setItem(
           'userInfor',
           JSON.stringify(inforUser?.data?.data)
@@ -52,16 +54,16 @@ const PageLogin = ({}) => {
         router.push('/news');
       }
     } catch (err) {
-      showErrorMessage('Đăng nhập thất bại', { autoClose: 4000 });
+      showErrorMessage(translateLanguage('login_fail', lang), { autoClose: 4000 });
       console.log('err', err);
     }
   };
   return (
     <>
       <header className="text-center max-w-2xl mx-auto - mb-14 sm:mb-16 lg:mb-20 ">
-        <Heading2>Đăng nhập</Heading2>
+        <Heading2>{translateLanguage("login", lang)}</Heading2>
         <span className="block text-sm mt-2 text-neutral-700 sm:text-base dark:text-neutral-200">
-          Tham gia với chúng tôi để có thể truy cập nhiều tính năng hơn
+          {translateLanguage("join_with_us", lang)}
         </span>
       </header>
 
@@ -113,7 +115,7 @@ const PageLogin = ({}) => {
           </label>
           <label className="block">
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
-              Mật khẩu
+              {translateLanguage('Password', lang)}
               {/* <NcLink href="/forgot-pass" className="text-sm underline">
                 Forgot password?
               </NcLink> */}
@@ -126,7 +128,7 @@ const PageLogin = ({}) => {
               onChange={(e) => setPassword(e?.target?.value)}
             />
           </label>
-          <ButtonPrimary type="submit">Đăng nhập</ButtonPrimary>
+          <ButtonPrimary type="submit">{translateLanguage("login", lang)}</ButtonPrimary>
         </form>
 
         {/* ==== */}

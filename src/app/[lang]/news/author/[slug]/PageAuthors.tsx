@@ -16,6 +16,7 @@ import { handleFetchStorage } from '@/components/utils/dispatch';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_AUTHORS } from '@/data/authors';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { translateLanguage } from '@/utils/translateLanguage';
 import { GlobeAltIcon, ShareIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -166,7 +167,7 @@ export const PageAuthors = ({
           {!blogs.length && (
             <div className=" flex justify-center items-center">
               <span className="pt-10">
-                {isLoading ? <Loading /> : 'Danh sách rỗng !'}
+                {isLoading ? <Loading /> : translateLanguage('emty_list', params?.lang)}
               </span>
             </div>
           )}
@@ -186,7 +187,7 @@ export const PageAuthors = ({
                   fetchDataBlogs(page + numberPerPage, numberPerPage);
                 }}
               >
-                Xem thêm
+                {translateLanguage('watch_more', params?.lang)}
               </ButtonPrimary>
             </div>
           )}
@@ -202,8 +203,8 @@ export const PageAuthors = ({
 
         {/* === SECTION 5 === */}
         <SectionSliderNewAuthors
-          heading="Những tác giả hàng đầu"
-          subHeading="Khám phá thêm các tác giả hàng đầu"
+          heading={translateLanguage('top_author', params?.lang)}
+          subHeading={translateLanguage('Explore_our_top_authors', params?.lang)}
           authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
         />
 

@@ -4,6 +4,7 @@ import { getStrapiImage } from '@/components/utils/api-helpers';
 import { DEMO_AUTHORS } from '@/data/authors';
 import { PostAuthorType } from '@/data/types';
 import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 import Link from 'next/link';
 import React, { FC } from 'react';
 
@@ -32,12 +33,12 @@ const SingleAuthor: FC<SingleAuthorProps> = ({ author = DEMO_AUTHORS[1] }) => {
           </Link>
         </h2>
         <span className="block mt-1 text-sm text-neutral-500 sm:text-base dark:text-neutral-300  ">
-          <span className='line-clamp-4'> {author?.description}</span>
+          <span className="line-clamp-4"> {author?.description}</span>
           <Link
             className="text-primary-6000 font-medium ml-1"
             href={`/${lang}/news/author/${author?.slug}` || ''}
           >
-            Xem thêm
+            {translateLanguage('watch_more', lang)}
           </Link>
         </span>
       </div>

@@ -1,6 +1,9 @@
+'use client';
 import React, { FC } from 'react';
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import CommentCard from '@/components/CommentCard/CommentCard';
+import { translateLanguage } from '@/utils/translateLanguage';
+import useTrans from '@/hooks/useTranslate';
 
 export interface SingleCommentListsProps {
   data: any[];
@@ -19,6 +22,7 @@ const SingleCommentLists: FC<SingleCommentListsProps> = ({
   isLoadMore,
   numberRest,
 }) => {
+  const lang = useTrans();
   return (
     <ul className="nc-SingleCommentLists space-y-5">
       {data?.map((item: any) => (
@@ -33,7 +37,8 @@ const SingleCommentLists: FC<SingleCommentListsProps> = ({
           className="dark:bg-primary-700 w-full"
           onClick={loadMore}
         >
-          Xem thêm (+{numberRest} bình luận)
+          {translateLanguage('watch_more', lang)}
+          (+{numberRest} {translateLanguage('comment', lang)})
         </ButtonPrimary>
       )}
     </ul>

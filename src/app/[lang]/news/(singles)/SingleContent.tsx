@@ -12,6 +12,8 @@ import SingleAuthor from './SingleAuthor';
 import OtherPost from './[slug]/OtherPost';
 import Product from './[slug]/Product';
 import OtherPostNotImage from './[slug]/OtherPostNotImage';
+import { translateLanguage } from '@/utils/translateLanguage';
+import useTrans from '@/hooks/useTranslate';
 
 const demoTags = DEMO_TAGS.filter((_, i) => i < 9);
 
@@ -36,7 +38,7 @@ const SingleContent: FC<SingleContentProps> = ({
   //
   const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(true);
   //
-
+  const lang = useTrans()
   const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
     threshold: 0,
     root: null,
@@ -116,7 +118,7 @@ const SingleContent: FC<SingleContentProps> = ({
             onClick={() => setIsLoadMore?.(false)}
           >
             <div className=" hover:bg-slate-200 px-3 py-3 rounded-2xl space-x-3 flex justify-center items-center font-medium">
-              <p className=""> Xem thêm</p>
+              <p className=""> {translateLanguage("watch_more", lang)}</p>
               <ChevronDoubleDownIcon height={18} width={18} />
             </div>
           </div>

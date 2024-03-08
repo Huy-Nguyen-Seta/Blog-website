@@ -1,8 +1,11 @@
-import CardAuthor from "@/components/CardAuthor/CardAuthor";
-import WidgetHeading1 from "@/components/WidgetHeading1/WidgetHeading1";
-import { DEMO_AUTHORS } from "@/data/authors";
-import { PostAuthorType } from "@/data/types";
-import React, { FC } from "react";
+'use client'
+import CardAuthor from '@/components/CardAuthor/CardAuthor';
+import WidgetHeading1 from '@/components/WidgetHeading1/WidgetHeading1';
+import { DEMO_AUTHORS } from '@/data/authors';
+import { PostAuthorType } from '@/data/types';
+import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
+import React, { FC } from 'react';
 
 const authorsDemo: PostAuthorType[] = DEMO_AUTHORS.filter((_, i) => i < 5);
 
@@ -12,16 +15,17 @@ export interface WidgetAuthorsProps {
 }
 
 const WidgetAuthors: FC<WidgetAuthorsProps> = ({
-  className = "bg-neutral-100 dark:bg-neutral-800",
+  className = 'bg-neutral-100 dark:bg-neutral-800',
   authors = authorsDemo,
 }) => {
+  const lang = useTrans()
   return (
     <div
       className={`nc-WidgetAuthors rounded-3xl overflow-hidden ${className}`}
     >
       <WidgetHeading1
         title="🎭 Discover Authors"
-        viewAll={{ label: "Xem thêm", href: "/#" }}
+        viewAll={{ label: translateLanguage('watch_more', lang), href: '/#' }}
       />
       <div className="flow-root">
         <div className="flex flex-col divide-y divide-neutral-200 dark:divide-neutral-700">

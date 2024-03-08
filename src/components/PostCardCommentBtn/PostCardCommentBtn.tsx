@@ -1,3 +1,6 @@
+'use client'
+import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 import Link from 'next/link';
 import React, { FC } from 'react';
 
@@ -15,12 +18,13 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
   commentCount = 0,
   slug,
 }) => {
+  const lang = useTrans()
   if (isATagOnSingle) {
     return (
       <a
         href={'#comments'}
         className={`nc-PostCardCommentBtn relative items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
-        title="Lượt bình luận"
+        title={translateLanguage('Comment', lang)}
       >
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
@@ -61,8 +65,8 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
     <Link
       href={`/news/${slug}#comments`}
       className={`nc-PostCardCommentBtn relative items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
-      title="Lượt bình luận"
-    >
+      title={translateLanguage('Comment', lang)}
+      >
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
         <path
           stroke="currentColor"

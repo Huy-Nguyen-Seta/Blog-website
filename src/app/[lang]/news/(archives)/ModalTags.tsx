@@ -6,12 +6,15 @@ import Tag from "@/components/Tag/Tag";
 import { TaxonomyType } from "@/data/types";
 import Button from "@/components/Button/Button";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { translateLanguage } from "@/utils/translateLanguage";
+import useTrans from "@/hooks/useTranslate";
 
 export interface ModalTagsProps {
   tags: TaxonomyType[];
 }
 
 const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
+  const lang = useTrans()
   const renderModalContent = () => {
     return (
       <div className="flex flex-wrap dark:text-neutral-200">
@@ -33,7 +36,7 @@ const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
             onClick={openModal}
           >
             <div>
-              <span className="hidden sm:inline">Thẻ</span> khác
+              <span className="hidden sm:inline">{translateLanguage('tag', lang)}</span> {translateLanguage('other', lang)}
             </div>
             <ChevronDownIcon
               className="w-4 h-4 ms-2 -me-1"
@@ -41,7 +44,7 @@ const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
             />
           </Button>
         )}
-        modalTitle="Khám phá các thẻ khác"
+        modalTitle={translateLanguage('explore_tag', lang)}
         renderContent={renderModalContent}
       />
     </div>

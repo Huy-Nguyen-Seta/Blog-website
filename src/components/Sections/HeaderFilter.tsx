@@ -1,11 +1,13 @@
-"use client";
+'use client';
 
-import React, { FC, useState } from "react";
-import Heading from "@/components/Heading/Heading";
-import Nav from "@/components/Nav/Nav";
-import NavItem from "@/components/NavItem/NavItem";
-import Button from "../Button/Button";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import React, { FC, useState } from 'react';
+import Heading from '@/components/Heading/Heading';
+import Nav from '@/components/Nav/Nav';
+import NavItem from '@/components/NavItem/NavItem';
+import Button from '../Button/Button';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { translateLanguage } from '@/utils/translateLanguage';
+import useTrans from '@/hooks/useTranslate';
 
 export interface HeaderFilterProps {
   tabs?: string[];
@@ -13,11 +15,11 @@ export interface HeaderFilterProps {
 }
 
 const HeaderFilter: FC<HeaderFilterProps> = ({
-  tabs = ["All items", "Garden", "Fitness", "Design"],
-  heading = "🎈 Latest Bài viết",
+  tabs = ['All items', 'Garden', 'Fitness', 'Design'],
+  heading = '',
 }) => {
   const [tabActive, setTabActive] = useState<string>(tabs[0]);
-
+  const lang = useTrans()
   const handleClickTab = (item: string) => {
     if (item === tabActive) {
       return;
@@ -43,7 +45,7 @@ const HeaderFilter: FC<HeaderFilterProps> = ({
           ))}
         </Nav>
         <Button className="!hidden md:!flex" pattern="white" sizeClass="px-6">
-          <span>Xem thêm</span>
+          <span> {translateLanguage('watch_more', lang)}</span>
           <ArrowRightIcon className="ms-3 w-6 h-6 rtl:rotate-180" />
         </Button>
       </div>

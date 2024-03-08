@@ -1,8 +1,11 @@
+'use client'
 import React, { FC } from "react";
 import { TaxonomyType, TwMainColor } from "@/data/types";
 import Badge from "@/components/Badge/Badge";
 import Link from "next/link";
 import Image from "next/image";
+import useTrans from "@/hooks/useTranslate";
+import { translateLanguage } from "@/utils/translateLanguage";
 
 export interface CardCategory4Props {
   className?: string;
@@ -15,6 +18,7 @@ const CardCategory4: FC<CardCategory4Props> = ({
   taxonomy,
   index,
 }) => {
+  const lang = useTrans()
   const { count, name, href = "/", thumbnail, color } = taxonomy;
   const getColorClass = () => {
     switch (color) {
@@ -68,7 +72,7 @@ const CardCategory4: FC<CardCategory4Props> = ({
             {name}
           </h2>
           <span className="block text-sm text-neutral-500 dark:text-neutral-400">
-            {count} Bài viết
+            {count} {translateLanguage('post', lang)}
           </span>
         </div>
       </div>

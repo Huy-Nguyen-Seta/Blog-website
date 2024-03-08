@@ -12,6 +12,7 @@ import ButtonSecondary from '../Button/ButtonSecondary';
 import { getData } from '../utils/fetch-api';
 import useTrans from '@/hooks/useTranslate';
 import Button from '../Button/Button';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface SectionGridCategoryBoxProps {
   categories?: TaxonomyType[];
@@ -34,7 +35,6 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
   const [total, setTotal] = useState<any>();
   const lang = useTrans();
   useEffect(() => {
-
     if (window.innerWidth <= 800) {
       setItemsPerPage(4);
     } else {
@@ -51,8 +51,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
     setTotal(total);
   };
   useEffect(() => {
-    if(itemsPerPage !== 0)
-    fetchData(0, itemsPerPage);
+    if (itemsPerPage !== 0) fetchData(0, itemsPerPage);
   }, [lang, itemsPerPage]);
 
   let CardComponentName = CardCategory2;
@@ -79,10 +78,8 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
 
   return (
     <div className={`nc-SectionGridCategoryBox relative ${className}`}>
-      <Heading
-        description={`Khám phá hơn ${total || 0} chủ đề`}
-      >
-        Chủ đề nổi bật
+      <Heading description={`${translateLanguage('explore_more', lang)} ${total || 0} ${translateLanguage('topic', lang)}`}>
+        {translateLanguage('featured_topic', lang)}
       </Heading>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
         {data?.map((item: any, i: number) => (
@@ -102,7 +99,7 @@ const SectionGridCategoryBox: React.FC<SectionGridCategoryBoxProps> = ({
               fetchData(page + itemsPerPage, itemsPerPage);
             }}
           >
-            Xem thêm
+            {translateLanguage('watch_more', lang)}
           </Button>
         </div>
       )}
