@@ -134,11 +134,11 @@ export default async function sitemap() {
     .map((item: any) => getEngLanguageUrl(`news/partner/${item?.slug}`))
     .flat();
 
-  const partnerViUrl = (enPartner ?? [])
+  const partnerViUrl = (enPartner?.data ?? [])
     .map((item: any) => getViLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
 
-  const partnerJaUrl = (jaPartner ?? [])
+  const partnerJaUrl = (jaPartner?.data ?? [])
     .map((item: any) => getJaLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
   const urls = [
