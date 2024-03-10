@@ -12,6 +12,7 @@ import { DEMO_POSTS, DEMO_POSTS_AUDIO } from '@/data/posts';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { translateLanguage } from '@/utils/translateLanguage';
 import { Metadata } from 'next';
+const FAVICON_VERSION = '?v=1';
 
 //
 const MAGAZINE2_POSTS = DEMO_POSTS.filter((_, i) => i >= 0 && i < 7);
@@ -52,6 +53,24 @@ export async function generateMetadata({
           },
         ],
         type: 'website',
+      },
+      icons: {
+        icon: {
+          url: '/favicons/favicon.ico' + FAVICON_VERSION,
+          sizes: '48x48',
+          type: 'image/x-icon',
+        },
+        other: [
+          {
+            rel: 'apple-touch-icon',
+            url: '/favicons/apple-touch-icon.png' + FAVICON_VERSION,
+            sizes: '180x180',
+          },
+          {
+            rel: 'manifest',
+            url: '/favicons/site.webmanifest' + FAVICON_VERSION,
+          },
+        ],
       },
     };
   } catch (error) {

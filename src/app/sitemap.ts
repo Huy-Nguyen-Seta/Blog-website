@@ -143,6 +143,7 @@ export default async function sitemap() {
     .flat();
   const urls = [
     { url: `${process.env.BASE_URL}`, lastModified: new Date() },
+    { url: `${process.env.BASE_URL}/news`, lastModified: new Date() },
     ...getLanguageUrls(''),
     ...getLanguageUrls('search'),
     ...newsEngUrls,
