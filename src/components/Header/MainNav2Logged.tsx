@@ -32,7 +32,6 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
 
         <div className="flex-1 flex items-center justify-end text-slate-700 dark:text-slate-100">
           <SearchModal />
-          <NotifyDropdown />
           <AvatarDropdown />
           <SwitchDarkMode />
           <SwitchLanguage lang={lang}/>
