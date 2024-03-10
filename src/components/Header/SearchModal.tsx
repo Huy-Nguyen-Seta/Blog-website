@@ -165,6 +165,13 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                   router.push(`/${lang}/news/search?search=${rawQuery}`);
                   setOpen(false);
                 }}
+                onKeyUp={(e) => {
+                  const ENTER = 13;
+                  if (e.keyCode === ENTER) {
+                    router.push(`/${lang}/news/search?search=${rawQuery}`);
+                    setOpen(false);
+                  }
+                }}
               >
                 <Combobox
                   onChange={(item: any) => {
