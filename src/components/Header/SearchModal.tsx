@@ -186,15 +186,17 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                   name="searchpallet"
                 >
                   <div className="relative">
-                    <MagnifyingGlassIcon
-                      className="pointer-events-none absolute top-3.5 left-4 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
                     <Combobox.Input
-                      className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
+                      className="h-12 w-10/12 md:w-11/12 border-0 bg-transparent pl-11 pr-4 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                       placeholder="Search..."
                       onChange={(event) => setRawQuery(event.target.value)}
                     />
+                    <button className="shadow-md px-3 rounded-md h-12 mt-2">
+                      <MagnifyingGlassIcon
+                        className="h-6 w-6 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </button>
                   </div>
 
                   {(filteredProjects?.length > 0 ||

@@ -142,6 +142,7 @@ export default async function sitemap() {
     .map((item: any) => getJaLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
   const urls = [
+    { url: `${process.env.BASE_URL}`, lastModified: new Date() },
     ...getLanguageUrls(''),
     ...getLanguageUrls('search'),
     ...newsEngUrls,
