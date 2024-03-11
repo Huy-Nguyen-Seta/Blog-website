@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-export default function ChatBot({ lang }: { lang: Language }) {
+export default function ChatBot() {
   return (
     <div>
       <div id="fb-root"></div>
