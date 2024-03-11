@@ -11,8 +11,8 @@ import StoreProvider from '../GlobalRedux/StoreProvider';
 import SiteHeader from './SiteHeader';
 import './globals.css';
 import GoogleAnalytics from '@/utils/google-analytics';
-import ChatBot from '@/components/Messenger/MessengerPlugin';
 const FAVICON_VERSION = '?v=1';
+import Script from 'next/script';
 
 export async function generateMetadata({
   params,
@@ -38,7 +38,7 @@ export async function generateMetadata({
         canonical: '/',
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',    
+          'ja-JP': '/ja',
           'en-US': '/en',
         },
       },
@@ -106,7 +106,37 @@ export default function RootLayout({
           <SiteHeader />
           <StoreProvider> {children}</StoreProvider>
           <Footer lang={params?.lang} />
-          <ChatBot  lang={params?.lang}/>
+          {/* chatbot */}
+          <div>
+            <div id="fb-root"></div>
+
+            <div id="fb-customer-chat" className="fb-customerchat"></div>
+            <Script strategy="afterInteractive" async id="facebook">
+              {`
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "${
+              params?.lang === 'ja' ? '253599117836485' : '274161719106282'
+            }");
+            chatbox.setAttribute("attribution", "biz_inbox");
+      
+            window.fbAsyncInit = function() {
+              FB.init({
+                xfbml            : true,
+                version          : 'v12.0'
+              });
+            };
+      
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        `}
+            </Script>
+          </div>
+          {/*end chatbot */}
           <ToastContainer
             position="top-right"
             autoClose={5000}
