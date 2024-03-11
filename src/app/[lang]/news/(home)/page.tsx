@@ -1,4 +1,5 @@
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+import ChatBot from '@/components/Messenger/MessengerPlugin';
 import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
@@ -38,7 +39,7 @@ export async function generateMetadata({
         canonical: '/news',
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',    
+          'ja-JP': '/ja',
           'en-US': '/en',
         },
       },
@@ -91,9 +92,13 @@ const PageHome = async ({
 
   const response = await getData(params?.lang, '/homepage/data');
   const postByCategory = await getData(params?.lang, '/homepage/postByCate');
-  const filterCategories = [{ id: 0, name: translateLanguage('All', params?.lang) }];
+  const filterCategories = [
+    { id: 0, name: translateLanguage('All', params?.lang) },
+  ];
   return (
     <section>
+      <ChatBot lang={params?.lang} />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -139,7 +144,9 @@ const PageHome = async ({
                 heading={item?.title}
                 subHeading={
                   item?.description ||
-                  `${translateLanguage('explore_more', params?.lang)} ${item?.category?.blogs?.length || 0} ${translateLanguage('topic', params?.lang)}`
+                  `${translateLanguage('explore_more', params?.lang)} ${
+                    item?.category?.blogs?.length || 0
+                  } ${translateLanguage('topic', params?.lang)}`
                 }
                 posts={item?.category?.blogs || []}
                 cate={item?.category}
@@ -152,7 +159,10 @@ const PageHome = async ({
           <SectionSliderNewCategories
             className="py-10 lg:py-16"
             heading={translateLanguage('forum', params?.lang)}
-            subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
+            subHeading={`${translateLanguage(
+              'explore_more',
+              params?.lang
+            )} 233 ${translateLanguage('topic', params?.lang)}`}
             categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"
           />
