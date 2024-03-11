@@ -130,11 +130,11 @@ export default async function sitemap() {
     .map((item: any) => getJaLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
 
-  const partnerEnUrl = (viPartner?.data ?? [])
+  const partnerEnUrl = (enPartner?.data ?? [])
     .map((item: any) => getEngLanguageUrl(`news/partner/${item?.slug}`))
     .flat();
 
-  const partnerViUrl = (enPartner?.data ?? [])
+  const partnerViUrl = (viPartner?.data ?? [])
     .map((item: any) => getViLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
 
@@ -161,7 +161,6 @@ export default async function sitemap() {
     ...partnerEnUrl,
     ...partnerViUrl,
     ...partnerJaUrl,
-
   ];
 
   return urls;
