@@ -106,7 +106,7 @@ export default function RootLayout({
           <SiteHeader />
           <StoreProvider> {children}</StoreProvider>
           <Footer lang={params?.lang} />
-          <ChatBot/>
+          <ChatBot  lang={params?.lang}/>
           <ToastContainer
             position="top-right"
             autoClose={5000}
