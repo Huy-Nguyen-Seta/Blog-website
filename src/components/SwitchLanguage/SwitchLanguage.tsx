@@ -91,7 +91,7 @@ function SwitchLanguage({ lang }: { lang: string }) {
               <Link
                 key={index}
                 className="relative flex hover:bg-[#eef1f8] w-full h-10 items-center"
-                href={redirectedPathName(language.code)}
+                href={{pathname:redirectedPathName(language.code)}}
               >
                 <div className="flex px-3 w-full">
                   <Image
