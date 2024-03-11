@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-export default function ChatBot() {
+export default function ChatBot({ lang }: { lang: Language }) {
   return (
     <div>
       <div id="fb-root"></div>
@@ -9,7 +9,9 @@ export default function ChatBot() {
       <Script strategy="lazyOnload" id="facebook">
         {`
             var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "274161719106282");
+            chatbox.setAttribute("page_id", "${
+              lang === 'ja' ? '253599117836485' : '274161719106282'
+            }");
             chatbox.setAttribute("attribution", "biz_inbox");
       
             window.fbAsyncInit = function() {
