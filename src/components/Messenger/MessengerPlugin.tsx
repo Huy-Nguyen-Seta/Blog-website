@@ -6,7 +6,7 @@ export default function ChatBot({ lang }: { lang: Language }) {
       <div id="fb-root"></div>
 
       <div id="fb-customer-chat" className="fb-customerchat"></div>
-      <Script strategy="lazyOnload" id="facebook">
+      <Script strategy="worker" async id="facebook">
         {`
             var chatbox = document.getElementById('fb-customer-chat');
             chatbox.setAttribute("page_id", "${
