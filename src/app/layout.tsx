@@ -4,6 +4,7 @@ import '../app/[lang]/globals.css';
 import { Metadata } from 'next';
 import { getData } from '@/components/utils/fetch-api';
 import { getStrapiMedia } from '@/components/utils/api-helpers';
+import ChatBot from '@/components/Messenger/MessengerPlugin';
 
 type Props = {
   children: ReactNode;
@@ -35,7 +36,7 @@ export async function generateMetadata({
         canonical: '/',
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',    
+          'ja-JP': '/ja',
           'en-US': '/en',
         },
       },
@@ -97,28 +98,6 @@ export default function RootLayout({ children }: Props) {
   return (
     <html>
       <body>{children}</body>
-      <Script strategy="lazyOnload" async id="facebook">
-        {`
-            var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "274161719106282");
-            chatbox.setAttribute("attribution", "biz_inbox");
-      
-            window.fbAsyncInit = function() {
-              FB.init({
-                xfbml            : true,
-                version          : 'v12.0'
-              });
-            };
-      
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        `}
-      </Script>
     </html>
   );
 }

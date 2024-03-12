@@ -1,4 +1,5 @@
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+import ChatBot from '@/components/Messenger/MessengerPlugin';
 import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
@@ -100,6 +101,7 @@ const PageHome = async ({
           __html: JSON.stringify(responseSeo?.Seo?.schema || {}),
         }}
       />
+      <ChatBot/>
       <div className="nc-PageHome relative">
         <div className="container relative">
           <SectionMagazine2

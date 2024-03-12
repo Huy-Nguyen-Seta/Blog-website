@@ -11,7 +11,6 @@ import StoreProvider from '../GlobalRedux/StoreProvider';
 import SiteHeader from './SiteHeader';
 import './globals.css';
 import GoogleAnalytics from '@/utils/google-analytics';
-import ChatBot from '@/components/Messenger/MessengerPlugin';
 const FAVICON_VERSION = '?v=1';
 
 export async function generateMetadata({
@@ -106,7 +105,6 @@ export default function RootLayout({
           <SiteHeader />
           <StoreProvider> {children}</StoreProvider>
           <Footer lang={params?.lang} />
-          <ChatBot />
           <ToastContainer
             position="top-right"
             autoClose={5000}
