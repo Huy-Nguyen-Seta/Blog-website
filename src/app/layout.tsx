@@ -4,7 +4,6 @@ import '../app/[lang]/globals.css';
 import { Metadata } from 'next';
 import { getData } from '@/components/utils/fetch-api';
 import { getStrapiMedia } from '@/components/utils/api-helpers';
-import ChatBot from '@/components/Messenger/MessengerPlugin';
 
 type Props = {
   children: ReactNode;
