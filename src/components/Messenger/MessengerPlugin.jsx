@@ -6,8 +6,8 @@ import { useEffect } from "react";
  */
 export function init() {
   var chatbox = document.getElementById("fb-customer-chat");
-  chatbox.setAttribute("page_id", "your_page_id"); // TODO: move to args
-  chatbox.setAttribute("attribution", "biz_inbox");
+  chatbox?.setAttribute("page_id", "your_page_id"); // TODO: move to args
+  chatbox?.setAttribute("attribution", "biz_inbox");
 
   window.fbAsyncInit = function () {
     FB.init({
@@ -38,7 +38,7 @@ export function cleanup() {
     }
   })(document, "facebook-jssdk");
 
-  delete window.FB;
+  delete window?.FB;
 }
 
 export function Facebook1() {
