@@ -6,7 +6,7 @@ import { useEffect } from "react";
  */
 export function init() {
   var chatbox = document.getElementById("fb-customer-chat");
-  chatbox?.setAttribute("page_id", "your_page_id"); // TODO: move to args
+  chatbox?.setAttribute("page_id", "253599117836485"); // TODO: move to args
   chatbox?.setAttribute("attribution", "biz_inbox");
 
   window.fbAsyncInit = function () {
