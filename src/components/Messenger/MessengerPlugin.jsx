@@ -1,18 +1,21 @@
-'use client'
-import { useEffect } from "react";
+'use client';
+import { useEffect } from 'react';
 
 /**
  *
  */
-export function init() {
-  var chatbox = document.getElementById("fb-customer-chat");
-  chatbox?.setAttribute("page_id", "253599117836485"); // TODO: move to args
-  chatbox?.setAttribute("attribution", "biz_inbox");
+export function init(lang) {
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox?.setAttribute(
+    'page_id',
+    lang === 'ja' ? '253599117836485' : '274161719106282'
+  ); // TODO: move to args
+  chatbox?.setAttribute('attribution', 'biz_inbox');
 
   window.fbAsyncInit = function () {
     FB.init({
       xfbml: true,
-      version: "v11.0",
+      version: 'v11.0',
     });
   };
 
@@ -22,9 +25,9 @@ export function init() {
     if (d.getElementById(id)) return;
     js = d.createElement(s);
     js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
     fjs.parentNode.insertBefore(js, fjs);
-  })(document, "script", "facebook-jssdk");
+  })(document, 'script', 'facebook-jssdk');
 }
 
 /**
@@ -36,15 +39,15 @@ export function cleanup() {
     if (target) {
       target.parentNode.removeChild(target);
     }
-  })(document, "facebook-jssdk");
+  })(document, 'facebook-jssdk');
 
   delete window?.FB;
 }
 
-export function Facebook1() {
+export function Facebook1({ lang }) {
   useEffect(() => {
-    console.log("Facebook1");
-    init();
+    console.log('Facebook1');
+    init(lang);
 
     return () => {
       cleanup();
