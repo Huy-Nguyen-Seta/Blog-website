@@ -101,7 +101,6 @@ const PageHome = async ({
           __html: JSON.stringify(responseSeo?.Seo?.schema || {}),
         }}
       />
-      <ChatBot/>
       <div className="nc-PageHome relative">
         <div className="container relative">
           <SectionMagazine2
