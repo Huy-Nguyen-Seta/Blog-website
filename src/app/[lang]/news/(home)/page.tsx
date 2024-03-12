@@ -1,5 +1,4 @@
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
-import ChatBot from '@/components/Messenger/MessengerPlugin';
 import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
