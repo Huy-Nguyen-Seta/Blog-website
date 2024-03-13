@@ -8,7 +8,7 @@ export function init(lang) {
   var chatbox = document.getElementById('fb-customer-chat');
   chatbox?.setAttribute(
     'page_id',
-    lang === 'ja' ? '253599117836485' : '274161719106282'
+    lang === 'vi' ? '460761507632325' : '657002014414624'
   ); // TODO: move to args
   chatbox?.setAttribute('attribution', 'biz_inbox');
 
