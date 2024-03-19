@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Nâng cấp gói cước",
     "href": "#",
-    "thumbnail": "/image/mock/Diễn đàn thảo luận - nâng cấp gói cước.png",
+    "thumbnail": "/image/mock/1.png",
     "count": 13,
     "color": "indigo"
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "name": "Chọn sim data",
     "href": "#",
-    "thumbnail": "/image/mock/Diễn đàn thảo luận - sim data.png",
+    "thumbnail": "/image/mock/2.png",
     "count": 16,
     "color": "red"
   },
@@ -19,7 +19,7 @@
     "id": 3,
     "name": "Thanh toán Compini",
     "href": "#",
-    "thumbnail": "/image/mock/Diễn đàn thảo luận - Thanh toán Combini.png",
+    "thumbnail": "/image/mock/3.png",
     "count": 15,
     "color": "yellow"
   },
@@ -27,7 +27,7 @@
     "id": 4,
     "name": "Thủ tục đăng ký mạng",
     "href": "#",
-    "thumbnail": "/image/mock/Diễn đàn thảo luận - thủ tục đăng ký.png",
+    "thumbnail": "/image/mock/4.png",
     "count": 21,
     "color": "pink"
   },
@@ -35,7 +35,7 @@
     "id": 5,
     "name": "Tiết kiệm dữ liệu",
     "href": "#",
-    "thumbnail": "/image/mock/Diễn đàn thảo luận - tiết kiệm dữ liệu.png",
+    "thumbnail": "/image/mock/5.png",
     "count": 16,
     "color": "pink"
   },
@@ -43,7 +43,7 @@
     "id": 6,
     "name": "Sử dụng thiết bị X11",
     "href": "#",
-    "thumbnail": "/image/mock/Diễn đàn thảo luận - X11.png",
+    "thumbnail": "/image/mock/6.png",
     "count": 25,
     "color": "blue"
   }
