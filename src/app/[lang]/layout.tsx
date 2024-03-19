@@ -6,12 +6,12 @@ import { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../globals.css';
+import { i18n } from '../../../i18n-config';
+import StoreProvider from '../GlobalRedux/StoreProvider';
+import SiteHeader from './SiteHeader';
+import './globals.css';
 import GoogleAnalytics from '@/utils/google-analytics';
 import { Facebook1 } from '@/components/Messenger/MessengerPlugin';
-import SiteHeader from '../SiteHeader';
-import StoreProvider from '@/app/GlobalRedux/StoreProvider';
-import { i18n } from '../../../../i18n-config';
 const FAVICON_VERSION = '?v=1';
 
 export async function generateMetadata({
