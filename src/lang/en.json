@@ -67,5 +67,7 @@
   "emty_list": "Empty list!",
   "back": "Back",
   "total": "Total",
-  "list_post": "List of posts"
+  "list_post": "List of posts",
+  "create_date":"Posting date"
+
 }

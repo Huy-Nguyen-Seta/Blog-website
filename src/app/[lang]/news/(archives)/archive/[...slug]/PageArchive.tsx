@@ -58,10 +58,34 @@ export const PageArchive = ({
   };
   const fetchDataInfor = async () => {
     let dataInfo;
+    let localData;
     if (!isTag) {
       dataInfo = await getData(params?.lang, `/findCateBySlug/${currentSlug}`);
+      if (localStorage)
+        localData = {
+          ...dataInfo,
+          localizations: dataInfo?.localizations?.concat([
+            {
+              id: dataInfo?.id,
+              slug: dataInfo?.slug,
+              locale: dataInfo?.locale,
+            },
+          ]),
+        };
+      localStorage.setItem('categories', JSON.stringify(localData));
     } else {
       dataInfo = await getData(params?.lang, `/findTagBySlug/${currentSlug}`);
+      localData = {
+        ...dataInfo,
+        localizations: dataInfo?.localizations?.concat([
+          {
+            id: dataInfo?.id,
+            slug: dataInfo?.slug,
+            locale: dataInfo?.locale,
+          },
+        ]),
+      };
+      if (localStorage) localStorage.setItem('tags', JSON.stringify(localData));
     }
     setDataInfor(dataInfo);
   };
@@ -117,7 +141,9 @@ export const PageArchive = ({
               {dataInfor?.tagName}
             </h2>
             <span className="block mt-4">
-              {translateLanguage('total', params?.lang)}{dataInfor?.blogs?.count || 0} {translateLanguage('post', params?.lang)}
+              {translateLanguage('total', params?.lang)}
+              {dataInfor?.blogs?.count || 0}{' '}
+              {translateLanguage('post', params?.lang)}
             </span>
           </div>
         </div>
@@ -138,7 +164,8 @@ export const PageArchive = ({
                 {dataInfor?.name}
               </h2>
               <span className="block mt-4 text-neutral-300">
-                {dataInfor?.blogs?.count} {translateLanguage('post', params?.lang)}
+                {dataInfor?.blogs?.count}{' '}
+                {translateLanguage('post', params?.lang)}
               </span>
             </div>
           </div>
@@ -165,7 +192,11 @@ export const PageArchive = ({
           {!blogs.length && (
             <div className=" flex justify-center items-center">
               <span className="pt-10">
-                {isLoading ? <Loading /> : translateLanguage('emty_list', params?.lang)}
+                {isLoading ? (
+                  <Loading />
+                ) : (
+                  translateLanguage('emty_list', params?.lang)
+                )}
               </span>
             </div>
           )}
@@ -212,7 +243,10 @@ export const PageArchive = ({
         <SectionSliderNewCategories
           className="py-10 lg:pt-16 !my-8"
           heading={translateLanguage('forum', params?.lang)}
-          subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
+          subHeading={`${translateLanguage(
+            'explore_more',
+            params?.lang
+          )} 233 ${translateLanguage('topic', params?.lang)}`}
           categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
           categoryCardType="card4"
         />

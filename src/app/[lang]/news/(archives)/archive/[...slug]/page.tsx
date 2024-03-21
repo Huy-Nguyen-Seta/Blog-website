@@ -101,13 +101,13 @@ export async function generateStaticParams({
   const slugsCate =
     responseCates
       ?.map((item: any) => ({
-        slug: [item?.slug],
+        slug: [encodeURI(item?.slug)],
       }))
       ?.filter((item: any) => item.slug) || [];
   const slugTags =
     responseTags
       ?.map((item: any) => ({
-        slug: ['tags', item?.slug],
+        slug: ['tags', encodeURI(item?.slug)],
       }))
       ?.filter((item: any) => item.slug) || [];
   return slugTags?.concat(slugsCate);

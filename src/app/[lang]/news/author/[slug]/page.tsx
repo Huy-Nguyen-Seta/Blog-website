@@ -96,7 +96,7 @@ export async function generateStaticParams({
   return (
     response?.results
       ?.map((item: any) => ({
-        slug: item?.slug,
+        slug: encodeURI(item?.slug),
       }))
       ?.filter((item: any) => item.slug) || []
   );

@@ -5,9 +5,21 @@ import { ScaleLevel } from '@/interface/Strapi';
 import moment from 'moment';
 import Image from 'next/image';
 import SingleTitle from '../../(singles)/SingleTitle';
+import { useEffect } from 'react';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 function Content(response: any) {
   const data = response?.response?.attributes;
+  useEffect(() => {
+    const newData = {
+      ...data,
+      localizations: data?.localizations?.data
+        ?.map((item: any) => ({ id: item.id, ...item?.attributes }))
+        ?.concat([{ id: data?.id, slug: data?.slug, locale: data?.locale }]),
+    };
+    if (localStorage) localStorage.setItem('partner', JSON.stringify(newData));
+  }, [data]);
+
   const lang = useTrans();
   return (
     <div>
@@ -35,7 +47,8 @@ function Content(response: any) {
           <div className="flex flex-col space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
               <span className="text-neutral-500 dark:text-neutral-400">
-                Ngày đăng:
+                {translateLanguage('create_date', lang)}
+                {': '}
                 <span className="mx-1"></span>
                 {moment(data?.createdDate || new Date()).format('DD MM, YYYY')}
               </span>

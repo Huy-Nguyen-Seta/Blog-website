@@ -67,5 +67,7 @@
   "emty_list": "空のリスト!",
   "back": "バックバック",
   "total": "合計",
-  "list_post": "投稿のリスト"
+  "list_post": "投稿のリスト",
+  "create_date":"郵送日"
+
 }

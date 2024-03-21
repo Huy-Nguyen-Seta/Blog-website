@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TableOfContent from './TableOfContent';
 import SingleHeader from '../SingleHeader';
 import TableOfContentMobile from './TableOfContentMobile';
@@ -19,6 +19,11 @@ function Content({
 }) {
   const [isLoadMore, setIsLoadMore] = useState(true);
   const lang = useTrans();
+
+  useEffect(() => {
+    if (localStorage)
+      localStorage.setItem('blog', JSON.stringify(response?.attributes));
+  }, []);
 
   return (
     <div className="lg:flex flex-row container">
@@ -44,7 +49,7 @@ function Content({
               fontSize={22}
               strokeWidth={1.5}
               fontWeight={500}
-              className='stroke-2'
+              className="stroke-2"
             />
             <Link
               className=" dark:text-white font-medium px-[10px] py-[3px] rounded-2xl border border-solid border-[#e7e7e7]"

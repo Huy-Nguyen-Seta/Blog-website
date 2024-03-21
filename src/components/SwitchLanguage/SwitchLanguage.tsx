@@ -4,6 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
+const blogSlugRegex = /^\/([a-z]{2})\/news\/(.+)/;
+const authorSlugRegex = /^\/([a-z]{2})\/news\/author\/(.+)/;
+const categorySlugRegex = /^\/([a-z]{2})\/news\/archive\/(.+)/;
+const tagSlugRegex = /^\/([a-z]{2})\/news\/archive\/tags\/(.+)/;
+const partnerSlugRegex = /^\/([a-z]{2})\/news\/partner\/(.+)/;
+
 const languagesList = [
   {
     language: 'English',
@@ -38,6 +44,41 @@ function SwitchLanguage({ lang }: { lang: string }) {
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return '/';
+    if(pathName.match(blogSlugRegex) && localStorage){
+      const data = JSON.parse(localStorage?.getItem('blog') || '');
+      const localizations = data?.localizations?.data;
+      const currentSlug = localizations?.find((item: any) => item?.attributes?.locale === locale)?.attributes?.slug
+      if(currentSlug && pathName.endsWith(encodeURI(data?.slug)))
+      return `/${locale}/news/${currentSlug}`
+    }
+    if(pathName.match(authorSlugRegex) && localStorage){
+      const data = JSON.parse(localStorage?.getItem('author') || '');
+      const localizations = data?.localizations;
+      const currentSlug = localizations?.find((item: any) => item?.locale === locale)?.slug
+      if(currentSlug && localizations?.some((item : any) => pathName.endsWith(encodeURI(item?.slug)) ))
+      return `/${locale}/news/author/${currentSlug}`
+    }
+    if(pathName.match(categorySlugRegex) && localStorage){
+      const data = JSON.parse(localStorage?.getItem('categories') || '');
+      const localizations = data?.localizations;
+      const currentSlug = localizations?.find((item: any) => item?.locale === locale)?.slug
+      if(currentSlug && localizations?.some((item : any) => pathName.endsWith(encodeURI(item?.slug)) ))
+      return `/${locale}/news/archive/${currentSlug}`
+    }
+    if(pathName.match(tagSlugRegex) && localStorage){
+      const data = JSON.parse(localStorage?.getItem('tags') || '');
+      const localizations = data?.localizations;
+      const currentSlug = localizations?.find((item: any) => item?.locale === locale)?.slug
+      if(currentSlug && localizations?.some((item : any) => pathName.endsWith(encodeURI(item?.slug)) ))
+      return `/${locale}/news/archive/tags/${currentSlug}`
+    }
+    if(pathName.match(partnerSlugRegex) && localStorage){
+      const data = JSON.parse(localStorage?.getItem('partner') || '');
+      const localizations = data?.localizations;
+      const currentSlug = localizations?.find((item: any) => item?.locale === locale)?.slug
+      if(currentSlug && localizations?.some((item : any) => pathName.endsWith(encodeURI(item?.slug)) ))
+      return `/${locale}/news/partner/${currentSlug}`
+    }
     const segments = pathName.split('/');
     segments[1] = locale;
     return segments.join('/');
