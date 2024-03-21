@@ -18,6 +18,7 @@ import { DEMO_AUTHORS } from '@/data/authors';
 import { DEMO_CATEGORIES } from '@/data/taxonomies';
 import { translateLanguage } from '@/utils/translateLanguage';
 import { GlobeAltIcon, ShareIcon } from '@heroicons/react/24/outline';
+import { locale } from 'moment';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -53,6 +54,10 @@ export const PageAuthors = ({
     );
     setAuthorInfor(data);
     fetchDataBlogs(0, 8);
+    const newData = {...data, localizations : data?.localizations?.concat([{id: data?.id , slug: data?.slug , locale: data?.locale}])}
+
+    if (localStorage)
+    localStorage.setItem('author', JSON.stringify(newData));
   };
   useEffect(() => {
     fetchAuthorInformation();
