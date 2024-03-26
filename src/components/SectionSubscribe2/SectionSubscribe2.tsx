@@ -115,7 +115,7 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = '' }) => {
       className={`nc-SectionSubscribe2 relative flex flex-col lg:flex-row items-center ${className}`}
     >
       <div className="flex-shrink-0 mb-14 lg:mb-0 lg:me-10 lg:w-2/5">
-        <h2 className="font-semibold text-4xl">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold">
           {translateLanguage('contact_us', lang)}
         </h2>
         <span className="block mt-6 text-neutral-500 dark:text-neutral-400">
