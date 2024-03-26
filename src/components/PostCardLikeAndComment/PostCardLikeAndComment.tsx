@@ -17,7 +17,7 @@ export interface PostCardLikeAndCommentProps {
 
 const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
   className = '',
-  itemClass = 'px-3 h-8 text-xs',
+  itemClass = 'px-1 md:px-3 h-8 text-xs',
   hiddenCommentOnMobile = true,
   useOnSinglePage = false,
   likeCount,
@@ -28,7 +28,7 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
 }) => {
   return (
     <div
-      className={`nc-PostCardLikeAndComment flex items-center space-x-2 rtl:space-x-reverse ${className}`}
+      className={`nc-PostCardLikeAndComment flex items-center space-x-0 md:space-x-2  rtl:space-x-reverse ${className}`}
     >
       <PostCardLikeAction
         blogId={blogId}
@@ -41,7 +41,7 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
         className={`flex ${itemClass}`}
         isATagOnSingle={useOnSinglePage}
       />
-      <PostCardView viewCount={viewCount} className={"h-8 text-xs px-3  !min-w-[50px] !lg:min-w-[68px]"} />
+      <PostCardView viewCount={viewCount} className={"h-8 text-xs px-1 md:px-3  !min-w-[50px] !lg:min-w-[68px]"} />
     </div>
   );
 };

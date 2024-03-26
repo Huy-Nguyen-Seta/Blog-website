@@ -14,7 +14,7 @@ export interface PostCardLikeActionProps {
 }
 
 const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
-  className = 'px-3 h-8 text-xs',
+  className = 'md:px-3 pl-0 pr-3  h-8 text-xs',
   likeCount = 34,
   liked = false,
   blogId,
@@ -23,7 +23,7 @@ const PostCardLikeAction: FC<PostCardLikeActionProps> = ({
   const lang = useTrans()
   return (
     <button
-      className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className} ${
+      className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors md:px-3 pl-0 pr-3  h-8 text-xs ${
         isLiked
           ? 'text-rose-600 bg-rose-50 dark:bg-rose-100'
           : 'text-neutral-700 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 dark:hover:bg-rose-100 hover:text-rose-600 dark:hover:text-rose-500'
