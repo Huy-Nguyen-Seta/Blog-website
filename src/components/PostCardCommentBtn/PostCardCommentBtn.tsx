@@ -10,6 +10,7 @@ export interface PostCardCommentBtnProps {
   numberComment?: number;
   commentCount?: number;
   slug?: string;
+  isCard6?: boolean;
 }
 
 const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
@@ -17,13 +18,14 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
   isATagOnSingle = false,
   commentCount = 0,
   slug,
+  isCard6
 }) => {
   const lang = useTrans()
   if (isATagOnSingle) {
     return (
       <a
         href={'#comments'}
-        className={`nc-PostCardCommentBtn relative items-center min-w-[48px] md:min-w-[68px] rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
+        className={`nc-PostCardCommentBtn relative items-center  ${isCard6 ?  'min-w-[48px] md:min-w-[68px]' : 'min-w-[68px]'} rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
         title={translateLanguage('Comment', lang)}
       >
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -64,7 +66,7 @@ const PostCardCommentBtn: FC<PostCardCommentBtnProps> = ({
   return (
     <Link
       href={`/news/${slug}#comments`}
-      className={`nc-PostCardCommentBtn relative items-center  min-w-[48px] md:min-w-[68px]  rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
+      className={`nc-PostCardCommentBtn relative items-center ${isCard6 ?  'min-w-[48px] md:min-w-[68px]' : 'min-w-[68px]'}  rounded-full text-neutral-6000 bg-neutral-50 transition-colors dark:text-neutral-200 dark:bg-neutral-800 hover:bg-teal-50 dark:hover:bg-teal-100 hover:text-teal-600 dark:hover:text-teal-500 ${className} `}
       title={translateLanguage('Comment', lang)}
       >
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">

@@ -13,6 +13,7 @@ export interface PostCardLikeAndCommentProps {
   commentCount?: number;
   slug?: string;
   viewCount?: number;
+  isCard6?: boolean;
 }
 
 const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
@@ -25,6 +26,7 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
   commentCount,
   slug,
   viewCount = 0,
+  isCard6= false
 }) => {
   return (
     <div
@@ -40,6 +42,7 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
         commentCount={commentCount}
         className={`flex ${itemClass}`}
         isATagOnSingle={useOnSinglePage}
+        isCard6={isCard6}
       />
       <PostCardView viewCount={viewCount} className={"h-8 text-xs px-1 md:px-3  !min-w-[50px] !lg:min-w-[68px]"} />
     </div>
