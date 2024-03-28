@@ -62,6 +62,7 @@ const Card6: FC<Card6Props> = ({ className = 'h-full', post }) => {
             likeCount={like}
             viewCount={viewCount}
             className="relative"
+            isCard6={true}
           />
           <PostCardSaveAction
             postId={id}
