@@ -16,7 +16,7 @@ import { translateLanguage } from '@/utils/translateLanguage';
 import useTrans from '@/hooks/useTranslate';
 
 const demoTags = DEMO_TAGS.filter((_, i) => i < 9);
-
+const regex = /((https:\/\/admin.hallo.co\/uploads\/)(?:(small)|(medium)|(large))?[^\.]+(\.[a-zA-Z]{3,4}))/g;   
 export interface SingleContentProps {
   data?: any;
   content?: any;
@@ -95,10 +95,11 @@ const SingleContent: FC<SingleContentProps> = ({
           {content?.map((item: any) => {
             switch (item?.__component) {
               case 'content.content':
+                const convertImage = item?.content.replace(regex, "$1?format=webp")
                 return (
                   <div
                     className="ck-content text-lg"
-                    dangerouslySetInnerHTML={{ __html: item?.content }}
+                    dangerouslySetInnerHTML={{ __html: convertImage }}
                   />
                 );
               case 'content.link':
