@@ -68,5 +68,20 @@
   "back":"Quay lại",
   "total":"Tổng số",
   "list_post":"Danh mục bài viết",
-  "create_date":"Ngày đăng"
+  "create_date":"Ngày đăng",
+  "sign_up":"Đăng ký",
+  "wellcome":"Chào mừng bạn đến với HALLO blog",
+  "email": "Nhập email",
+  "password":"Mật khẩu",
+  "have_account":"Bạn đã có tài khoản",
+  "sign_in": "Đăng nhập",
+  "user_name":"Tên người dùng",
+  "favourite_list": "Danh sách yêu thích",
+  "dark_background": "Nền tối",
+  "Logout":"Đăng xuất",
+  "havent_account":"Nếu bạn chưa có tài khoản",
+  "create_account":"Tạo một tài khoản",
+  "registration_failed": "Đăng ký tài khoản thất bại",
+  "regis_success":"Đăng ký tài khoản thành công"
+
 }

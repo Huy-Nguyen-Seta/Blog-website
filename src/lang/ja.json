@@ -68,6 +68,21 @@
   "back": "バックバック",
   "total": "合計",
   "list_post": "投稿のリスト",
-  "create_date":"郵送日"
+  "create_date":"郵送日",
+  "sign_up":"サインアップ",
+  "wellcome":"HALLO ブログへようこそ",
+  "email": "電子メールアドレス",
+  "password":"パスワード",
+  "have_account": "すでにアカウントをお持ちですか",
+  "sign_in": "サインイン",
+  "user_name":"ユーザー名",
+  "favourite_list": "お気に入りリスト",
+  "dark_background": "暗い背景",
+  "Logout":"ログアウト",
+  "havent_account":"まだアカウントをお持ちでない場合",
+  "create_account":"アカウントを作成する",
+  "registration_failed": "登録に失敗しました",
+  "regis_success":"アカウント登録が成功しました"
 
+   
 }

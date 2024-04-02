@@ -2,6 +2,7 @@
 import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import Heading2 from '@/components/Heading/Heading2';
 import Input from '@/components/Input/Input';
+import NcLink from '@/components/NcLink/NcLink';
 import useTrans from '@/hooks/useTranslate';
 import { showErrorMessage, showSuccessMessage } from '@/utils/toastify';
 import { translateLanguage } from '@/utils/translateLanguage';
@@ -36,11 +37,11 @@ const PageLogin = ({}) => {
     e.preventDefault();
     try {
       const data = await axios.post(
-        'https://phukienpetz.click/api/v1/auth/client/login',
+        'https://phukienpetz.click/api/v1/auth/user/login',
         { email: email, password: password }
       );
       const inforUser = await axios.get(
-        'https://phukienpetz.click/api/v1/auth/client/current',
+        'https://phukienpetz.click/api/v1/auth/user/current',
         {
           headers: { Authorization: `Bearer ${data?.data?.data?.accessToken}` },
         }
@@ -132,10 +133,10 @@ const PageLogin = ({}) => {
         </form>
 
         {/* ==== */}
-        {/* <span className="block text-center text-neutral-700 dark:text-neutral-300">
-          New user? {` `}
-          <NcLink href="/signup">Create an account</NcLink>
-        </span> */}
+        <span className="block text-center text-neutral-700 dark:text-neutral-300 pt-3">
+          {translateLanguage("havent_account", lang)}? {` `}
+          <NcLink href="/news/signup">{translateLanguage("create_account", lang)}</NcLink>
+        </span>
       </div>
     </>
   );

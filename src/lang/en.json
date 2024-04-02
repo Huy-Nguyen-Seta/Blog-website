@@ -68,6 +68,19 @@
   "back": "Back",
   "total": "Total",
   "list_post": "List of posts",
-  "create_date":"Posting date"
-
+  "create_date":"Posting date",
+  "sign_up":"Sign up",
+  "wellcome":"Welcome to the HALLO blog",
+  "email": "Email address",
+  "password":"Password",
+  "have_account":"Already have an account",
+  "sign_in": "Sign in",
+  "user_name":"User name",
+  "favourite_list": "Favourites list",
+  "dark_background": "Dark background",
+  "Logout":"Log out",
+  "havent_account":"If you do not already have an account",
+  "create_account":"Create an account",
+  "registration_failed": "registration failed",
+  "regis_success":"Account registration successful"
 }
