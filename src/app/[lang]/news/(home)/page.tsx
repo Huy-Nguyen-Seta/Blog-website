@@ -67,9 +67,23 @@ export async function generateMetadata({
             sizes: '180x180',
           },
           {
-            rel: 'manifest',
-            url: '/favicons/site.webmanifest' + FAVICON_VERSION,
+            rel: 'icon',
+            url: '/favicons/favicon-16x16.png' + FAVICON_VERSION,
+            sizes: '16x16',
+            type: 'image/x-icon',
           },
+          {
+            rel: 'icon',
+            url: '/favicons/favicon-32x32.png' + FAVICON_VERSION,
+            sizes: '32x32',
+            type: 'image/x-icon',
+          },
+          {
+            rel: 'icon',
+            url: '/favicons/favicon-96x96.png' + FAVICON_VERSION,
+            sizes: '96x96',
+            type: 'image/x-icon',
+          }
         ],
       },
     };

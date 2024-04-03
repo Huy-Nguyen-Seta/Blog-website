@@ -8,6 +8,7 @@ import SwitchDarkMode2 from '@/components/SwitchDarkMode/SwitchDarkMode2';
 import Link from 'next/link';
 import useTrans from '@/hooks/useTranslate';
 import { useRouter } from 'next/navigation';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export default function AvatarDropdown() {
   const [user, setUser] = useState<any>();
@@ -19,18 +20,16 @@ export default function AvatarDropdown() {
     if (localStorage.getItem('userInfor')) {
       user = JSON.parse(localStorage.getItem('userInfor') || '');
     }
-    setUser(user)
-  }, [])
-  
+    setUser(user);
+  }, []);
 
   const handleClick = (e: any) => {
     if (!localStorage.getItem('userInfor')) {
       e.preventDefault();
       router.push(`/${lang}/news/login`);
-    }else {
+    } else {
       let user = JSON.parse(localStorage.getItem('userInfor') || '');
-      setUser(user)
-
+      setUser(user);
     }
   };
   const handleLogOut = () => {
@@ -81,11 +80,18 @@ export default function AvatarDropdown() {
                 <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
                     <div className="flex items-center">
-                      <Avatar imgUrl={avatarImgs[0]} sizeClass="w-12 h-12" />
+                      <Avatar
+                        imgUrl={'/image/circle_red.jpeg'}
+                        sizeClass="w-12 h-12"
+                      />
 
                       <div className="flex-grow ms-3">
                         <h4 className="font-semibold">{user?.name || ''}</h4>
-                        <p className="text-xs mt-0.5">{user?.email || ''}</p>
+                        <p className="text-xs mt-0.5">
+                          {user?.email?.length >= 13
+                            ? `${user?.email?.slice(0, 18)}...`
+                            : user?.email?.length || ''}
+                        </p>
                       </div>
                     </div>
 
@@ -201,7 +207,7 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{'Yêu thích'}</p>
+                        <p className="text-sm font-medium ">{translateLanguage("favourite_list", lang)}</p>
                       </div>
                     </Link>
 
@@ -242,7 +248,7 @@ export default function AvatarDropdown() {
                           </svg>
                         </div>
                         <div className="ms-4">
-                          <p className="text-sm font-medium ">{'Nền tối'}</p>
+                          <p className="text-sm font-medium ">{translateLanguage("dark_background", lang)}</p>
                         </div>
                       </div>
                       <SwitchDarkMode2 />
@@ -348,7 +354,7 @@ export default function AvatarDropdown() {
                         </svg>
                       </div>
                       <div className="ms-4">
-                        <p className="text-sm font-medium ">{'Đăng xuất'}</p>
+                        <p className="text-sm font-medium ">{translateLanguage("Logout", lang)}</p>
                       </div>
                     </div>
                   </div>
