@@ -12,6 +12,7 @@ import useTrans from '@/hooks/useTranslate';
 import { translateLanguage } from '@/utils/translateLanguage';
 import axios from 'axios';
 import { showErrorMessage, showSuccessMessage } from '@/utils/toastify';
+import { useRouter } from 'next/navigation';
 
 const loginSocials = [
   {
@@ -33,6 +34,7 @@ const loginSocials = [
 
 const PageSignUp = ({}) => {
   const lang = useTrans();
+  const router = useRouter();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let name: any = document.getElementById('name');
@@ -53,15 +55,27 @@ const PageSignUp = ({}) => {
           showSuccessMessage(translateLanguage('regis_success', lang), {
             autoClose: 4000,
           });
+          router.push(`/${lang}/login`);
         } else {
           showErrorMessage(translateLanguage('registration_failed', lang), {
             autoClose: 4000,
           });
         }
       } catch (err: any) {
+        let mess;
+        console.log('err?.response?.data?.info?.code', err?.response?.data)
+        if (err?.response?.data?.code === 'USER_00000') {
+          mess = translateLanguage('anf', lang);
+        }
+        if (err?.response?.data?.code === 'USER_00001') {
+          mess = translateLanguage('aax', lang);
+        }
+        if (err?.response?.data?.code === 'USER_00002') {
+          mess = translateLanguage('aaa', lang);
+        }
+
         showErrorMessage(
-          err?.response?.data?.info?.message ||
-            translateLanguage('registration_failed', lang),
+          mess || translateLanguage('registration_failed', lang),
           {
             autoClose: 4000,
           }
@@ -148,7 +162,7 @@ const PageSignUp = ({}) => {
         {/* ==== */}
         <span className="block text-center text-neutral-700 dark:text-neutral-300">
           {translateLanguage('have_account', lang)}? {` `}
-          <NcLink href="/news/login">
+          <NcLink href={`/${lang}/news/login`}>
             {' '}
             {translateLanguage('sign_in', lang)}
           </NcLink>

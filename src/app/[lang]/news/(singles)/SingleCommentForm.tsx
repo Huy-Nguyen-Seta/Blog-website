@@ -75,7 +75,7 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
         setComment('');
         onFetchComment?.();
       } else {
-        router.push('/news/login')
+        router.push(`/${lang}/news/login`)
         showErrorMessage(translateLanguage("require_login", lang), { autoClose: 4000 });
       }
     } catch (err) {

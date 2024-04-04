@@ -82,5 +82,15 @@
   "havent_account":"If you do not already have an account",
   "create_account":"Create an account",
   "registration_failed": "registration failed",
-  "regis_success":"Account registration successful"
+  "regis_success":"Account registration successful",
+  "anf": "Account not found",
+  "aax":"Account already existed.",
+  "aaa":"Account adress and hash message are not matched.",
+  "mcontent":"Misleading content",
+  "Violence":"Violence",
+  "Spam":"Spam",
+  "Other":"Other",
+  "Message":"Message",
+  "ppaa":"Please provide any additional information or context that will help us understand and handle the situation.",
+  "Report_Abuse":"Report Abuse"
 }

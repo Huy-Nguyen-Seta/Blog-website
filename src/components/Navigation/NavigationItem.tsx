@@ -6,6 +6,7 @@ import React, { FC, Fragment, useState } from "react";
 import { Route } from "@/routers/types";
 import Link from "next/link";
 import NcImage from "../NcImage/NcImage";
+import useTrans from "@/hooks/useTranslate";
 
 export interface NavItemType {
   id: string;
@@ -50,7 +51,7 @@ const recentPosts = [
 
 const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
   const [menuCurrentHovers, setMenuCurrentHovers] = useState<string[]>([]);
-
+   const lang = useTrans()
   const onMouseEnterMenu = (id: string) => {
     setMenuCurrentHovers((state) => [...state, id]);
   };
@@ -291,7 +292,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
         <Link
           className="inline-flex items-center text-sm lg:text-[15px] font-medium text-slate-700 min-w-max dark:text-slate-300 py-2.5 px-4 xl:px-5 rounded-full hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-200"
           href={{
-            pathname: `/news/${item.href}` || '',
+            pathname: `/${lang}/news/${item.href}` || '',
           }}
         >
           {item.name}

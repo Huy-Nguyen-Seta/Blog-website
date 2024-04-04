@@ -82,6 +82,16 @@
   "havent_account":"Nếu bạn chưa có tài khoản",
   "create_account":"Tạo một tài khoản",
   "registration_failed": "Đăng ký tài khoản thất bại",
-  "regis_success":"Đăng ký tài khoản thành công"
-
+  "regis_success":"Đăng ký tài khoản thành công",
+  "anf": "Không tìm thấy tài khoản",
+  "aax":"Tài khoản đã tồn tại.",
+  "aaa":"Địa chỉ tài khoản và thông báo băm không khớp.",
+  "mcontent":"Nội dung sai lệch",
+  "Violence":"Bạo lực",
+  "Spam":"Trùng lặp",
+  "Other":"Khác",
+  "Message":"Tin nhắn",
+  "ppaa":"Vui lòng cung cấp bất kỳ thông tin hoặc bối cảnh bổ sung sẽ giúp chúng tôi hiểu và xử lý tình huống.",
+  "Report_Abuse":"Báo cáo nội dung"
+  
 }
