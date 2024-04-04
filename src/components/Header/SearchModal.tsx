@@ -177,15 +177,15 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                   onChange={(item: any) => {
                     switch (item?.taxonomy) {
                       case 'author':
-                        router?.push(`/news/author/${item.slug}`);
+                        router?.push(`/${lang}/news/author/${item.slug}`);
 
                         break;
                       case 'category':
-                        router?.push(`/news/archive/${item.slug}`);
+                        router?.push(`/${lang}/news/archive/${item.slug}`);
 
                         break;
                       default:
-                        router?.push(`/news/${item.slug}`);
+                        router?.push(`/${lang}/news/${item.slug}`);
                         break;
                     }
                     setOpen(false);
@@ -397,7 +397,7 @@ const SearchModal: FC<Props> = ({ renderTrigger }) => {
                     </kbd>{' '}
                     {translateLanguage('to_help', lang)}{' '}
                     <Link
-                      href={'/news/search'}
+                      href={`/${lang}/news/search`}
                       className="mx-1 flex h-5 px-1.5 items-center justify-center rounded border bg-white sm:mx-2 border-primary-6000 text-neutral-900"
                       onClick={() => setOpen(false)}
                     >

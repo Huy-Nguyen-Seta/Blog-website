@@ -43,7 +43,7 @@ const NcBookmark: FC<NcBookmarkProps> = ({
     if (localStorage.getItem('userInfor')) {
       user = JSON.parse(localStorage.getItem('userInfor') || '');
     } else {
-      router.push('/news/login');
+      router.push(`/${lang}/news/login`);
       showErrorMessage(translateLanguage('require_login', lang), {
         autoClose: 4000,
       });

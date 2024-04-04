@@ -52,7 +52,7 @@ const PageLogin = ({}) => {
           'userInfor',
           JSON.stringify(inforUser?.data?.data)
         );
-        router.push('/news');
+        router.push(`/${lang}/news`);
       }
     } catch (err) {
       showErrorMessage(translateLanguage('login_fail', lang), { autoClose: 4000 });
@@ -135,7 +135,7 @@ const PageLogin = ({}) => {
         {/* ==== */}
         <span className="block text-center text-neutral-700 dark:text-neutral-300 pt-3">
           {translateLanguage("havent_account", lang)}? {` `}
-          <NcLink href="/news/signup">{translateLanguage("create_account", lang)}</NcLink>
+          <NcLink href={`/${lang}/news/signup`}>{translateLanguage("create_account", lang)}</NcLink>
         </span>
       </div>
     </>
