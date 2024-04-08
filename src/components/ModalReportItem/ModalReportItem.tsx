@@ -45,7 +45,7 @@ const ModalReportItem: FC<ModalReportItemProps> = ({
     { name: translateLanguage("Other", lang), id: "Other", label: translateLanguage("Other", lang) },
   ];
 
-  const textareaRef = useRef(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [problemSelected, setProblemSelected] = useState(problemPlansDemo[0]);
 
@@ -83,8 +83,7 @@ const handlSendMailReport = (params : any) => {
   );
 }
 
-  const handleClickSubmitForm = async(e: any) => {
-    e.preventDefault();
+  const handleClickSubmitForm = async() => {
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     let user ;
     if (localStorage.getItem('userInfor')) {
