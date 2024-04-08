@@ -39,9 +39,9 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
   commentId,
   replyName,
 }) => {
-  const lang = useTrans()
+  const lang = useTrans();
   const [comment, setComment] = useState<string>('');
-  const router = useRouter()
+  const router = useRouter();
   const handlePostComment = async (e?: any) => {
     e.preventDefault();
 
@@ -70,16 +70,22 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
         }
 
         if (data?.status === 200) {
-          showSuccessMessage(translateLanguage("comment_success", lang), { autoClose: 4000 });
+          showSuccessMessage(translateLanguage('comment_success', lang), {
+            autoClose: 4000,
+          });
         }
         setComment('');
         onFetchComment?.();
       } else {
-        router.push(`/${lang}/news/login`)
-        showErrorMessage(translateLanguage("require_login", lang), { autoClose: 4000 });
+        router.push(`/${lang}/news/login`);
+        showErrorMessage(translateLanguage('require_login', lang), {
+          autoClose: 4000,
+        });
       }
     } catch (err) {
-      showErrorMessage(translateLanguage('try_again', lang), { autoClose: 4000 });
+      showErrorMessage(translateLanguage('try_again', lang), {
+        autoClose: 4000,
+      });
     }
   };
   useEffect(() => {
@@ -91,7 +97,7 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
   return (
     <form className={`nc-SingleCommentForm ${className}`}>
       <Textarea
-        placeholder="Thêm thảo luận của bạn"
+        placeholder={translateLanguage('add_your_cm', lang)}
         ref={textareaRef}
         required={true}
         defaultValue={defaultValue}
@@ -100,9 +106,11 @@ const SingleCommentForm: FC<SingleCommentFormProps> = ({
         value={comment}
       />
       <div className="mt-2 space-x-3">
-        <ButtonPrimary onClick={handlePostComment}>{translateLanguage('send_comment', lang)}</ButtonPrimary>
+        <ButtonPrimary onClick={handlePostComment}>
+          {translateLanguage('send_comment', lang)}
+        </ButtonPrimary>
         <Button type="button" pattern="white" onClick={onClickCancel}>
-        {translateLanguage('Cancel', lang)}
+          {translateLanguage('Cancel', lang)}
         </Button>
       </div>
     </form>

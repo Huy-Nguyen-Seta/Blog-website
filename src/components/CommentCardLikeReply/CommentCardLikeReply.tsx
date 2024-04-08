@@ -5,6 +5,7 @@ import convertNumbThousand from '@/utils/convertNumbThousand';
 import twFocusClass from '@/utils/twFocusClass';
 import { likedComment } from '../utils/funtion';
 import useTrans from '@/hooks/useTranslate';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 export interface CommentCardLikeReplyProps {
   className?: string;
@@ -75,7 +76,7 @@ const CommentCardLikeReply: FC<CommentCardLikeReplyProps> = ({
         {!hiddenReply && (
           <button
             className={`flex items-center min-w-[68px] rounded-full text-neutral-6000 bg-neutral-100 dark:text-neutral-200 dark:bg-neutral-800 px-3 h-8 hover:bg-teal-50 hover:text-teal-600 dark:hover:text-teal-500 ${twFocusClass()} `}
-            title="Reply"
+            title= {translateLanguage("reply", lang)}
             onClick={onClickReply}
           >
             <svg
@@ -93,7 +94,7 @@ const CommentCardLikeReply: FC<CommentCardLikeReplyProps> = ({
               />
             </svg>
             <span className="text-xs leading-none text-neutral-900 dark:text-neutral-200">
-              Reply
+              {translateLanguage("reply", lang)}
             </span>
           </button>
         )}

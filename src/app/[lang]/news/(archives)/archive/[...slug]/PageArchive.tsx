@@ -17,7 +17,7 @@ import ModalCategories from '../../ModalCategories';
 import ModalTags from '../../ModalTags';
 import { AppDispatch } from '@/app/GlobalRedux/store';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
-import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { DEMO_CATEGORIES, getMockDataCategories } from '@/data/taxonomies';
 import { translateLanguage } from '@/utils/translateLanguage';
 
 export const PageArchive = ({
@@ -247,7 +247,7 @@ export const PageArchive = ({
             'explore_more',
             params?.lang
           )} 233 ${translateLanguage('topic', params?.lang)}`}
-          categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+          categories={getMockDataCategories(params?.lang).filter((_, i) => i < 10)}
           categoryCardType="card4"
         />
       </div>

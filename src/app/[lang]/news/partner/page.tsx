@@ -11,7 +11,7 @@ import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2'
 import { getStrapiImage } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_AUTHORS } from '@/data/authors';
-import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { DEMO_CATEGORIES, getMockDataCategories } from '@/data/taxonomies';
 import { ScaleLevel } from '@/interface/Strapi';
 import { translateLanguage } from '@/utils/translateLanguage';
 import { useEffect, useState } from 'react';
@@ -153,7 +153,7 @@ const Partner = ({ params }: { params: { lang: Language } }) => {
           className="py-10 lg:py-4"
           heading={translateLanguage('forum', params?.lang)}
           subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
-          categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+          categories={getMockDataCategories(params?.lang).filter((_, i) => i < 10)}
           categoryCardType="card4"
         />
       </div>

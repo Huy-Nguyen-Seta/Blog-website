@@ -92,6 +92,14 @@
   "Other":"Khác",
   "Message":"Tin nhắn",
   "ppaa":"Vui lòng cung cấp bất kỳ thông tin hoặc bối cảnh bổ sung sẽ giúp chúng tôi hiểu và xử lý tình huống.",
-  "Report_Abuse":"Báo cáo nội dung"
+  "Report_Abuse":"Báo cáo nội dung",
+  "send_success":"Gửi thành công",
+  "coppy_link":"Sao chép liên kết",
+  "report_article":"Báo cáo bài viết này",
+  "Home_page":"Trang chủ",
+  "add_your_cm":"Thêm thảo luận của bạn",
+  "reply":"Trả lời",
+  "report_comment":"Báo cáo bình luận"
+
   
 }

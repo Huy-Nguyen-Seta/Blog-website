@@ -118,7 +118,7 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
         <PostActionDropdown
           containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
           iconClass="h-5 w-5"
-          url={process.env.NEXT_PUBLIC_HOST ? process.env.NEXT_PUBLIC_HOST + '/news/' + data?.slug : '#'}
+          url={process.env.NEXT_PUBLIC_HOST ? process.env.NEXT_PUBLIC_HOST +'/'+ lang+'/news/' + data?.slug : '#'}
         />
       </div>
     </div>

@@ -4,7 +4,7 @@ import Heading from '@/components/Heading/Heading';
 import MySlider from '@/components/MySlider';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import { DEMO_POSTS } from '@/data/posts';
-import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { DEMO_CATEGORIES, getMockDataCategories } from '@/data/taxonomies';
 import { PostDataType } from '@/data/types';
 import useTrans from '@/hooks/useTranslate';
 import { Route } from '@/routers/types';
@@ -63,7 +63,7 @@ const SingleRelatedPosts: FC<SingleRelatedPostsProps> = ({
           className="py-16 lg:py-28"
           heading={translateLanguage('forum',lang)}
           subHeading={`${translateLanguage('explore_more', lang)} 233 ${translateLanguage('topic', lang)}`}
-          categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+          categories={getMockDataCategories(lang).filter((_, i) => i < 10)}
           categoryCardType="card4"
         />
       </div>

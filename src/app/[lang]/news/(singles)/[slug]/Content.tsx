@@ -7,6 +7,7 @@ import SingleContent from '../SingleContent';
 import useTrans from '@/hooks/useTranslate';
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
+import { translateLanguage } from '@/utils/translateLanguage';
 
 function Content({
   output,
@@ -41,7 +42,7 @@ function Content({
               className="px-[10px] py-[3px] rounded-2xl border border-solid border-[#e7e7e7]"
               href={`/${lang}/news`}
             >
-              Trang chủ
+              {translateLanguage("Home_page", lang)}
             </Link>
             <ChevronRightIcon
               height={20}
