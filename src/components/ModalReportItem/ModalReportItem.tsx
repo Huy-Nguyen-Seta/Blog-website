@@ -83,7 +83,8 @@ const handlSendMailReport = (params : any) => {
   );
 }
 
-  const handleClickSubmitForm = async() => {
+  const handleClickSubmitForm = async(e: any) => {
+    e.preventDefault()
     const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
     let user ;
     if (localStorage.getItem('userInfor')) {
