@@ -93,6 +93,15 @@
   "Other":"他の",
   "Message":"メッセージ",
   "ppaa":"任意でご提供ください 状況を理解し、対処するのに役立つ追加情報またはコンテキスト。",
-  "Report_Abuse":"不正行為を報告する"
+  "Report_Abuse":"不正行為を報告する",
+  "send_success":"正常に送信されました",
+  "coppy_link":"リンクをコピーする",
+  "report_article":"この記事を非難する",
+  "send_comment": "コメントを送信",
+  "Home_page":"ホームページ",
+  "add_your_cm":"ディスカッションを追加",
+  "reply":"フィードバック",
+  "report_comment":"コメントレポート"
+
    
 }

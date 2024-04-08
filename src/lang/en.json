@@ -92,5 +92,17 @@
   "Other":"Other",
   "Message":"Message",
   "ppaa":"Please provide any additional information or context that will help us understand and handle the situation.",
-  "Report_Abuse":"Report Abuse"
+  "Report_Abuse":"Report Abuse",
+  "send_success":"Submitted successfully",
+  "coppy_link":"Copy link",
+  "report_article":"Report this article",
+  "send_comment": "Send comment",
+  "Home_page":"Home page",
+  "add_your_cm":"Add your discussion",
+  "reply":"Reply",
+  "report_comment":"Report comment"
+
+
+
+
 }

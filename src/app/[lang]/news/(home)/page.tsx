@@ -9,7 +9,7 @@ import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
 import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_POSTS, DEMO_POSTS_AUDIO } from '@/data/posts';
-import { DEMO_CATEGORIES } from '@/data/taxonomies';
+import { DEMO_CATEGORIES, getMockDataCategories } from '@/data/taxonomies';
 import { translateLanguage } from '@/utils/translateLanguage';
 import { Metadata } from 'next';
 const FAVICON_VERSION = '?v=1';
@@ -167,7 +167,7 @@ const PageHome = async ({
             className="py-10 lg:py-16"
             heading={translateLanguage('forum', params?.lang)}
             subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
-            categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+            categories={getMockDataCategories(params?.lang).filter((_, i) => i < 10)}
             categoryCardType="card4"
           />
         </div>

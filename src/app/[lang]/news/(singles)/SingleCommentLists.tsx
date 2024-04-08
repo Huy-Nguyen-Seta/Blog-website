@@ -23,6 +23,7 @@ const SingleCommentLists: FC<SingleCommentListsProps> = ({
   numberRest,
 }) => {
   const lang = useTrans();
+  console.log('----data', data, total)
   return (
     <ul className="nc-SingleCommentLists space-y-5">
       {data?.map((item: any) => (

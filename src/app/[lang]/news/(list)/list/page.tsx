@@ -264,7 +264,7 @@ const PageList = ({ params }: { params: { lang: Language } }) => {
         <SectionSubscribe2 />
         <SectionSliderNewCategories
           className="py-10 lg:py-4"
-          heading={translateLanguage('forum', params?.lang)}
+          heading={translateLanguage('', params?.lang)}
           subHeading={`${translateLanguage(
             'explore_more',
             params?.lang
