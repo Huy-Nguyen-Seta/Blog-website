@@ -10,25 +10,28 @@ const DEMO_CATEGORIES: TaxonomyType[] = __taxonomies.map((item) => ({
 }));
 
 export const getMockDataCategories  = (lang: Language) => {
+  let data : TaxonomyType[]
+
   if (lang === 'en') {
-    return mockEng.map((item) => ({
+    data = mockEng.map((item) => ({
       ...item,
       taxonomy: 'category',
       href: item.href as Route,
     }));
   } else if (lang === 'ja') {
-    return mockJa.map((item) => ({
+    data = mockJa.map((item) => ({
       ...item,
       taxonomy: 'category',
       href: item.href as Route,
     }));
   } else {
-    return mockVi.map((item) => ({
+    data = mockVi.map((item) => ({
       ...item,
       taxonomy: 'category',
       href: item.href as Route,
     }));
   }
+  return data;
 };
 
 const DEMO_TAGS: TaxonomyType[] = __taxonomies.map((item) => ({
