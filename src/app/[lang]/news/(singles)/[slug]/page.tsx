@@ -31,7 +31,7 @@ export async function generateMetadata({
         canonical: `/news/${params?.slug}`,
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',    
+          'ja-JP': '/ja',
           'en-US': '/en',
         },
       },
@@ -80,7 +80,7 @@ const PageSingle = async ({
       `/byCateNoLimit/${response?.attributes?.category?.data?.id}`
     );
   }
-  relatePost = relatePost?.filter((item: any) => item?.id !== response?.id)
+  relatePost = relatePost?.filter((item: any) => item?.id !== response?.id);
   const responseSeo = await getData(
     params?.lang,
     `/getBlogSeo/${params?.slug}`
@@ -164,12 +164,33 @@ const PageSingle = async ({
       ? { ...item, content: handleAddIdForTagName(item?.content) }
       : item
   );
+  console.log('responseSeo?.metaData', responseSeo)
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(responseSeo?.attributes?.meta?.schema || {}),
+          __html: JSON.stringify(responseSeo?.attributes?.meta?.breadcrumbSchema || {}),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(responseSeo?.attributes?.meta?.articleSchema || {}),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            responseSeo?.attributes?.meta?.siteNavigationElementSchema || {}
+          ),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(responseSeo?.attributes?.meta?.websiteSchema || {}),
         }}
       />
       <div className={`nc-PageSingle pt-8 lg:pt-16`}>
