@@ -55,7 +55,7 @@ const PageSignUp = ({}) => {
           showSuccessMessage(translateLanguage('regis_success', lang), {
             autoClose: 4000,
           });
-          router.push(`/${lang}/login`);
+          router.push(`/${lang}/news/login`);
         } else {
           showErrorMessage(translateLanguage('registration_failed', lang), {
             autoClose: 4000,
