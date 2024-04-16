@@ -52,7 +52,7 @@ export async function getData(
     urlParamsObject,
     options,
     lang,
-    notRevalidate
+    false
   );
   return data;
 }
