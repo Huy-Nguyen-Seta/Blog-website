@@ -16,7 +16,8 @@ import { translateLanguage } from '@/utils/translateLanguage';
 import useTrans from '@/hooks/useTranslate';
 
 const demoTags = DEMO_TAGS.filter((_, i) => i < 9);
-const regex = /((https:\/\/admin.hallo.co\/uploads\/)(?:(small)|(medium)|(large))?[^\.]+(\.[a-zA-Z]{3,4}))/g;   
+const regex =
+  /((https:\/\/admin.hallo.co\/uploads\/)(?:(small)|(medium)|(large))?[^\.]+(\.[a-zA-Z]{3,4}))/g;
 export interface SingleContentProps {
   data?: any;
   content?: any;
@@ -38,7 +39,7 @@ const SingleContent: FC<SingleContentProps> = ({
   //
   const [isShowScrollToTop, setIsShowScrollToTop] = useState<boolean>(true);
   //
-  const lang = useTrans()
+  const lang = useTrans();
   const endedAnchorEntry = useIntersectionObserver(endedAnchorRef, {
     threshold: 0,
     root: null,
@@ -95,11 +96,32 @@ const SingleContent: FC<SingleContentProps> = ({
           {content?.map((item: any) => {
             switch (item?.__component) {
               case 'content.content':
-                const convertImage = item?.content.replace(regex, "$1?format=webp")
+                const convertImage = item?.content.replace(
+                  regex,
+                  '$1?format=webp'
+                );
+                let linkList = '';
+                linkList = convertImage;
+                const link = convertImage.match(/<a\b[^>]*>(.*?)(<\/a>)/g);
+                link?.map((item: any) => {
+                  if (item.search('hallo.co') < 0) {
+                    if (item.search('rel') < 0) {
+                      linkList = linkList.replace(
+                        item,
+                        item?.replace(/(<a\b[^>]*)>/, '$1 rel="nofollow">')
+                      );
+                    } else {
+                      linkList = linkList.replace(
+                        item,
+                        item.replace(/rel="[^"]+"/, 'rel="nofollow"')
+                      );
+                    }
+                  }
+                });
                 return (
                   <div
                     className="ck-content text-lg"
-                    dangerouslySetInnerHTML={{ __html: convertImage }}
+                    dangerouslySetInnerHTML={{ __html: linkList }}
                   />
                 );
               case 'content.link':
@@ -119,7 +141,7 @@ const SingleContent: FC<SingleContentProps> = ({
             onClick={() => setIsLoadMore?.(false)}
           >
             <div className=" hover:bg-slate-200 px-3 py-3 rounded-2xl space-x-3 flex justify-center items-center font-medium">
-              <p className=""> {translateLanguage("watch_more", lang)}</p>
+              <p className=""> {translateLanguage('watch_more', lang)}</p>
               <ChevronDoubleDownIcon height={18} width={18} />
             </div>
           </div>

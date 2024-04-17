@@ -12,7 +12,7 @@ export async function fetchAPI(
   try {
     // Merge default and user options
     const mergedOptions = {
-      ...(!notRevalidate && { next: { revalidate: 60 } }),
+      next: { revalidate: 60 },
       headers: {
         'Content-Type': 'application/json',
       },
@@ -47,12 +47,6 @@ export async function getData(
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   const urlParamsObject = queryParams || { populate: '*' };
   const options = { headers: { Authorization: `Bearer ${token}` } };
-  const { data } = await fetchAPI(
-    path,
-    urlParamsObject,
-    options,
-    lang,
-    false
-  );
+  const { data } = await fetchAPI(path, urlParamsObject, options, lang, true);
   return data;
 }
