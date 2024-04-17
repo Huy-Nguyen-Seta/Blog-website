@@ -114,6 +114,7 @@ const PageHome = async ({
           __html: JSON.stringify(responseSeo?.Seo?.schema || {}),
         }}
       />
+      <h1 className='invisible h-0 w-0'>Hallo.co</h1>
       <div className="nc-PageHome relative">
         <div className="container relative">
           <SectionMagazine2
