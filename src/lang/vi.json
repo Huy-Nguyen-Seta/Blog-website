@@ -99,7 +99,12 @@
   "Home_page":"Trang chủ",
   "add_your_cm":"Thêm thảo luận của bạn",
   "reply":"Trả lời",
-  "report_comment":"Báo cáo bình luận"
-
+  "report_comment":"Báo cáo bình luận",
+  "require":"Phải nhập dữ liệu",
+  "rqEmail" : "Phải nhập dạng email",
+  "forgot": "Quên mật khẩu",
+  "verify":"Xác minh tài khoản thành công",
+  "verifydesc":"Tài khoản đăng ký của bạn đã được xác thực thành công qua mail đăng ký ",
+  "verifydesc2":"Với tài khoản vừa tạo bạn có thể tham gia nhiều tính năng mới của chúng tôi như lưu bài viết, bình luận và nhiều tính năng khác nữa"
   
 }
