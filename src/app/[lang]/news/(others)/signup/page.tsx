@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import facebookSvg from '@/images/Facebook.svg';
 import twitterSvg from '@/images/Twitter.svg';
 import googleSvg from '@/images/Google.svg';
@@ -35,11 +35,51 @@ const loginSocials = [
 const PageSignUp = ({}) => {
   const lang = useTrans();
   const router = useRouter();
+  const [errors, setErrors] = useState('');
+  const handleError = (error: string) => {
+    switch (error) {
+      case 'name':
+        return translateLanguage('require', lang);
+      case 'email':
+        return translateLanguage('require', lang);
+      case 'password':
+        return translateLanguage('require', lang);
+      case 'emailType':
+        return translateLanguage('rqEmail', lang);
+      default:
+        break;
+    }
+  };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     let name: any = document.getElementById('name');
     let email: any = document.getElementById('email');
     let password: any = document.getElementById('password');
+    setErrors('');
+    console.log('name?.value?.trim()', name?.value?.trim())
+    if (name?.value?.trim() === '') {
+      setErrors('name');
+      return;
+    }
+    if (email?.value?.trim() === '') {
+      setErrors('email');
+      return;
+    } else if (
+      !email?.value
+        ?.trim()
+        ?.toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+      setErrors('emailType');
+      return;
+    }
+    if (password?.value?.trim() === '') {
+      setErrors('password');
+      return;
+    }
+
     if (!name || !email || !password) {
       showErrorMessage(translateLanguage('registration_failed', lang), {
         autoClose: 4000,
@@ -63,7 +103,7 @@ const PageSignUp = ({}) => {
         }
       } catch (err: any) {
         let mess;
-        console.log('err?.response?.data?.info?.code', err?.response?.data)
+        console.log('err?.response?.data?.info?.code', err?.response?.data);
         if (err?.response?.data?.code === 'USER_00000') {
           mess = translateLanguage('anf', lang);
         }
@@ -128,30 +168,26 @@ const PageSignUp = ({}) => {
             <span className="text-neutral-800 dark:text-neutral-200">
               {translateLanguage('user_name', lang)}
             </span>
-            <Input
-              placeholder="Example User Name"
-              className="mt-1"
-              required
-              id="name"
-            />
+            <Input placeholder="Example User Name" className="mt-1" id="name" />
+            <div className="text-sm pl-2 pt-3 text-red-500">{errors === 'name' && handleError(errors)}</div>
           </label>
           <label className="block">
             <span className="text-neutral-800 dark:text-neutral-200">
               {translateLanguage('email', lang)}
             </span>
             <Input
-              type="email"
               placeholder="example@example.com"
               className="mt-1"
-              required
               id="email"
             />
+            <div className="text-sm pl-2 pt-3 text-red-500">{errors.startsWith('email') && handleError(errors)}</div>
           </label>
           <label className="block">
             <span className="flex justify-between items-center text-neutral-800 dark:text-neutral-200">
               {translateLanguage('password', lang)}
             </span>
-            <Input type="password" required className="mt-1" id="password" />
+            <Input type="password" className="mt-1" id="password" />
+            <div className="text-sm pl-2 pt-3 text-red-500">{errors === 'password' && handleError(errors)}</div>
           </label>
           <ButtonPrimary type="submit">
             {' '}

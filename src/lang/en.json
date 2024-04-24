@@ -100,9 +100,13 @@
   "Home_page":"Home page",
   "add_your_cm":"Add your discussion",
   "reply":"Reply",
-  "report_comment":"Report comment"
-
-
+  "report_comment":"Report comment",
+  "require":"This field must be entered",
+  "rqEmail" : "Must enter email format"   ,
+  "forgot":"Forgot password",
+  "verify":"Account verified successfully",
+  "verifydesc":"Your registered account has been successfully verified via registration email",
+  "verifydesc2":"With your newly created account you can participate in many of our new features such as saving posts, commenting and more"
 
 
 }
