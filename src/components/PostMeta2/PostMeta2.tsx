@@ -12,7 +12,7 @@ const metaDemo: PostMeta2Props['meta'] = DEMO_POSTS[0];
 
 export interface PostMeta2Props {
   className?: string;
-  meta?: Pick<PostDataType, 'date' | 'author' | 'categories' | 'readingTime' | 'createdAt'>;
+  meta?: Pick<PostDataType, 'date' | 'author' | 'categories' | 'readingTime' | 'createdAt' | 'createdDate'>;
   hiddenCategories?: boolean;
   size?: 'large' | 'normal';
   avatarRounded?: string;
@@ -26,7 +26,7 @@ const PostMeta2: FC<PostMeta2Props> = ({
   avatarRounded,
 }) => {
   const lang = useTrans()
-  const { author, readingTime, createdAt } = meta;
+  const { author, readingTime, createdAt, createdDate } = meta;
   return (
     <div
       className={`nc-PostMeta2 flex items-center flex-wrap text-neutral-700 text-left dark:text-neutral-200 ${
@@ -78,7 +78,7 @@ const PostMeta2: FC<PostMeta2Props> = ({
         <div className="text-xs mt-[6px]">
           <span className="text-neutral-700 dark:text-neutral-300">
             {' '}
-            {moment(createdAt).format('MMM DD, YYYY')}
+            {moment(createdDate || createdAt).format('MMM DD, YYYY')}
           </span>
           {/* <span className="mx-2 font-semibold">·</span>
           <span className="text-neutral-700 dark:text-neutral-300">
