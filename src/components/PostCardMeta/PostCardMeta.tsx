@@ -9,7 +9,7 @@ import useTrans from '@/hooks/useTranslate';
 
 export interface PostCardMetaProps {
   className?: string;
-  meta: Pick<PostDataType, 'createdAt' | 'author'>;
+  meta: Pick<PostDataType, 'createdAt' | 'author' | 'createdDate'>;
   hiddenAvatar?: boolean;
   avatarSize?: string;
 }
@@ -25,7 +25,7 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
   useEffect(() => {
     setIsClient(true);
   }, []);
-  const { createdAt, author } = meta;
+  const { createdAt, author, createdDate } = meta;
   const currentAuthor = author?.data ? author?.data?.attributes : author;
   const authorImage = currentAuthor?.image?.data
     ? currentAuthor?.image?.data?.attributes
@@ -54,7 +54,7 @@ const PostCardMeta: FC<PostCardMetaProps> = ({
         ·
       </span>
       <span className="text-neutral-500 dark:text-neutral-400 font-normal">
-        {moment(createdAt).format('MMM DD, YYYY')}
+        {moment(createdDate || createdAt).format('MMM DD, YYYY')}
       </span>
     </div>
   ) : (

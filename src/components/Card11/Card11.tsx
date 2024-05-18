@@ -25,7 +25,7 @@ const Card11: FC<Card11Props> = ({
   ratio = 'aspect-w-4 aspect-h-3',
 }) => {
   
-  const { title, href, tag, createdAt, like, slug, id, comments, viewCount } = post;
+  const { title, href, tag, createdAt, like, slug, id, comments, viewCount, createdDate } = post;
   const lang = useTrans();
   const [isHover, setIsHover] = useState(false);
   return (
@@ -55,7 +55,7 @@ const Card11: FC<Card11Props> = ({
           <PostCardMeta meta={post} />
         ) : (
           <span className="text-xs text-neutral-500">
-            {moment(createdAt).format('MMM DD, YYYY')}
+            {moment(createdDate || createdAt).format('MMM DD, YYYY')}
           </span>
         )}
         <h3 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100">

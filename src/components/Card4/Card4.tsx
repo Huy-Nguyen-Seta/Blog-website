@@ -22,6 +22,7 @@ const Card4: FC<Card4Props> = ({ className = 'h-full', post }) => {
     author,
     readingTime,
     createdAt,
+    createdDate
   } = post;
 
   return (
@@ -52,7 +53,7 @@ const Card4: FC<Card4Props> = ({ className = 'h-full', post }) => {
         <div className="flex items-end justify-between mt-auto">
           <CardAuthor2
             readingTime={readingTime}
-            date={moment(createdAt).format('MMM DD, YYYY')}
+            date={moment(createdDate || createdAt).format('MMM DD, YYYY')}
             author={author}
           />
           <PostCardSaveAction hidenReadingTime />

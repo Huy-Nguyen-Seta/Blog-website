@@ -37,7 +37,8 @@ const Card9: FC<Card9Props> = ({
     slug,
     id,
     comments,
-    viewCount
+    viewCount,
+    createdDate
   } = post;
   const lang = useTrans();
   const renderMeta = () => {
@@ -58,7 +59,7 @@ const Card9: FC<Card9Props> = ({
             </span>
             <span className="mx-[6px] font-medium">·</span>
             <span className="font-normal truncate">
-              {moment(createdAt).format('MMM DD, YYYY')}
+              {moment(createdDate || createdAt).format('MMM DD, YYYY')}
             </span>
           </Link>
         </div>
