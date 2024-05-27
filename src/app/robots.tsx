@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: `${process.env.BASE_URL}/sitemap.xml`,
+    sitemap: `https://hallo.co/sitemap.xml`,
   };
 }

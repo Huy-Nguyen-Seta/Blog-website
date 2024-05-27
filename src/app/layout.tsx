@@ -23,7 +23,7 @@ export async function generateMetadata({
 
     const image = metadata?.metaImage;
     return {
-      metadataBase: new URL(`${process.env.BASE_URL}`),
+      metadataBase: new URL(`https://hallo.co`),
       title: {
         template: '%s | Hallo.co',
         absolute: '',

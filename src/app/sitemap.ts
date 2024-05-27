@@ -2,23 +2,23 @@ import { getData } from '@/components/utils/fetch-api';
 import { i18n } from '../../i18n-config';
 
 const getEngLanguageUrl = (slug: string) => ({
-  url: `${process.env.BASE_URL}/en/${slug}`,
+  url: `https://hallo.co/en/${slug}`,
   lastModified: new Date(),
 });
 
 const getViLanguageUrl = (slug: string) => ({
-  url: `${process.env.BASE_URL}/vi/${slug}`,
+  url: `https://hallo.co/vi/${slug}`,
   lastModified: new Date(),
 });
 
 const getJaLanguageUrl = (slug: string) => ({
-  url: `${process.env.BASE_URL}/ja/${slug}`,
+  url: `https://hallo.co/ja/${slug}`,
   lastModified: new Date(),
 });
 
 function getLanguageUrls(slug: string) {
   return i18n.locales.map((locale) => ({
-    url: `${process.env.BASE_URL}/${locale}/news/${slug}`,
+    url: `https://hallo.co/${locale}/news/${slug}`,
     lastModified: new Date(),
   }));
 }
@@ -142,8 +142,8 @@ export default async function sitemap() {
     .map((item: any) => getJaLanguageUrl(`news/archive/tags/${item?.slug}`))
     .flat();
   const urls = [
-    { url: `${process.env.BASE_URL}`, lastModified: new Date() },
-    { url: `${process.env.BASE_URL}/news`, lastModified: new Date() },
+    { url: `https://hallo.co`, lastModified: new Date() },
+    { url: `https://hallo.co/news`, lastModified: new Date() },
     ...getLanguageUrls(''),
     ...getLanguageUrls('search'),
     ...newsEngUrls,
