@@ -28,7 +28,7 @@ export async function generateMetadata({
       keywords: metadata?.keyword,
       authors: metadata?.author,
       alternates: {
-        canonical: `/news/${params?.slug}`,
+        canonical: `/${params?.lang}/news/${params?.slug}`,
         languages: {
           'vi-VN': '/vi',
           'ja-JP': '/ja',
