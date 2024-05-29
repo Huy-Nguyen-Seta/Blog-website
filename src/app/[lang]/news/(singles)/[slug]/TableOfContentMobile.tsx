@@ -89,7 +89,7 @@ function TableOfContentMobile({
                   'text-base': item?.tagName === 'h1',
                 },
                 {
-                  'text-[#11295E] font-semibold': item?.href === active,
+                  'text-[#E7262B] font-semibold': item?.href === active,
                   'text-[#425466] font-normal': !active,
                 }
               )}
@@ -134,7 +134,7 @@ function TableOfContentMobile({
                     'pl-9 text-[0.875rem]': item?.tagName === 'h3',
                     'pl-5 text-[0.875rem]': item?.tagName === 'h2',
                     'text-base': item?.tagName === 'h1',
-                    'text-[#11295E] font-semibold': item?.href === active,
+                    'text-[#E7262B] font-semibold': item?.href === active,
                     'text-[#425466] font-normal': item?.href !== active,
                   }
                 )}

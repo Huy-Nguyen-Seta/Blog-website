@@ -95,7 +95,7 @@ function TableOfContent({
                   'text-base': item?.tagName === 'h1',
                 },
                 {
-                  'text-[#11295E] font-bold': item?.href === active,
+                  'text-[#E7262B] font-bold': item?.href === active,
                   'text-[#425466] dark:text-white font-semibold': item?.href !== active,
                 }
               )}
