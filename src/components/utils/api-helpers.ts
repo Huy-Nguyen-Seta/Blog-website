@@ -9,7 +9,7 @@ export function getStrapiURL(path = '') {
   }${path}`;
 }
 
-export function getStrapiMedia(url: string | null) {
+export function getStrapiMedia(url: string | null, isWebp = true ) {
   if (url == null) {
     return null;
   }
@@ -20,7 +20,7 @@ export function getStrapiMedia(url: string | null) {
   }
 
   // Otherwise prepend the URL path with the Strapi URL
-  return `${getStrapiURL()}${url}?format=webp`;
+  return `${getStrapiURL()}${url}${isWebp ? '?format=webp' : ''}`;
 }
 
 // Get a scaled image size url from strapi, use original size if not found any

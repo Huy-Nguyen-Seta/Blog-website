@@ -1,4 +1,5 @@
 import BackgroundSection from '@/components/BackgroundSection/BackgroundSection';
+import MySlider from '@/components/MySlider';
 import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionGridCategoryBox';
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
@@ -6,6 +7,7 @@ import SectionMagazine1 from '@/components/Sections/SectionMagazine1';
 import SectionMagazine2 from '@/components/Sections/SectionMagazine2';
 import SectionMagazine9 from '@/components/Sections/SectionMagazine9';
 import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
+import SliderHomepage from '@/components/SliderHomepage/SliderHomepage';
 import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_POSTS, DEMO_POSTS_AUDIO } from '@/data/posts';
@@ -38,7 +40,7 @@ export async function generateMetadata({
         canonical: '/news',
         languages: {
           'vi-VN': '/vi',
-          'ja-JP': '/ja',    
+          'ja-JP': '/ja',
           'en-US': '/en',
         },
       },
@@ -83,7 +85,7 @@ export async function generateMetadata({
             url: '/favicons/favicon-96x96.png' + FAVICON_VERSION,
             sizes: '96x96',
             type: 'image/x-icon',
-          }
+          },
         ],
       },
     };
@@ -102,10 +104,11 @@ const PageHome = async ({
   params: { lang: Language; slug: string };
 }) => {
   const responseSeo = await getData(params?.lang, '/homepage/seo');
-
   const response = await getData(params?.lang, '/homepage/data');
   const postByCategory = await getData(params?.lang, '/homepage/postByCate');
-  const filterCategories = [{ id: 0, name: translateLanguage('All', params?.lang) }];
+  const filterCategories = [
+    { id: 0, name: translateLanguage('All', params?.lang) },
+  ];
   return (
     <section>
       <script
@@ -114,8 +117,11 @@ const PageHome = async ({
           __html: JSON.stringify(responseSeo?.Seo?.schema || {}),
         }}
       />
-      <h1 className='invisible h-0 w-0'>Hallo.co</h1>
+      <h1 className="invisible h-0 w-0">Hallo.co</h1>
       <div className="nc-PageHome relative">
+        {response?.Banner?.length > 0 && (
+          <SliderHomepage data={response?.Banner} />
+        )}
         <div className="container relative">
           <SectionMagazine2
             className="pt-10 pb-4 lg:py-16"
@@ -154,7 +160,9 @@ const PageHome = async ({
                 heading={item?.title}
                 subHeading={
                   item?.description ||
-                  `${translateLanguage('explore_more', params?.lang)} ${item?.category?.blogs?.length || 0} ${translateLanguage('topic', params?.lang)}`
+                  `${translateLanguage('explore_more', params?.lang)} ${
+                    item?.category?.blogs?.length || 0
+                  } ${translateLanguage('topic', params?.lang)}`
                 }
                 posts={item?.category?.blogs || []}
                 cate={item?.category}
@@ -167,8 +175,13 @@ const PageHome = async ({
           <SectionSliderNewCategories
             className="py-10 lg:py-16"
             heading={translateLanguage('forum', params?.lang)}
-            subHeading={`${translateLanguage('explore_more', params?.lang)} 233 ${translateLanguage('topic', params?.lang)}`}
-            categories={getMockDataCategories(params?.lang).filter((_, i) => i < 10)}
+            subHeading={`${translateLanguage(
+              'explore_more',
+              params?.lang
+            )} 233 ${translateLanguage('topic', params?.lang)}`}
+            categories={getMockDataCategories(params?.lang).filter(
+              (_, i) => i < 10
+            )}
             categoryCardType="card4"
           />
         </div>
