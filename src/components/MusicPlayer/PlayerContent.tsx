@@ -28,8 +28,8 @@ export interface PlayerContentProps {
   handleVolumeChange: (e: number) => void;
   handleSetPlaybackRate: (e: 1 | 1.5 | 2) => void;
   handleSetMuted: (e: boolean) => void;
-  handleClickBackwards10Sec: () => void;
-  handleClickForwards15Sec: () => void;
+  handleClickBackwards10Sec?: () => void;
+  handleClickForwards15Sec?: () => void;
 }
 
 const PlayerContent: FC<PlayerContentProps> = ({

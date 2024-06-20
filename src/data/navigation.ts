@@ -1,8 +1,7 @@
 import { NavItemType } from "@/components/Navigation/NavigationItem";
 import { Route } from "@/routers/types";
-import _ from "lodash";
 
-const randomId = _.uniqueId;
+const randomId = () => `1`;
 
 export const MEGAMENU_TEMPLATES: NavItemType[] = [
   // home pages ---------

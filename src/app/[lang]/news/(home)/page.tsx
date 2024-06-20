@@ -4,16 +4,19 @@ import SectionGridCategoryBox from '@/components/SectionGridCategoryBox/SectionG
 import SectionSliderNewCategories from '@/components/SectionSliderNewCategories/SectionSliderNewCategories';
 import SectionSubscribe2 from '@/components/SectionSubscribe2/SectionSubscribe2';
 import SectionMagazine1 from '@/components/Sections/SectionMagazine1';
-import SectionMagazine2 from '@/components/Sections/SectionMagazine2';
+// import SectionMagazine2 from '@/components/Sections/SectionMagazine2';
 import SectionMagazine9 from '@/components/Sections/SectionMagazine9';
 import SectionSliderPosts from '@/components/Sections/SectionSliderPosts';
-import SliderHomepage from '@/components/SliderHomepage/SliderHomepage';
+// import SliderHomepage from '@/components/SliderHomepage/SliderHomepage';
 import { getStrapiMedia, getStrapiURL } from '@/components/utils/api-helpers';
 import { getData } from '@/components/utils/fetch-api';
 import { DEMO_POSTS, DEMO_POSTS_AUDIO } from '@/data/posts';
 import { DEMO_CATEGORIES, getMockDataCategories } from '@/data/taxonomies';
 import { translateLanguage } from '@/utils/translateLanguage';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic'
+const SliderHomepage = dynamic(() => import('@/components/SliderHomepage/SliderHomepage'))
+const SectionMagazine2 = dynamic(() => import('@/components/Sections/SectionMagazine2'))
 const FAVICON_VERSION = '?v=1';
 
 //

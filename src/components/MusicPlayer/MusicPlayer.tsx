@@ -10,7 +10,6 @@ import React, {
   useMemo,
 } from "react";
 import PlayerContent from "./PlayerContent";
-import _ from "lodash";
 import ReactFilePlayer, { FilePlayerProps } from "react-player/file";
 import ReactYoutubePlayer from "react-player/youtube";
 import { useMusicPlayer } from "@/hooks/useMusicPlayer";
@@ -139,8 +138,8 @@ const MusicPlayer: FC<MusicPlayerProps> = ({}) => {
         handleSeekChange={handleSeekChange}
         handleVolumeChange={handleVolumeChange}
         handleSetPlaybackRate={handleSetPlaybackRate}
-        handleClickBackwards10Sec={_.debounce(onClickBackwards10Sec, 200)}
-        handleClickForwards15Sec={_.debounce(onClickForwarkds15Sec, 200)}
+        // handleClickBackwards10Sec={_.debounce(onClickBackwards10Sec, 200)}
+        // handleClickForwards15Sec={_.debounce(onClickForwarkds15Sec, 200)}
       />
 
       {/* ---- PLAYER ---- */}

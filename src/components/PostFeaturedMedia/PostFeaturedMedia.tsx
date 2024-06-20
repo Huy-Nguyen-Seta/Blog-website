@@ -83,6 +83,7 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
         <Image
           alt={ thumbnailImage?.data?.attributes ?  thumbnailImage?.data?.attributes?.name : thumbnailImage?.name}
           fill
+          priority={true}
           className="object-cover"
           src={
             getStrapiImage(
