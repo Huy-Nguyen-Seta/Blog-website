@@ -11,13 +11,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 import { getStrapiMedia } from '../utils/api-helpers';
-const LINEAR = 'linear';
-const WRAP = 'wrap-box';
 
 export default function BannerSwipers({
-  data,
-  backgroundImage,
-  Seo,
+  data
 }: {
   data: any;
   backgroundImage?: any;
@@ -36,7 +32,7 @@ export default function BannerSwipers({
     <div className="SwiperPageHeader relative h-[170px] md:h-[600px] group/item">
       <Swiper
         autoplay={true}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         navigation={{
           prevEl: navigationPrevRef.current,
           nextEl: navigationNextRef.current,
@@ -61,12 +57,13 @@ export default function BannerSwipers({
                   className="cursor-pointer"
                 >
                   <Image
+                    priority={true}
                     src={getStrapiMedia(item?.BannerImage?.url, false) || ''}
                     alt={''}
                     width={item?.BannerImage?.width}
                     height={item?.BannerImage?.height}
                     sizes="(min-width: 1624px) 100vw, 1240px"
-                    className="w-full h-full object-center"
+                    className="w-full h-full object-center object-cover"
                     quality={100}
                   />
                 </a>

@@ -121,7 +121,7 @@ export default function RootLayout({
       <body className="">
         <div className="bg-[#f8f8f8] text-base dark:bg-neutral-900/95 text-neutral-900 dark:text-neutral-200">
           <SiteHeader />
-          <Facebook1 lang={params?.lang} />
+          {/* <Facebook1 lang={params?.lang} /> */}
           <StoreProvider> {children}</StoreProvider>
           <Footer lang={params?.lang} />
           <ToastContainer
