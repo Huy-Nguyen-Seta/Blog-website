@@ -232,7 +232,8 @@ const PlayerContent: FC<PlayerContentProps> = ({
     return (
       <button
         className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-700/80 transition-colors"
-        onClick={handleClickForwards15Sec}
+        // onClick={(handleClickForwards15Sec)}
+        onClick={() => {}}
       >
         <svg
           className="w-6 h-6 hidden rtl:block"
@@ -312,7 +313,9 @@ const PlayerContent: FC<PlayerContentProps> = ({
     return (
       <button
         className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-neutral-700/80 transition-colors"
-        onClick={() => handleClickBackwards10Sec()}
+        // onClick={() => handleClickBackwards10Sec()}
+        onClick={() => {}}
+
       >
         <svg
           className="w-6 h-6 hidden rtl:block"
