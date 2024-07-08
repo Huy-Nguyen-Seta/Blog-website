@@ -27,8 +27,8 @@ const Logo: React.FC<LogoProps> = ({
       <Image
         alt="Hallo"
         src={'/image/logo-r.png'}
-        width={80}
-        height={80}
+        width={150}
+        height={150}
         className="block"
       />
     </Link>
